@@ -1,7 +1,7 @@
 ---
 title: General Security Considerations for Crypto Asset Exchange
 abbrev: General Security Considerations for Crypto Asset Exchange
-docname: draft-nakajima-crypto-currency-exchange-security-considerations-latest
+docname: draft-vcgtf-crypto-asset-exchange-security-considerations-latest
 category: info
 date: {DATE}
 
