@@ -1,6 +1,6 @@
 ---
-title: General Security Considerations for Crypto Currency Exchange
-abbrev: General Security Considerations for Crypto Currency Exchange
+title: General Security Considerations for Crypto Asset Exchange
+abbrev: General Security Considerations for Crypto Asset Exchange
 docname: draft-nakajima-crypto-currency-exchange-security-considerations-latest
 category: info
 date: {DATE}
@@ -34,12 +34,12 @@ informative:
 
 <!-- この文書は仮想通貨交換所の事業者が利用者の資産を保護する目的としてセキュリティを検討するための推奨事項を整理するものである。保護すべき資産のうち、特に仮想通貨の秘密鍵は従来の情報システムとは異なる特徴があり留意が必要である。仮想通貨交換事業者が秘密鍵を適切に管理し、顧客が意図しない不正な取引を防止するために留意すべき点を特に重点的に述べる。 -->
 
-This document discusses the threat, risk, and controls on the followings;
-- Online system of crypto currency exchange that provides the exchange service to its customer (consumers and trade partners);
-- Asset information (including the private key of the crypto currency) that the online system of a crypto currency exchange manages;
-- Social impact that can arise from the discrepancy in the security measures that are implemented in the online system of a crypto currency exchange.
+This document discusses the threat, risk, and controls on the followings; 
+Online system of crypto asset exchange that provides the exchange service to its customer (consumers and trade partners);
+Asset information (including the private key of the crypto asset) that the online system of a crypto asset exchange manages;
+Social impact that can arise from the discrepancy in the security measures that are implemented in the online system of a crypto asset exchange.
 
-This document is applicable to the crypto currency exchanges that manages the private key that corresponds to the crypto currency. It includes the organizations that outsources the key management to another organization. In such a case, the certain recommendations applies to those outsourcers.
+This document is applicable to the crypto asset exchanges that manages the private key that corresponds to the crypto asset. It includes the organizations that outsources the key management to another organization. In such a case, the certain recommendations applies to those outsourcers.
 
 --- middle
 
@@ -74,15 +74,15 @@ when, and only when, they appear in all capitals, as shown here.
 - Wallet
 - Fork of blockchain
 
-# Basic description of a model online system of a crypto currency exchange
+# Basic description of a model online system of a crypto asset exchange
 
 ## General
 
-In this clause, a model online system of a crypto currency exchange that is used to explain the concepts and provisions in this document are explained.
+In this clause, a model online system of a crypto asset exchange that is used to explain the concepts and provisions in this document are explained.
 
 
 
-## A basic model of online system of a crypto currency exchange and its functional components
+## A basic model of online system of a crypto asset exchange and its functional components
 
 Followings are the basic model of a crypt currency exchange that this document deals with.
 
@@ -98,7 +98,7 @@ Followings are the basic model of a crypt currency exchange that this document d
 
 ### On the suspension of keys
 
-## On the characteristics of crypto currency on Blockchain and distributed ledger technologies
+## On the characteristics of crypto asset on Blockchain and distributed ledger technologies
 
 ### General
 
@@ -120,13 +120,13 @@ Followings are the basic model of a crypt currency exchange that this document d
 
 #### The handling of the unapproved transactions
 
-#### Transaction failures caused by the vulnerabilities of the implementation or the specification of the crypto currency
+#### Transaction failures caused by the vulnerabilities of the implementation or the specification of the crypto asset
 
-# Basic objectives for the security management of crypto currency exchanges
+# Basic objectives for the security management of crypto asset exchanges
 
 # Approaches to basic security controls
 
-# Sector specific security management controls for crypto currency exchanges
+# Sector specific security management controls for crypto asset exchanges
 
 ## General
 
@@ -144,7 +144,7 @@ Followings are the basic model of a crypt currency exchange that this document d
 
 ## On the withdrawal of the coins
 
-## On the transfer of the crypto currency to an unused address
+## On the transfer of the crypto asset to an unused address
 
 # Remaining issues
 
