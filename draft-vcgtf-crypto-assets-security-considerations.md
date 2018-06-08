@@ -15,11 +15,6 @@ pi: [toc, sortrefs, symrefs]
 
 author:
  -
-    ins: M. Sato
-    name: Masashi Sato
-    organization: SECOM CO.,LTD.
-
- -
     ins: H. Nakajima
     name: Hirotaka Nakajima
     organization: Mercari, Inc.
