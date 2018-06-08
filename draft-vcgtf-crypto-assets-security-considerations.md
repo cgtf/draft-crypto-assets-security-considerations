@@ -18,7 +18,7 @@ author:
     ins: H. Nakajima
     name: Hirotaka Nakajima
     organization: Mercari, Inc.
-    email: nunnun@mercari.com
+    email: hiro@awa.sfc.keio.ac.jp
 
 normative:
   RFC2119:
