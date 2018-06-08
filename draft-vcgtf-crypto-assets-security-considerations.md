@@ -7,7 +7,7 @@ date: {DATE}
 
 ipr: trust200902
 area: General
-workgroup: secdispatch
+workgroup: saag
 keyword: Internet-Draft
 
 stand_alone: yes
