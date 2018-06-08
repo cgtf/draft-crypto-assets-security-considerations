@@ -1,13 +1,13 @@
 ---
 title: General Security Considerations for Crypto Assets Exchange
 abbrev: General Security Considerations for Crypto Assets Exchange
-docname: draft-vcgtf-crypto-assets-exchange-security-considerations-latest
+docname: draft-vcgtf-crypto-assets-security-considerations-latest
 category: info
 date: {DATE}
 
 ipr: trust200902
 area: General
-workgroup: saag
+workgroup: secdispatch
 keyword: Internet-Draft
 
 stand_alone: yes
@@ -60,7 +60,7 @@ TODO Introduction
 事業者自身の経営リスク
 顧客と交換所の資産の分離に関する具体的な要件 -->
 
-In this document, virtual currency exchange operators which hold a private key of virtual currency.
+In this document, crypto assets exchange operators which hold a private key of crypto assets.
 
 # Conventions and Definitions
 
@@ -84,7 +84,7 @@ In this clause, a model online system of a crypto assets exchange that is used t
 
 ## A basic model of online system of a crypto assets exchange and its functional components
 
-Followings are the basic model of a crypt currency exchange that this document deals with.
+Followings are the basic model of a crypto assets exchange that this document deals with.
 
 ## The flow leading to the sending of the transaction
 
@@ -106,13 +106,13 @@ Followings are the basic model of a crypt currency exchange that this document d
 
 ### Diversity of implementations
 
-#### On the cryptographic algorithms used by crypto currencies
+#### On the cryptographic algorithms used by crypto assets
 
 #### On the possibility of the forking of the Blockchain
 
 #### Rollback by reorganization
 
-#### The treatment of the forked crypto currencies
+#### The treatment of the forked crypto assets
 
 ### Risk on the unapproved transactions
 
