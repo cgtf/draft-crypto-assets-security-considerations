@@ -15,10 +15,40 @@ pi: [toc, sortrefs, symrefs]
 
 author:
  -
+    ins: M. Sato
+    name: Masashi Sato
+    organization: SECOM Co., Ltd. Intelligent System Laboratory
+    street:
+    - SECOM SC Center
+    - 8-10-16 Shimorenjaku
+    city: Mitaka, Tokyo
+    code: '181-8528'
+    country: JAPAN
+    email: tbd
+ -
+    ins: M. Shimaoka
+    name: Masaki Shimaoka
+    organization: SECOM Co., Ltd. Intelligent System Laboratory
+    street:
+    - SECOM SC Center
+    - 8-10-16 Shimorenjaku
+    city: Mitaka, Tokyo
+    code: '181-8528'
+    country: JAPAN
+    email: m-shimaoka@secom.co.jp
+ -
+    role: editor
     ins: H. Nakajima
     name: Hirotaka Nakajima
-    organization: Mercari, Inc.
-    email: hiro@awa.sfc.keio.ac.jp
+    organization: Mercari, Inc. R4D
+    abbrev: Mercari R4D
+    street:
+    - Roppongi Hills Mori Tower 18F
+    - 6-10-1 Roppongi
+    city: Minato, Tokyo
+    code: '106-6118'
+    country: JAPAN
+    email: nunnun@mercari.com
 
 normative:
   RFC2119:
