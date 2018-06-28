@@ -24,7 +24,7 @@ author:
     city: Mitaka, Tokyo
     code: '181-8528'
     country: JAPAN
-    email: tbd
+    email: satomasa756@gmail.com
  -
     ins: M. Shimaoka
     name: Masaki Shimaoka
@@ -55,6 +55,7 @@ normative:
 
 informative:
 
+
 --- abstract
 
 <!-- この文書は仮想通貨交換所の事業者が利用者の資産を保護する目的としてセキュリティを検討するための推奨事項を整理するものである。保護すべき資産のうち、特に仮想通貨の秘密鍵は従来の情報システムとは異なる特徴があり留意が必要である。仮想通貨交換事業者が秘密鍵を適切に管理し、顧客が意図しない不正な取引を防止するために留意すべき点を特に重点的に述べる。 -->
@@ -70,7 +71,7 @@ This document is applicable to the crypto assets exchanges that manages the priv
 
 # Introduction
 
-TODO Introduction
+TBD
 
 # Scope of this document
 
@@ -96,16 +97,13 @@ when, and only when, they appear in all capitals, as shown here.
 
 # Terminology
 
-- Wallet
-- Fork of blockchain
+Terms used in this document are defined in other i-d.
 
 # Basic description of a model online system of a crypto assets exchange
 
 ## General
 
-In this clause, a model online system of a crypto assets exchange that is used to explain the concepts and provisions in this document are explained.
-
-
+In this section, a model online system of a crypto assets exchange that is used to explain the concepts and provisions in this document are explained.
 
 ## A basic model of online system of a crypto assets exchange and its functional components
 
@@ -175,12 +173,11 @@ Followings are the basic model of a crypto assets exchange that this document de
 
 # Security Considerations
 
-TODO Security
-
+Security Considerations are included in main section of this document.
 
 # IANA Considerations
 
-This document has no IANA actions.
+None.
 
 --- back
 
