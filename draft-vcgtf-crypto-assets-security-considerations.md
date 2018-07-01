@@ -1,6 +1,6 @@
 ---
-title: General Security Considerations for Crypto Assets Exchange
-abbrev: General Security Considerations for Crypto Assets Exchange
+title: General Security Considerations for Crypto Asset Exchange
+abbrev: General Security Considerations for Crypto Asset Exchange
 docname: draft-vcgtf-crypto-assets-security-considerations-latest
 category: info
 date: {DATE}
@@ -17,7 +17,7 @@ author:
  -
     ins: M. Sato
     name: Masashi Sato
-    organization: SECOM Co., Ltd. Intelligent System Laboratory
+    organization: "SECOM Co., Ltd. Intelligent System Laboratory"
     street:
     - SECOM SC Center
     - 8-10-16 Shimorenjaku
@@ -28,7 +28,7 @@ author:
  -
     ins: M. Shimaoka
     name: Masaki Shimaoka
-    organization: SECOM Co., Ltd. Intelligent System Laboratory
+    organization: "SECOM Co., Ltd. Intelligent System Laboratory"
     street:
     - SECOM SC Center
     - 8-10-16 Shimorenjaku
@@ -61,11 +61,11 @@ informative:
 <!-- この文書は仮想通貨交換所の事業者が利用者の資産を保護する目的としてセキュリティを検討するための推奨事項を整理するものである。保護すべき資産のうち、特に仮想通貨の秘密鍵は従来の情報システムとは異なる特徴があり留意が必要である。仮想通貨交換事業者が秘密鍵を適切に管理し、顧客が意図しない不正な取引を防止するために留意すべき点を特に重点的に述べる。 -->
 
 This document discusses the threat, risk, and controls on the followings;
-Online system of crypto assets exchange that provides the exchange service to its customer (consumers and trade partners);
-assets information (including the private key of the crypto assets) that the online system of a crypto assets exchange manages;
-Social impact that can arise from the discrepancy in the security measures that are implemented in the online system of a crypto assets exchange.
+Online system of crypto asset exchange that provides the exchange service to its customer (consumers and trade partners);
+asset information (including the private key of the crypto asset) that the online system of a crypto asset exchange manages;
+Social impact that can arise from the discrepancy in the security measures that are implemented in the online system of a crypto asset exchange.
 
-This document is applicable to the crypto assets exchanges that manages the private key that corresponds to the crypto assets. It includes the organizations that outsources the key management to another organization. In such a case, the certain recommendations applies to those outsourcers.
+This document is applicable to the crypto asset exchanges that manages the private key that corresponds to crypto asset. It includes the organizations that outsources the key management to another organization. In such a case, the certain recommendations applies to those outsourcers.
 
 --- middle
 
@@ -86,7 +86,7 @@ TBD
 事業者自身の経営リスク
 顧客と交換所の資産の分離に関する具体的な要件 -->
 
-In this document, crypto assets exchange operators which hold a private key of crypto assets.
+In this document, crypto asset exchange operators which hold a private key of crypto asset.
 
 # Conventions and Definitions
 
@@ -99,15 +99,15 @@ when, and only when, they appear in all capitals, as shown here.
 
 Terms used in this document are defined in other i-d.
 
-# Basic description of a model online system of a crypto assets exchange
+# Basic description of a model online system of a crypto asset exchange
 
 ## General
 
-In this section, a model online system of a crypto assets exchange that is used to explain the concepts and provisions in this document are explained.
+In this section, a model online system of a crypto asset exchange that is used to explain the concepts and provisions in this document are explained.
 
-## A basic model of online system of a crypto assets exchange and its functional components
+## A basic model of online system of a crypto asset exchange and its functional components
 
-Followings are the basic model of a crypto assets exchange that this document deals with.
+Followings are the basic model of a crypto asset exchange that this document deals with.
 
 ## The flow leading to the sending of the transaction
 
@@ -121,7 +121,7 @@ Followings are the basic model of a crypto assets exchange that this document de
 
 ### On the suspension of keys
 
-## On the characteristics of crypto assets on Blockchain and distributed ledger technologies
+## On the characteristics of crypto asset on Blockchain and distributed ledger technologies
 
 ### General
 
@@ -129,13 +129,13 @@ Followings are the basic model of a crypto assets exchange that this document de
 
 ### Diversity of implementations
 
-#### On the cryptographic algorithms used by crypto assets
+#### On the cryptographic algorithms used by crypto asset
 
 #### On the possibility of the forking of the Blockchain
 
 #### Rollback by reorganization
 
-#### The treatment of the forked crypto assets
+#### The treatment of the forked crypto asset
 
 ### Risk on the unapproved transactions
 
@@ -143,13 +143,13 @@ Followings are the basic model of a crypto assets exchange that this document de
 
 #### The handling of the unapproved transactions
 
-#### Transaction failures caused by the vulnerabilities of the implementation or the specification of the crypto assets
+#### Transaction failures caused by the vulnerabilities of the implementation or the specification of the crypto asset
 
-# Basic objectives for the security management of crypto assets exchanges
+# Basic objectives for the security management of crypto asset exchanges
 
 # Approaches to basic security controls
 
-# Sector specific security management controls for crypto assets exchanges
+# Sector specific security management controls for crypto asset exchanges
 
 ## General
 
@@ -161,13 +161,13 @@ Followings are the basic model of a crypto assets exchange that this document de
 
 ## On the illegal operation of the private key for signing
 
-## On the illegal operation against the assets data
+## On the illegal operation against the asset data
 
 ## On the user authentication
 
 ## On the withdrawal of the coins
 
-## On the transfer of the crypto assets to an unused address
+## On the transfer of the crypto asset to an unused address
 
 # Remaining issues
 
