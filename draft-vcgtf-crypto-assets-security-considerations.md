@@ -18,6 +18,7 @@ author:
     ins: M. Sato
     name: Masashi Sato
     organization: "SECOM Co., Ltd. Intelligent System Laboratory"
+    abbrev: "SECOM Intelligent System Laboratory"
     street:
     - SECOM SC Center
     - 8-10-16 Shimorenjaku
@@ -29,6 +30,7 @@ author:
     ins: M. Shimaoka
     name: Masaki Shimaoka
     organization: "SECOM Co., Ltd. Intelligent System Laboratory"
+    abbrev: "SECOM Intelligent System Laboratory"
     street:
     - SECOM SC Center
     - 8-10-16 Shimorenjaku
