@@ -1,10 +1,10 @@
 # 
 
-This is the working area for the individual Internet-Draft, "".
+This is the working area for the individual Internet-Draft, "draft-vcgtf-crypto-assets-security-considerations".
 
-* [Editor's Copy](https://VCGTF.github.io/draft-crypto-assets-security-requirements/#go.draft-vcgtf-crypto-assets-exchange-security-considerations.html)
-* [Individual Draft](https://tools.ietf.org/html/draft-vcgtf-crypto-assets-exchange-security-considerations)
-* [Compare Editor's Copy to Individual Draft](https://VCGTF.github.io/draft-crypto-assets-security-requirements/#go.draft-vcgtf-crypto-assets-exchange-security-considerations.diff)
+* [Editor's Copy](https://vcgtf.github.io/draft-crypto-assets-security-considerations/#go.draft-vcgtf-crypto-assets-exchange-security-considerations.html)
+* [Individual Draft](https://tools.ietf.org/html/draft-vcgtf-crypto-assets-security-considerations)
+* [Compare Editor's Copy to Individual Draft](https://vcgtf.github.io/draft-crypto-assets-security-considerations/#go.draft-vcgtf-crypto-assets-exchange-security-considerations.diff)
 
 ## Building the Draft
 
