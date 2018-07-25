@@ -88,13 +88,13 @@ TBD
 事業者自身の経営リスク
 顧客と交換所の資産の分離に関する具体的な要件 -->
 
-This document discusses the threat, risk, and controls on the followings: 
-* Online system of crypto assets exchange that provides the exchange service to its customer (consumers and trade partners); 
-* Asset information (including the private key of the crypto assets) that the online system of a crypto assets exchange manages; 
-* Social impact that can arise from the discrepancy in the security measures that are implemented in the online system of a crypto assets exchange. 
+This document discusses the threat, risk, and controls on the followings:
+* Online system of crypto assets exchange that provides the exchange service to its customer (consumers and trade partners);
+* Asset information (including the private key of the crypto assets) that the online system of a crypto assets exchange manages;
+* Social impact that can arise from the discrepancy in the security measures that are implemented in the online system of a crypto assets exchange.
 
 
-This document is applicable to the crypto assets exchanges that manages the private key that corresponds to the crypto assets. It includes the organizations that outsources the key management to another organization. In such a case, the certain recommendations applies to those outsourcers. 
+This document is applicable to the crypto assets exchanges that manages the private key that corresponds to the crypto assets. It includes the organizations that outsources the key management to another organization. In such a case, the certain recommendations applies to those outsourcers.
 
 
 # Conventions and Definitions
@@ -118,7 +118,7 @@ In this section, a model online system of a crypto assets exchange that is used 
 
 Followings are the basic model of a crypto assets exchange that this document deals with.
 
-![Basic Model of Crypto Assets Exchange System](./CryptoAssetCustodiansSystemModeling.svg "Basic Model of Crypto Assets Exchange System")
+<!-- ![Basic Model of Crypto Assets Exchange System](./CryptoAssetCustodiansSystemModeling.svg "Basic Model of Crypto Assets Exchange System") -->
 
 
 
@@ -131,7 +131,7 @@ Followings are the basic model of a crypto assets exchange that this document de
 |Types | Description |
 | ---  | --- |
 |Signature Key | A private key for signing transactions (asymmetric key cryptography) |
-|Verification Key | A public key for verification of transactions (asymmetric key cryptography <br> Recipient address of transactions are unique value calculated from verification key <br> |
+|Verification Key | A public key for verification of transactions (asymmetric key cryptography Recipient address of transactions are unique value calculated from verification key |
 | Encryption/decryption key for signature key | Secret key to keep confidentiality of signature key (symmetric key cryptography) |
 |Master Seed | A seed to generate a signature key in decisional wallet |
 
@@ -300,7 +300,7 @@ Unintended Behaivors of implementations: The system behaves unexpectedly by the 
 
 Of these threat factors, theft and fraudulent use are regarded as threats that can only be caused by explicit malicious factors. As a result, the possible risks for signing key to be assumed are the following:
 
-a) Threat by lost 
+a) Threat by lost
 - Risk of Unauthorized operation (with legitimate path)
     - End-user's malice
     - Operator's malice in Custodian
@@ -544,7 +544,7 @@ There is a way to backup keys in offline manner, to print them to papers as a QR
 
 There is a type of offline key management (as known as "cold wallet") which isolates private keys from the system network to prevent leakage and theft caused by intrusion.
 
-![Offline Key Management](./CryptoAssetCustodiansSystemModeling.svg "Offline Key Management")
+<!-- ![Offline Key Management](./CryptoAssetCustodiansSystemModeling.svg "Offline Key Management") -->
 
 In this case, some offline operation is needed to make the system use the key. Examples are, keys are usually stored inside a vault and connected to the system only when it is utilized, and USB memory is used to data transportation between an online system and an offline system.  If there is not explicit approval process in the offline operation for key usage, anyone cannot stop malicious transaction. That is, this solution can prevent lost and theft, however, an explicit approval process is needed to prevent abuse of keys.
 
@@ -553,11 +553,9 @@ In this case, some offline operation is needed to make the system use the key. E
 It is also a good security control to distribute the right to use private key to multiple entity. There are two examples; division of secret key and multi-signature.
 
 - Division of secret key　
--
 Division of the signing key to multiple parts, then manage them by multiple isolated system is an effective measure to protect the keys against leakage and theft. This document does not recommend  a specific technique, but recommends to implement this control based on a certain level of security evaluation like secret sharing scheme. In that case, secure coding and mounting penetration test are needed to eliminate the implementation vulnerabilities. This method is also effective to backup devices.
 
-- Multi-Signature
-
+- Multi-Signature  
 This is a signature scheme which requires multiple isolated signing keys to sign a message. It is effective to protect each key hold by an entity and signing mechanisms. There are many different realization of multi-signature and they are different according to specific digital asset system. Thus, consideration on preparing multiple implementations and their interoperation is need when a digital asset custodian operate multiple digital assets.
 
 ##### Other issues
