@@ -60,8 +60,6 @@ informative:
 
 --- abstract
 
-<!-- この文書は仮想通貨交換所の事業者が利用者の資産を保護する目的としてセキュリティを検討するための推奨事項を整理するものである。保護すべき資産のうち、特に仮想通貨の秘密鍵は従来の情報システムとは異なる特徴があり留意が必要である。仮想通貨交換事業者が秘密鍵を適切に管理し、顧客が意図しない不正な取引を防止するために留意すべき点を特に重点的に述べる。 -->
-
 This document discusses the threat, risk, and controls on the followings;
 Online system of crypto assets custodian that provides the exchange service to its customer (consumers and trade partners);
 asset information (including the private key of the crypto assets) that the online system of a crypto assets custodian manages;
@@ -76,17 +74,6 @@ This document is applicable to the crypto assets custodians that manages the pri
 TBD
 
 # Scope of this document
-
-<!-- 本書が対象とする事業者は、仮想通貨の秘密鍵を保有する仮想通貨交換所の事業者である。秘密鍵の管理を他の事業者へ委託する場合も含む。その場合、秘密鍵の管理を委託された事業者についても、本書が示す推奨事項の相当箇所が適用されるものと考える。
-本書は以下の対象に対する脅威やリスクに関する考察を含む。
-顧客（消費者や取引相手）に対して仮想通貨の交換業務を提供する仮想通貨交換所オンラインシステム
-仮想通貨交換所オンラインシステムが管理する資産情報（仮想通貨の秘密鍵を含む）
-仮想通貨交換所オンラインシステムのセキュリティ対策の不備により及ぼしうる社会的な影響
-本書で対象とする仮想通貨交換所オンラインシステムの基本モデルは5章で示す。この基本モデルとは別の形態のシステム、例えば、利用者が提示する秘密鍵を事業者が管理する業態（例：オンラインウォレット）等については別の補完的な文書あるいは本書の後の改訂で扱うものとする。
-本書は以下についてはスコープ外とする。
-仮想通貨の仕組みを提供するブロックチェーンや分散台帳自体に対するセキュリティ対策
-事業者自身の経営リスク
-顧客と交換所の資産の分離に関する具体的な要件 -->
 
 This document discusses the threat, risk, and controls on the followings:
 * Online system of crypto assets custodian that provides the exchange service to its customer (consumers and trade partners);
@@ -119,7 +106,7 @@ In this section, a model online system of a crypto assets custodian that is used
 Followings are the basic model of a crypto assets custodian that this document deals with.
 
 <!-- ![Basic Model of Crypto Assets Custodian System](./CryptoAssetCustodiansSystemModeling.svg "Basic Model of Crypto Assets Custodian System") -->
-Figure 5-1 Basic Model of Cryto Assets Custodian
+Figure 5-1 Basic Model of Crypto Assets Custodian
 
 - Customer Interface  
 Provides screen and input functions such as login process, account management (deposit/withdrawal instruction etc.) and trade instruction for the customers(users). Web application, API, etc.
@@ -143,7 +130,7 @@ Checks transaction stored in blockchain and confirm whether incoming coins are i
 A group of functions that receives sales instructions from customers and performs processing related to trading of crypto assets. Referes and updates asset data based on asset data.
 
 - Assets Database  
-Manages holdings of fiat currencies and cryto assets. It does not include the private keys for signing transactions. Managed separately from the assets of the custodian for each customer.
+Manages holdings of fiat currencies and crypto assets. It does not include the private keys for signing transactions. Managed separately from the assets of the custodian for each customer.
 
 - Transaction Singing Function
     - Transaction Generator  
@@ -194,16 +181,16 @@ When using existing implementations such as bitcoin wallet, bitcoin wallet is th
 <!-- ![Lifecycle of Key](./SignatureKeyLifeCycle.svg "Lifecycle of Key") -->
 Fig. 5-2 Lifecycle of signature key, verification key and encryption/decryption key for signature key
 
-After a pair of a signature key and a verification key (hereafter “key pair”) is generated, an address to receive transactions is generated from the verification key. By notifying a sender of cryto assets this address, the sender is able to transfer the asset to the address. When the recipient transfers the asset to the other address, the original recipient signs the transaction data which includes the transfer order.
+After a pair of a signature key and a verification key (hereafter “key pair”) is generated, an address to receive transactions is generated from the verification key. By notifying a sender of crypto assets this address, the sender is able to transfer the asset to the address. When the recipient transfers the asset to the other address, the original recipient signs the transaction data which includes the transfer order.
 Inactive state of the signature key is the state such that the signature key is stored in confidential manner in the signature key management function of fIg.1. An example of inactivation is encryption by encryption/decryption key (e.g. pass phrase), that is,  the signature key is encrypted. In contrary, activation is the process to make the key usable to sign, by decrypting the inactivated key. The activation is assumed to be executed in transaction signing function if fig.1. Activation and inactivation may be executed in an implementation of wallet, when the wallet have both functions. The signature key is not needed after its generation until execution of signing to transaction. Thus, there is a way to manage the signature key in offline manner with storing the verification key and address online (see 9.2.2).
 
 ### On the usage of multiple keys
 
-In some cryto assets system, it is recommended not to use the same key pair twice, thus it produces multiple key pairs. This feature is for preventing trace and not relevant to the business efficiency of a cryto assets custodian. However, a cryto assets custodian should manage addresses for each customer. Thus it should manage multiple key pairs for the same crypto assets.
+In some crypto assets system, it is recommended not to use the same key pair twice, thus it produces multiple key pairs. This feature is for preventing trace and not relevant to the business efficiency of a crypto assets custodian. However, a crypto assets custodian should manage addresses for each customer. Thus it should manage multiple key pairs for the same crypto assets.
 
 ### On the suspension of keys
 
-Suspension of key usage is only an operation inside a cryto assets custodian. By definition of blockchain based cryto assets system, any user cannot cancel transaction once it is made. As another case, it is difficult to revoke signature key even after the suspension of key. For example, a customer accidentally operate some cryto assets for suspended address. In such case, the suspended signature key is needed to make an reimbursement. Thus, suspension of keys should be conducted with considering such
+Suspension of key usage is only an operation inside a crypto assets custodian. By definition of blockchain based crypto assets system, any user cannot cancel transaction once it is made. As another case, it is difficult to revoke signature key even after the suspension of key. For example, a customer accidentally operate some crypto assets for suspended address. In such case, the suspended signature key is needed to make an reimbursement. Thus, suspension of keys should be conducted with considering such
 cases.
 
 ## On the characteristics of crypto assets on Blockchain and distributed ledger technologies
@@ -530,7 +517,7 @@ Depending on the platform, there are cases where handling of crypto assets by th
 
 ## General
 
-In this clause, considerations from the ISMS viewpoint in implementing security controls to cryto assets custodians for risks described in clause 8 are described.
+In this clause, considerations from the ISMS viewpoint in implementing security controls to crypto assets custodians for risks described in clause 8 are described.
 They included issues caused by specific characteristics to crypto assets. This clause also describes relationship to ISO/IEC 27001:2013 and ISO/IEC 27002:2013 for each consideration.
 
 ## Consideration on security controls
@@ -548,7 +535,7 @@ In general, followings are required in management of private cryptographic keys.
 - Limit the number of access to private keys as minimum as possible.
 - Be prepared for unintentional lost of private keys.
 
-Followings are three basic security control to realize above. Additional security controls specific to cryto assets custodians are described in and after sub-clause 9.2.2.2.
+Followings are three basic security control to realize above. Additional security controls specific to crypto assets custodians are described in and after sub-clause 9.2.2.2.
 
 1) State management of private keys
  As described in figure 5-2, a private key has one of multiple states, and it may be active or inactive state in its operation. The private key should be in active state when it is used for signing or decryption. It is recommended to enforce to input some secret information to activate an inactive private key. This makes keep the inactive private key away from abuse, if the adversary does not have the secret information. This method ensure security of the private key against leakage and lost.
@@ -566,12 +553,12 @@ Backup is the most fundamental and effective measure against lost of signing key
 
 - Cloning to tamper-resistant cryptographic key management device
 
-If a signing key is managed by a tamper-resistant key management device (device X) and X has cloning function, cloning the key to another device Y is the most secure way to backup the key, where the cloning function is the technique to copy the key with keeping confidentiality to other devices than X and Y. The implementation of the function is recommended to be evaluated/certified by certification program like CMVP or FIPS 140. Note that, the cryptographic algorithms supported by such tamper-resistant key management devices are limited and all cryto assets systems can utilize it, but it is one of the most secure way of backup.
+If a signing key is managed by a tamper-resistant key management device (device X) and X has cloning function, cloning the key to another device Y is the most secure way to backup the key, where the cloning function is the technique to copy the key with keeping confidentiality to other devices than X and Y. The implementation of the function is recommended to be evaluated/certified by certification program like CMVP or FIPS 140. Note that, the cryptographic algorithms supported by such tamper-resistant key management devices are limited and all crypto assets systems can utilize it, but it is one of the most secure way of backup.
 
 - Backup to storage for digital data
 
 Here, it is assumed to backup keys to storage like USB memory and DVD. There are two types of operations; one is backup data is stored in movable devices in offline manner, the other is backup data is stored in online accessible manner. If the device is movable, the possibility of steala and lost increases, thus the device should be kept in a cabinet or a vault with key, and the access control to such cabinet/vault should be restrict.  
-Of the backup storage is online, risks of leakage and theft should be assumed as same as the key management function implementation inside the cryto assets custodian. In general, the same security control is recommended to such backup storage. If there is some additional operation, for example the backup device is inactivated except for the time of restore, the security control may be modified with considering operation environment. When it is not avoided the raw key data is be outside of the key management function implementation, the custodian should deal with the problem of remained magnetics.
+Of the backup storage is online, risks of leakage and theft should be assumed as same as the key management function implementation inside the crypto assets custodian. In general, the same security control is recommended to such backup storage. If there is some additional operation, for example the backup device is inactivated except for the time of restore, the security control may be modified with considering operation environment. When it is not avoided the raw key data is be outside of the key management function implementation, the custodian should deal with the problem of remained magnetics.
 
 - Backup to paper
 
@@ -593,7 +580,7 @@ It is also a good security control to distribute the right to use private key to
 Division of the signing key to multiple parts, then manage them by multiple isolated system is an effective measure to protect the keys against leakage and theft. This document does not recommend  a specific technique, but recommends to implement this control based on a certain level of security evaluation like secret sharing scheme. In that case, secure coding and mounting penetration test are needed to eliminate the implementation vulnerabilities. This method is also effective to backup devices.
 
 - Multi-Signature  
-This is a signature scheme which requires multiple isolated signing keys to sign a message. It is effective to protect each key hold by an entity and signing mechanisms. There are many different realization of multi-signature and they are different according to specific cryto assets system. Thus, consideration on preparing multiple implementations and their interoperation is need when a cryto assets custodian operate multiple crypto assets.
+This is a signature scheme which requires multiple isolated signing keys to sign a message. It is effective to protect each key hold by an entity and signing mechanisms. There are many different realization of multi-signature and they are different according to specific crypto assets system. Thus, consideration on preparing multiple implementations and their interoperation is need when a crypto assets custodian operate multiple crypto assets.
 
 #### Other issues
 
@@ -603,7 +590,7 @@ Security of wallet implementation
 Monitoring of private key access
 Log audit
 
-### Security controls at cryto assets custodian
+### Security controls at crypto assets custodian
 
 Following security controls addition to kay management in sub clause 9.2.2 will be described in this sub clause.
 
@@ -617,7 +604,7 @@ Following security controls addition to kay management in sub clause 9.2.2 will 
 - Consideration in user authentication and providing API
 - Flow control in transaction generation
 
-Above controls are described with aligning to ISO/IEC 27002:2013 and considering security controls specific to cryto assets custodians. The structure of this sub clause aligns the structure of ISO/IEC 27002:2013.
+Above controls are described with aligning to ISO/IEC 27002:2013 and considering security controls specific to crypto assets custodians. The structure of this sub clause aligns the structure of ISO/IEC 27002:2013.
 
 ## Countermeasures against risks caused by blockchain and network environment
 
