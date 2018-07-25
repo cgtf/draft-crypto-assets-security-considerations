@@ -75,23 +75,21 @@ informative:
 
 --- abstract
 
-This document discusses the threat, risk, and controls on the followings;
-Online system of crypto assets custodian that provides the exchange service to its customer (consumers and trade partners);
-asset information (including the private key of the crypto assets) that the online system of a crypto assets custodian manages;
-Social impact that can arise from the discrepancy in the security measures that are implemented in the online system of a crypto assets custodian.
-
-This document is applicable to the crypto assets custodians that manages the private key that corresponds to crypto assets. It includes the organizations that outsources the key management to another organization. In such a case, the certain recommendations applies to those outsourcers.
+This document discusses technical and operational risks of crypto assets custodian and its security controls to avoid the unintended transactions for its customers.
 
 --- middle
 
 # Introduction
 
-TBD
+This document gives guidance as to what security measure should the crypto assets custodians consider and implement to protect the asset of its customers. The management of the secret key for the crypto assets especially has different aspects than other types of information systems and requires special attention.
+
+This document reports especially on the appropriate management of the secret key by the crypto assets custodians to avoid the unintended transactions for its customers.
 
 # Scope of this document
 
 This document discusses the threat, risk, and controls on the followings:
-* Online system of crypto assets custodian that provides the exchange service to its customer (consumers and trade partners);
+
+* Online system of crypto assets custodian that provides the custodian  service to its customer (consumers and trade partners);
 * Assets information (including the private key of the crypto assets) that the online system of a crypto assets custodian manages;
 * Social impact that can arise from the discrepancy in the security measures that are implemented in the online system of a crypto assets custodian.
 
@@ -130,7 +128,7 @@ Provides screen and input functions such as login process, account management (d
 Performs user authentication process for login to the crypto assets custodians.
 
 - Customer Credential Database  
-Manages required IDs for login and verification information related to user authentication process (f.g password verification info.) .
+Manages required IDs for login and verification information related to user authentication process (f.g password verification info.).
 
 - Customer Assets Management Function  
 A group of functions to manage customer accounts. Receive instructions for deposit or withdrawal (outgoing coins) and perform processing according to the user instructions. Refer or update asset data.
@@ -142,7 +140,7 @@ Connects to another blockchain nodes to retrieve blockchain data.
 Checks transaction stored in blockchain and confirm whether incoming coins are involved in the specified addresses.
 
 - Order processing function  
-A group of functions that receives sales instructions from customers and performs processing related to trading of crypto assets. Referes and updates asset data based on asset data.
+A group of functions that receives sales instructions from customers and performs processing related to trading of crypto assets. Refers and updates asset data based on asset data.
 
 - Assets Database  
 Manages holdings of fiat currencies and crypto assets. It does not include the private keys for signing transactions. Managed separately from the assets of the custodian for each customer.
@@ -155,16 +153,16 @@ Manages holdings of fiat currencies and crypto assets. It does not include the p
     Sends the signed transaction to the blockchain. Connects to nodes of the another nodes on the blockchain.
 
     - Transaction Signing Function  
-    Genarates digital signatures based on the instructed transaction contents and the private signature key (with IDs and addresses).
+    Generates digital signatures based on the instructed transaction contents and the private signature key (with IDs and addresses).
 
     - Address Management  
     Manages public keys with related to the private signature keys, or addresses (such as values calculated from the public keys).
 
     - Private Signature Key Management Function  
-    Manages the signing keys of the crypto assets (the keys used for the transaction signing). Sometimes it is separated into the cold-wallet as security sountermeasure. "Signature key generator" creates singnature keys. The generated keys are registered in the signature key management unit, and the public keys and addresses are registered in the address management units.
+    Manages the signing keys of the crypto assets (the keys used for the transaction signing). Sometimes it is separated into the cold-wallet as security sountermeasure. "Signature key generator" creates signature keys. The generated keys are registered in the signature key management unit, and the public keys and addresses are registered in the address management units.
 
 - Exchange Operation Modules  
-A group of functions for custodians' administrators. Based on operations from administrators, instructes generation of generating new signature keys or transfer crypto assets.
+A group of functions for custodians' administrators. Based on operations from administrators, instructs generation of generating new signature keys or transfer crypto assets.
 
 - Operator Authentication Function   
 Authenticates the administrator users.
@@ -173,7 +171,7 @@ Authenticates the administrator users.
 Manages verification data related to the authentication processes of the administrators.
 
 We defined each functional element to distinguish functions logically, and do not show the actual arrangement on the actual system. For example, in our actual system, address management unit may be managed by an integrated database.
-Also, there are implementations with multiple functionsa packaged together. For example, each functional element of the transaction signature system may be integrated with the customer property management system, or the transaction signature system may be operating as another system.
+Also, there are implementations with multiple functions packaged together. For example, each functional element of the transaction signature system may be integrated with the customer property management system, or the transaction signature system may be operating as another system.
 
 When using existing implementations such as bitcoin wallet, bitcoin wallet is thought to provide the functions of transaction signature system as just one implementation as a whole. It is also conceivable that some functions are provided by a remote subcontractor as in a form in which the function of the transaction signature system is provided by an remote server.
 
@@ -244,7 +242,7 @@ crypto assets.
 - On stakeholders (Related to {{ISO.27001:2013}} Clause 4)
 
 It is needed to consider protection of customer's assets, as well as
-division of responsibility with outsourcee including security of private key management for crypto asset, and mattes by which
+division of responsibility with outsourcers including security of private key management for crypto asset, and mattes by which
 a crypto assets  custodian may give social impacts like money laundering.
 
 - On security policy (Related to {{ISO.27001:2013}} Clause 5)
@@ -253,7 +251,7 @@ A crypto assets custodian should define a security policy which includes securit
 and controls described in and after clause 7. Especially, it is recommended to disclose
 the security policy on the management of crypto assets to customers to facilitate self evaluation.
 
-- Continuous risk evaluation and improvement (Related to ISO/IEC 27002:2014 Clause 6, 8, 9 and 10)
+- Continuous risk evaluation and improvement (Related to {{ISO.27002:2013}} Clause 6, 8, 9 and 10)
 
 A crypto assets custodian should watch security risks of crypto assets in addition to aligning
 the general security management framework, because the risks change and increase due to rapid development of
@@ -324,11 +322,11 @@ Here, the threat concerning the signature secret key and the factors that can ca
   - fraudulent use
 
 * Factors of Threats:
-  - misoperations
+  - mis-operations
   - Legitimate users’ malice
   - Spoofing
   - Intrusions from outside
-  - Unintended Behaivors of implementations
+  - Unintended behaviors of implementations
 
 * Actors:
   - exchange operation modules
@@ -338,7 +336,7 @@ Here, the threat concerning the signature secret key and the factors that can ca
 
 Factors of threats are organized as follows.
 
-Misoperation: An act that an authorized user (including an administrator) of the system accidentally operated by mistake. For example, it is incorrectly supposed that an operation to coin 100,000 yen is incorrectly dispatched for 1 million yen.
+Mis-operation: An act that an authorized user (including an administrator) of the system accidentally operated by mistake. For example, it is incorrectly supposed that an operation to coin 100,000 yen is incorrectly dispatched for 1 million yen.
 
 Legitimate users’ malice: Acts performed by a legitimate user of the system (including administrator etc) with malicious intent. For example, theft or unauthorized use of the signature private key due to internal fraud. In this case, it is the purpose of identifying acts that can be factors, and the purpose and incentive of the act are not limited here.
 
@@ -346,73 +344,70 @@ Spoofing: An act other than an authorized user of the system impersonating a leg
 
 Intrusions from outside: an act of an outsider accessing the system maliciously in a manner other than spoofing. For example, by using malicious intrusion from the outside by exploiting the system's vulnerability, incorporating malware into the exchanging system via targeted e-mail to the custodians administrator or the like and generating a private signature private key (or transaction creation) from the outside, Allow remote control of etc.
 
-Unintended Behaivors of implementations: The system behaves unexpectedly by the designer or operator irrespective of the intention or malice of the operation. For example, a signature private key leaks due to a bug in the exchange management system.
+Unintended behaviors of implementations: The system behaves unexpectedly by the designer or operator irrespective of the intention or malice of the operation. For example, a signature private key leaks due to a bug in the exchange management system.
 
 Of these threat factors, theft and fraudulent use are regarded as threats that can only be caused by explicit malicious factors. As a result, the possible risks for signing key to be assumed are the following:
 
-a) Threat by lost
-- Risk of Unauthorized operation (with legitimate path)
-    - End-user's malice
-    - Operator's malice in Custodian
-    - Spoofing to end users
-    - internal frauds (spoofing to operators)
-- Risk of Intrusion from the outside
-    - Intrusion into the transaction signing modules
-    - Intrusion into the incoming coin management function (implementation)
-    - Intrusion into the customer asset management function (implementation)
-    - Intrusion into the exchange operation modules
-- Risk of System Behaviors different from human operation
-    - Unintended behaviors of the transaction signing modules
-    - Unintended behaviors of the incoming coin management function (implementation)
-    - Unintended behaviors of the customer asset management function  (implementation)
-    - Unintended behaviors of the exchange operation modules
-- Risk of misoperation (by human error)
-    - Misoperation of end user
-    - Misoperation of operator
-
-b) Threat by leakage
-- Risk of Unauthorized operation (with legitimate path)
-    - End-user's malice
-    - Operator's malice in Custodian
-    - Spoofing to end users
-    - internal frauds (spoofing to operators)
-- Risk of Intrusion from the outside
-    - Intrusion into the transaction signing modules
-    - Intrusion into the incoming coin management function (implementation)
-    - Intrusion into the customer asset management function (implementation)
-    - Intrusion into the exchange operation modules
-- Risk of System Behaviors different from human operation
-    - Unintended behaviors of the transaction signing modules
-    - Unintended behaviors of the incoming coin management function (implementation)
-    - Unintended behaviors of the customer asset management function  (implementation)
-    - Unintended behaviors of the exchange operation modules
-- Risk of misoperation (by human error)
-    - Misoperation of end user
-    - Misoperation of operator
-
-c) Threat by theft
-- Risk of Unauthorized operation (with legitimate path)
-    - End-user's malice
-    - Operator's malice in Custodian
-    - Spoofing to end users
-    - internal frauds (spoofing to operators)
-- Risk of Intrusion from the outside
-    - Intrusion into the transaction signing modules
-    - Intrusion into the incoming coin management function (implementation)
-    - Intrusion into the customer asset management function (implementation)
-    - Intrusion into the exchange operation modules
-
-d) Threat by fraudulent use
-- Risk of Unauthorized operation (with legitimate path)
-    - End-user's malice
-    - Operator's malice in Custodian
-    - Spoofing to end users
-    - internal frauds (spoofing to operators)
-- Risk of Intrusion from the outside
-    - Intrusion into the transaction signing modules
-    - Intrusion into the incoming coin management function (implementation)
-    - Intrusion into the customer asset management function (implementation)
-    - Intrusion into the exchange operation modules
+1. Threat by lost
+  - Risk of Unauthorized operation (with legitimate path)
+      - End-user's malice
+      - Operator's malice in Custodian
+      - Spoofing to end users
+      - internal frauds (spoofing to operators)
+  - Risk of Intrusion from the outside
+      - Intrusion into the transaction signing modules
+      - Intrusion into the incoming coin management function (implementation)
+      - Intrusion into the customer asset management function (implementation)
+      - Intrusion into the exchange operation modules
+  - Risk of System Behaviors different from human operation
+      - Unintended behaviors of the transaction signing modules
+      - Unintended behaviors of the incoming coin management function (implementation)
+      - Unintended behaviors of the customer asset management function  (implementation)
+      - Unintended behaviors of the exchange operation modules
+  - Risk of mis-operation (by human error)
+      - Mis-operation of end user
+      - Mis-operation of operator
+2. Threat by leakage
+  - Risk of Unauthorized operation (with legitimate path)
+      - End-user's malice
+      - Operator's malice in Custodian
+      - Spoofing to end users
+      - internal frauds (spoofing to operators)
+  - Risk of Intrusion from the outside
+      - Intrusion into the transaction signing modules
+      - Intrusion into the incoming coin management function (implementation)
+      - Intrusion into the customer asset management function (implementation)
+      - Intrusion into the exchange operation modules
+  - Risk of System Behaviors different from human operation
+      - Unintended behaviors of the transaction signing modules
+      - Unintended behaviors of the incoming coin management function (implementation)
+      - Unintended behaviors of the customer asset management function  (implementation)
+      - Unintended behaviors of the exchange operation modules
+  - Risk of mis-operation (by human error)
+      - Mis-operation of end user
+      - Mis-operation of operator
+3. Threat by theft
+  - Risk of Unauthorized operation (with legitimate path)
+      - End-user's malice
+      - Operator's malice in Custodian
+      - Spoofing to end users
+      - internal frauds (spoofing to operators)
+  - Risk of Intrusion from the outside
+      - Intrusion into the transaction signing modules
+      - Intrusion into the incoming coin management function (implementation)
+      - Intrusion into the customer asset management function (implementation)
+      - Intrusion into the exchange operation modules
+4. Threat by fraudulent use
+  - Risk of Unauthorized operation (with legitimate path)
+      - End-user's malice
+      - Operator's malice in Custodian
+      - Spoofing to end users
+      - internal frauds (spoofing to operators)
+  - Risk of Intrusion from the outside
+      - Intrusion into the transaction signing modules
+      - Intrusion into the incoming coin management function (implementation)
+      - Intrusion into the customer asset management function (implementation)
+      - Intrusion into the exchange operation modules
 
 The following sections outline each risk, and their security controls are shown in {{security-controls-at-crypto-assets-custodian}}.
 
@@ -437,14 +432,14 @@ The fraudulent use risk shown in Table 8-2 is an enumeration of events having a 
 #### Other related risks
 
 Supply chain risk of hardware wallet
-As a product having a secret key management function, there is a so-called hardware wallet. Many hardware wallets connect to the management terminal such as PC via USB and perform key management operation from the management terminal. FIPS 140-2, etc. as a security certification of products with key management function, etc. However, since most of cryptographic algorithms handled by Crypto Assets are not subject to certification, the security of hardware wallet for Crypto Assets Unfortunately it is inevitable that the third-party accreditation system on insurance is inadequate. For this reason, while there are products with sufficient safety in the hardware wallet that circulates in Ichii, it is necessary to recognize that there are products with insufficient safety.
+As a product having a secret key management function, there is a so-called hardware wallet. Many hardware wallets connect to the management terminal such as PC via USB and perform key management operation from the management terminal. FIPS 140-2, etc. as a security certification of products with key management function, etc. However, since most of cryptographic algorithms handled by Crypto Assets are not subject to certification, the security of hardware wallet for Crypto Assets Unfortunately it is inevitable that the third-party accreditation system on insurance is inadequate. For this reason, while there are products with sufficient safety in the hardware wallet that generally available, it is necessary to recognize that there are products with insufficient safety.
 Furthermore, even with products with certain safety, safety may be impaired by being crafted on the distribution route. For example, a hardware wallet that is loaded with malware in the middle of a sales channel, even if the purchaser newly generates a signing secret key in the hardware wallet, the attacker can use the signature secret It becomes possible to restore the key.
 
 ### Risks related to asset data
 
 The asset data is data for managing assets such as Crypto Assets and statutory currency held by customers and custodians. The secret key of the transaction signature shall not be included (see {{a-basic-model-of-online-system-of-a-crypto-assets-custodian-and-its-functional-components}}).
 As mentioned above, since asset data varies from custodians to custodians, we consider this as a more abstracted model in this document. Since detailed threat analysis and risk assessment need to be performed on the asset data handled by the actual custodian system, only the way of thinking is shown here.
-The main threats of asset data may be illegal rewriting, loss, or leakage. The factors include misoperation by the manager, malice of the righteous person, spoofing the legitimate person, malicious intent of the outsider, unintended behavior of the system. In the example of the basic model in {{a-basic-model-of-online-system-of-a-crypto-assets-custodian-and-its-functional-components}}, there is a route from the exchange management system, the customer property management system, and the incoming coin determination unit.
+The main threats of asset data may be illegal rewriting, loss, or leakage. The factors include mis-operation by the manager, malice of the righteous person, spoofing the legitimate person, malicious intent of the outsider, unintended behavior of the system. In the example of the basic model in {{a-basic-model-of-online-system-of-a-crypto-assets-custodian-and-its-functional-components}}, there is a route from the exchange management system, the customer property management system, and the incoming coin determination unit.
 Among the threats of asset data, the following examples are considered as incidents due to illegal rewriting.
 A customer asset management system referring to unauthorized asset data may create an illegal transaction and flow through the normal process to the block chain ({{risk-of-unauthorized-use-of-signing-private-key}}). For example, it is possible to rewrite the holding amount recorded in the asset data, change the Crypto Assets transfer destination address, or the like.
 For example, by rewriting the list of addresses associated with the customer, illegal recombination of the amount held between customers or between customers and custodians within the asset data within the custodian will be made. As a transaction in the block chain the result is not reflected, assets that a customer or custodian should have had is lost.
@@ -453,7 +448,7 @@ Risks related to asset data can be thought of as a problem similar to general fi
 ### Risks related to suspension of systems and operations
 
 The system of the crypto assets custodian office is software, hardware, network, and the like constituting the crypto assets custodian. In addition, the term "operation" refers to an operation performed manually, such as operation monitoring of a switching center system, account opening, remittance instruction, wallet deposit / withdrawal. It is conceivable that the system and work may be stopped due to various factors.
-Risks related to suspension of systems and operations can be regarded as problems similar to general financial and payment systems. However, the fact that thecrypto assets custodian office is connected to the Internet all the time, not the dedicated communication network at all times, that it is operating 24 hours a day, 365 days, that many crypto assets custodians are built on the public cloud infrastructure, crypto assets custodian It is necessary to consider it based on the fact that the operating situation of the place has a large effect on the crypto assets price and it tends to be an object of attack.
+Risks related to suspension of systems and operations can be regarded as problems similar to general financial and payment systems. However, the fact that the crypto assets custodian office is connected to the Internet all the time, not the dedicated communication network at all times, that it is operating 24 hours a day, 365 days, that many crypto assets custodians are built on the public cloud infrastructure, crypto assets custodian It is necessary to consider it based on the fact that the operating situation of the place has a large effect on the crypto assets price and it tends to be an object of attack.
 
 #### Risks related to network congestion
 Crypto assets custodians frequently receive denial of service attacks. As a target of a denial-of-service attack, publicly-released top page, API endpoint, etc. are common, but when an attacker knows the system configuration and a business system or operation monitoring system is placed on the Internet, A case of receiving a denial of service attack may be considered.
@@ -492,7 +487,7 @@ By intervening with an e-mail or other messaging system, an attacker can fraud a
 #### Compromise of hash function and cryptographic algorithm
 
 #### Inadequate consensus algorithm
-By misusing a bug in the agreement algorithm, fake transaction information is sent to a specific node and disguised as to whether or not to send money to the counterparty. For example, in the case of the MtGOX case in 2014, double payment attacks abusing Transaction Malleability occurred frequently in piggybacking.
+By misusing a bug in the agreement algorithm, fake transaction information is sent to a specific node and disguised as to whether or not to send money to the counter party. For example, in the case of the MtGOX case in 2014, double payment attacks abusing Transaction Malleability occurred frequently in piggybacking.
 
 ### Risks arising from external reputation databases
 
@@ -553,17 +548,17 @@ In general, followings are required in management of private cryptographic keys.
 
 Followings are three basic security control to realize above. Additional security controls specific to crypto assets custodians are described in and after sub-clause 9.2.2.2.
 
-1) State management of private keys
- As described in figure 5-2, a private key has one of multiple states, and it may be active or inactive state in its operation. The private key should be in active state when it is used for signing or decryption. It is recommended to enforce to input some secret information to activate an inactive private key. This makes keep the inactive private key away from abuse, if the adversary does not have the secret information. This method ensure security of the private key against leakage and lost.
- It is also recommended to minimize the term of activation to limit the risk of abuse as minimum as possible. Unnecessary activation of secret key increases the risk of abuse, leakage and theft, though keeping the activation state is efficient from business viewpoint. On the other hand, frequent activation/inactivation may give impact to business efficiency. It is important to consider the trade-off between the risk and business efficiency and provide clear key management policy to customers.
+1. State management of private keys  
+As described in figure 5-2, a private key has one of multiple states, and it may be active or inactive state in its operation. The private key should be in active state when it is used for signing or decryption. It is recommended to enforce to input some secret information to activate an inactive private key. This makes keep the inactive private key away from abuse, if the adversary does not have the secret information. This method ensure security of the private key against leakage and lost.  
+It is also recommended to minimize the term of activation to limit the risk of abuse as minimum as possible. Unnecessary activation of secret key increases the risk of abuse, leakage and theft, though keeping the activation state is efficient from business viewpoint. On the other hand, frequent activation/inactivation may give impact to business efficiency. It is important to consider the trade-off between the risk and business efficiency and provide clear key management policy to customers.
 
-2) Administrator role separation and mutual check-and-balance
-It is fundamental form of operation of a critical business process which uses private key to perform cryptographic operations by multiple party to prevent internal frauds and errors. For example, by setting isolated rights on digitally signing and approval to go into the area of signing operation, it becomes difficult for single adversary to give an malicious digital signature without known by the third party. Additionally, the enforcement of attendance of other person is effective security control to internal frauds and misoperations.
+2. Administrator role separation and mutual check-and-balance  
+It is fundamental form of operation of a critical business process which uses private key to perform cryptographic operations by multiple party to prevent internal frauds and errors. For example, by setting isolated rights on digitally signing and approval to go into the area of signing operation, it becomes difficult for single adversary to give an malicious digital signature without known by the third party. Additionally, the enforcement of attendance of other person is effective security control to internal frauds and mis-operations.
 
-3) Backup of private key
-  Lost of private key makes signing operations by using the key impossible any more. Thus backup of private key is an important security control. On the other hand, risks of leakage and theft of backup keys should be considered. It is needed to inactivate the backup key.
+3. Backup of private key  
+Lost of private key makes signing operations by using the key impossible any more. Thus backup of private key is an important security control. On the other hand, risks of leakage and theft of backup keys should be considered. It is needed to inactivate the backup key.
 
-#### Buck up
+#### Backup
 
 Backup is the most fundamental and effective measure against lost of signing key. On the other hand, there are  risks of leakage and lost of backup device. These risks depend on the kind backup device, thus security controls on such devices should be considered independently. Followings describe typical backup devices and leakage/theft risks associated with them.
 
@@ -641,3 +636,5 @@ None.
 --- back
 
 # Contributors
+
+- secWG + 松尾先生
