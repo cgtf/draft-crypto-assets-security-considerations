@@ -56,7 +56,22 @@ normative:
   RFC2119:
 
 informative:
-
+  ISO.27001:2013:
+    author:
+      org: International Organization for Standardization
+    title: Information technology -- Security techniques -- Information security management systems -- Requirements
+    date: 2013-10
+    target: https://www.iso.org/standard/54534.html
+    seriesinfo:
+      ISO/IEC JTC 1/SC 27: IT Security techniques
+  ISO.27002:2013:
+    author:
+      org: International Organization for Standardization
+    title: Information technology -- Security techniques -- Code of practice for information security controls
+    date: 2013-10
+    target: https://www.iso.org/standard/54533.html
+    seriesinfo:
+      ISO/IEC JTC 1/SC 27: IT Security techniques
 
 --- abstract
 
@@ -93,7 +108,7 @@ when, and only when, they appear in all capitals, as shown here.
 
 # Terminology
 
-Terms used in this document are defined in other i-d.
+Terms used in this document are defined in {{?I-D.nakajima-crypto-asset-terminology}}
 
 # Basic description of a model online system of a crypto assets custodian
 
@@ -220,19 +235,19 @@ In this sub-clause, following items will described as characteristics of crypto 
 # Basic objectives for the security management of crypto assets custodians
 
 At crypto assets custodians, it is mandatory to establish, conduct, maintain and continuously improve security management.
-As requirements in term os security management, items described in ISO/IEC 27001:2013 are sufficiently
+As requirements in term os security management, items described in {{ISO.27001:2013}} are sufficiently
 considered according to the business process of
 each crypto assets custodian. Especially, following items should be carefully considered, because a crypto
 assets custodian retains customer's asset and should deal with issues specific to
 crypto assets.
 
-- On stakeholders (Related to ISO/IEC 27001:3013 Clause 4)
+- On stakeholders (Related to {{ISO.27001:2013}} Clause 4)
 
 It is needed to consider protection of customer's assets, as well as
 division of responsibility with outsourcee including security of private key management for crypto asset, and mattes by which
 a crypto assets  custodian may give social impacts like money laundering.
 
-- On security policy (Related to ISO/IEC 27001:2013 Clause 5)
+- On security policy (Related to {{ISO.27001:2013}} Clause 5)
 
 A crypto assets custodian should define a security policy which includes security objectives
 and controls described in and after clause 7. Especially, it is recommended to disclose
@@ -259,9 +274,9 @@ The crypto assets custodian conducts threat analysis, vulnerability evaluation, 
 defining security objectives and controls according to its actual business and system.
 Security objectives and controls should be decided with considering threats and risks specific to
 crypto assets described in clause 5, as well as general security objectives and controls
-described in ISO/IEC 27002:2013.
+described in {{ISO.27002:2013}}.
 
-Followings are items of security objectives and controls described in ISO/IEC 27002:2013.
+Followings are items of security objectives and controls described in {{ISO.27002:2013}}.
 
 
 - Information Security Policies
@@ -519,7 +534,7 @@ Depending on the platform, there are cases where handling of crypto assets by th
 ## General
 
 In this clause, considerations from the ISMS viewpoint in implementing security controls to crypto assets custodians for risks described in clause 8 are described.
-They included issues caused by specific characteristics to crypto assets. This clause also describes relationship to ISO/IEC 27001:2013 and ISO/IEC 27002:2013 for each consideration.
+They included issues caused by specific characteristics to crypto assets. This clause also describes relationship to {{ISO.27001:2013}} and {{ISO.27002:2013}} for each consideration.
 
 ## Consideration on security controls
 ### Direction of the information security management
@@ -546,7 +561,7 @@ Followings are three basic security control to realize above. Additional securit
 It is fundamental form of operation of a critical business process which uses private key to perform cryptographic operations by multiple party to prevent internal frauds and errors. For example, by setting isolated rights on digitally signing and approval to go into the area of signing operation, it becomes difficult for single adversary to give an malicious digital signature without known by the third party. Additionally, the enforcement of attendance of other person is effective security control to internal frauds and misoperations.
 
 3) Backup of private key
-  Lost of private key makes signing operations by using the key impossible any more. Thus backup of private key is an important security control. On the other hand, risks of leakage and theft of backup keys shoube be considerd. It is needed to inactivate the backup key.
+  Lost of private key makes signing operations by using the key impossible any more. Thus backup of private key is an important security control. On the other hand, risks of leakage and theft of backup keys should be considered. It is needed to inactivate the backup key.
 
 #### Buck up
 
@@ -558,7 +573,8 @@ If a signing key is managed by a tamper-resistant key management device (device 
 
 - Backup to storage for digital data
 
-Here, it is assumed to backup keys to storage like USB memory and DVD. There are two types of operations; one is backup data is stored in movable devices in offline manner, the other is backup data is stored in online accessible manner. If the device is movable, the possibility of steala and lost increases, thus the device should be kept in a cabinet or a vault with key, and the access control to such cabinet/vault should be restrict.  
+Here, it is assumed to backup keys to storage like USB memory and DVD. There are two types of operations; one is backup data is stored in movable devices in offline manner, the other is backup data is stored in online accessible manner. If the device is movable, the possibility of steal and lost increases, thus the device should be kept in a cabinet or a vault with key, and the access control to such cabinet/vault should be restrict.
+
 Of the backup storage is online, risks of leakage and theft should be assumed as same as the key management function implementation inside the crypto assets custodian. In general, the same security control is recommended to such backup storage. If there is some additional operation, for example the backup device is inactivated except for the time of restore, the security control may be modified with considering operation environment. When it is not avoided the raw key data is be outside of the key management function implementation, the custodian should deal with the problem of remained magnetics.
 
 - Backup to paper
@@ -605,7 +621,7 @@ Following security controls addition to kay management in sub clause 9.2.2 will 
 - Consideration in user authentication and providing API
 - Flow control in transaction generation
 
-Above controls are described with aligning to ISO/IEC 27002:2013 and considering security controls specific to crypto assets custodians. The structure of this sub clause aligns the structure of ISO/IEC 27002:2013.
+Above controls are described with aligning to {{ISO.27002:2013}} and considering security controls specific to crypto assets custodians. The structure of this sub clause aligns the structure of {{ISO.27002:2013}}.
 
 ## Countermeasures against risks caused by blockchain and network environment
 
