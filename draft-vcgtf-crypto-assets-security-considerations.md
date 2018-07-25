@@ -116,7 +116,7 @@ In this section, a model online system of a crypto assets custodian that is used
 
 ## A basic model of online system of a crypto assets custodian and its functional components
 
-Followings are the basic model of a crypt assets custodian that this document deals with. 
+Followings are the basic model of a crypto assets custodian that this document deals with. 
 
 <!-- ![Basic Model of Crypto Assets Custodian System](./CryptoAssetCustodiansSystemModeling.svg "Basic Model of Crypto Assets Custodian System") -->
 Figure 5-1 Basic Model of Cryto Assets Custodian
@@ -216,7 +216,7 @@ In this sub-clause, following items will described as characteristics of crypto 
 
 #### On the cryptographic algorithms used by crypto assets
 
-#### On the possibility of the forking of the Blockchain
+### On the possibility of the forking of the Blockchain
 
 #### Rollback by reorganization
 
