@@ -116,58 +116,58 @@ In this section, a model online system of a crypto assets custodian that is used
 
 ## A basic model of online system of a crypto assets custodian and its functional components
 
-Followings are the basic model of a crypto assets custodian that this document deals with. 
+Followings are the basic model of a crypto assets custodian that this document deals with.
 
 <!-- ![Basic Model of Crypto Assets Custodian System](./CryptoAssetCustodiansSystemModeling.svg "Basic Model of Crypto Assets Custodian System") -->
 Figure 5-1 Basic Model of Cryto Assets Custodian
 
-- Customer Interface <br>
+- Customer Interface  
 Provides screen and input functions such as login process, account management (deposit/withdrawal instruction etc.) and trade instruction for the customers(users). Web application, API, etc.
 
-- Customer Authentication Function <br>
+- Customer Authentication Function  
 Performs user authentication process for login to the crypto assets custodians.
 
-- Customer Credential Database <br>
+- Customer Credential Database  
 Manages required IDs for login and verification information related to user authentication process (f.g password verification info.) .
 
-- Customer Assets Management Function <br>
+- Customer Assets Management Function  
 A group of functions to manage customer accounts. Receive instructions for deposit or withdrawal (outgoing coins) and perform processing according to the user instructions. Refer or update asset data.
 
-- Blockchain Node <br>
+- Blockchain Node  
 Connects to another blockchain nodes to retrieve blockchain data.
 
-- Incoming transaction management Function <br>
+- Incoming transaction management Function  
 Checks transaction stored in blockchain and confirm whether incoming coins are involved in the specified addresses.
 
-- Order processing function <br>
+- Order processing function  
 A group of functions that receives sales instructions from customers and performs processing related to trading of crypto assets. Referes and updates asset data based on asset data.
 
-- Assets Database <br>
+- Assets Database  
 Manages holdings of fiat currencies and cryto assets. It does not include the private keys for signing transactions. Managed separately from the assets of the custodian for each customer.
 
 - Transaction Singing Function
-    - Transaction Generator <br> 
+    - Transaction Generator  
     Generates transactions to be sent to the blockchain based on instructions from the customer asset management system or the exchange management system.
 
-    - Transaction Broadcaster <br> 
+    - Transaction Broadcaster   
     Sends the signed transaction to the blockchain. Connects to nodes of the another nodes on the blockchain.
 
-    - Transaction Signing Function <br>
+    - Transaction Signing Function  
     Genarates digital signatures based on the instructed transaction contents and the private signature key (with IDs and addresses).
 
-    - Address Management <br>
+    - Address Management  
     Manages public keys with related to the private signature keys, or addresses (such as values calculated from the public keys).
 
-    - Private Signature Key Management Function <br>
+    - Private Signature Key Management Function  
     Manages the signing keys of the crypto assets (the keys used for the transaction signing). Sometimes it is separated into the cold-wallet as security sountermeasure. "Signature key generator" creates singnature keys. The generated keys are registered in the signature key management unit, and the public keys and addresses are registered in the address management units.
 
-- Exchange Operation Modules <br>
+- Exchange Operation Modules  
 A group of functions for custodians' administrators. Based on operations from administrators, instructes generation of generating new signature keys or transfer crypto assets.
 
-- Operator Authentication Function <br> 
+- Operator Authentication Function   
 Authenticates the administrator users.
 
-- Operator Audit Database <br>
+- Operator Audit Database  
 Manages verification data related to the authentication processes of the administrators.
 
 We defined each functional element to distinguish functions logically, and do not show the actual arrangement on the actual system. For example, in our actual system, address management unit may be managed by an integrated database.
@@ -348,7 +348,7 @@ Unintended Behaivors of implementations: The system behaves unexpectedly by the 
 
 Of these threat factors, theft and fraudulent use are regarded as threats that can only be caused by explicit malicious factors. As a result, the possible risks for signing key to be assumed are the following:
 
-a) Threat by lost 
+a) Threat by lost
 - Risk of Unauthorized operation (with legitimate path)
     - End-user's malice
     - Operator's malice in Custodian
@@ -526,7 +526,7 @@ Depending on the platform, there are cases where handling of crypto assets by th
 
 
 
-# Consideration on security controls at cryto assets custodian
+# Consideration on security controls at crypto assets custodian
 
 ## General
 
@@ -536,7 +536,7 @@ They included issues caused by specific characteristics to crypto assets. This c
 ## Consideration on security controls
 ### Direction of the information security management
 
-Objectives of security management at a cryto assets custodian contain secure protection of customer's asset, compliance to business requirements, laws and rules, and realization of social responsibility. Security policies and execution statements derived from such objectives are recommended to be publicly available for consumers, business partners, auditor and regulators to help their judge.
+Objectives of security management at a crypto assets custodian contain secure protection of customer's asset, compliance to business requirements, laws and rules, and realization of social responsibility. Security policies and execution statements derived from such objectives are recommended to be publicly available for consumers, business partners, auditor and regulators to help their judge.
 
 ### Security controls on signing keys
 
