@@ -176,10 +176,6 @@ In this sub-clause, following items will described as characteristics of digital
 
 #### Transaction failures caused by the vulnerabilities of the implementation or the specification of the crypto assets
 
-# Basic objectives for the security management of crypto assets exchanges
-
-# Approaches to basic security controls
-
 # Basic objectives for the security management of digital asset custodians
 
 At digital asset custodians, it is mandatory to establish, conduct, maintain and continuously improve security management.
@@ -489,21 +485,21 @@ Depending on the platform, there are cases where handling of virtual currency by
 
 ### Counter Financing of Terrorism
 
-## Consideration on security controls at digital asset custodian
+# Consideration on security controls at digital asset custodian
 
-### About this clause
+## General
 
 In this clause, considerations from the ISMS viewpoint in implementing security controls to digital asset custodians for risks described in clause 8 are described.
 They included issues caused by specific characteristics to digital asset. This clause also describes relationship to ISO/IEC 27001:2013 and ISO/IEC 27002:2013 for each consideration.
 
-### Consideration on security controls
-#### Direction of the information security management
+## Consideration on security controls
+### Direction of the information security management
 
 Objectives of security management at a digital asset custodian contain secure protection of customer's asset, compliance to business requirements, laws and rules, and realization of social responsibility. Security policies and execution statements derived from such objectives are recommended to be publicly available for consumers, business partners, auditor and regulators to help their judge.
 
-#### Security controls on signing keys
+### Security controls on signing keys
 
-##### Basics of key management
+#### Basics of key management
 
 In general, followings are required in management of private cryptographic keys.
 
@@ -523,7 +519,7 @@ It is fundamental form of operation of a critical business process which uses pr
 3) Backup of private key
   Lost of private key makes signing operations by using the key impossible any more. Thus backup of private key is an important security control. On the other hand, risks of leakage and theft of backup keys shoube be considerd. It is needed to inactivate the backup key.
 
-##### Buck up
+#### Buck up
 
 Backup is the most fundamental and effective measure against lost of signing key. On the other hand, there are  risks of leakage and lost of backup device. These risks depend on the kind backup device, thus security controls on such devices should be considered independently. Followings describe typical backup devices and leakage/theft risks associated with them.
 
@@ -540,7 +536,7 @@ Of the backup storage is online, risks of leakage and theft should be assumed as
 
 There is a way to backup keys in offline manner, to print them to papers as a QR code or other machine readable ways. It is movable than storage for digital data and easy to identify. There remains some risk of leakage and theft by taking a photo by smartphone and so on.
 
-##### Offline management
+#### Offline management
 
 There is a type of offline key management (as known as "cold wallet") which isolates private keys from the system network to prevent leakage and theft caused by intrusion.
 
@@ -548,7 +544,7 @@ There is a type of offline key management (as known as "cold wallet") which isol
 
 In this case, some offline operation is needed to make the system use the key. Examples are, keys are usually stored inside a vault and connected to the system only when it is utilized, and USB memory is used to data transportation between an online system and an offline system.  If there is not explicit approval process in the offline operation for key usage, anyone cannot stop malicious transaction. That is, this solution can prevent lost and theft, however, an explicit approval process is needed to prevent abuse of keys.
 
-##### Distributed management
+#### Distributed management
 
 It is also a good security control to distribute the right to use private key to multiple entity. There are two examples; division of secret key and multi-signature.
 
@@ -560,7 +556,7 @@ Division of the signing key to multiple parts, then manage them by multiple isol
 
 This is a signature scheme which requires multiple isolated signing keys to sign a message. It is effective to protect each key hold by an entity and signing mechanisms. There are many different realization of multi-signature and they are different according to specific digital asset system. Thus, consideration on preparing multiple implementations and their interoperation is need when a digital asset custodian operate multiple digital assets.
 
-##### Other issues
+#### Other issues
 
 In this sub-clause, following topics will be described.
 
@@ -568,7 +564,7 @@ Security of wallet implementation
 Monitoring of private key access
 Log audit
 
-#### Security controls at digital asset custodian
+### Security controls at digital asset custodian
 
 Following security controls addition to kay management in sub clause 9.2.2 will be described in this sub clause.
 
@@ -584,9 +580,9 @@ Following security controls addition to kay management in sub clause 9.2.2 will 
 
 Above controls are described with aligning to ISO/IEC 27002:2013 and considering security controls specific to digital asset custodians. The structure of this sub clause aligns the structure of ISO/IEC 27002:2013.
 
-### Countermeasures against risks caused by blockchain and network environment
+## Countermeasures against risks caused by blockchain and network environment
 
-### Risk mitigation against crimes
+## Risk mitigation against crimes
 
 
 # Remaining issues
