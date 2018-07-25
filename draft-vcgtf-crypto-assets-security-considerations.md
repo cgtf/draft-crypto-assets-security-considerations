@@ -154,7 +154,7 @@ cases.
 
 ## On the characteristics of crypto assets on Blockchain and distributed ledger technologies
 
-In this sub-clause, following items will described as characteristics of digital assets over blockchain and distributed ledger technology in preparation for section 8 and 9.
+In this sub-clause, following items will described as characteristics of digital assets over blockchain and distributed ledger technology in preparation for {{risks-of-crypto-asset-exchange}} and {{consideration-on-security-controls-at-digital-asset-custodian}}.
 
 ### The importance of the private key used for signing
 
@@ -249,10 +249,10 @@ The main risks to be noted as a Crypto Asset exchange office are roughly classif
 ## Risks related to the system of the Crypto Asset exchange
 
 Here are the typical risks to the information assets held by the system of the Crypto Asset exchange.
-In the basic model of Section 5.2, pay attention to the signing secret key and the asset data as an information asset which is particularly important from the viewpoint of protecting customer assets.
-If the signing secret key and the surrounding environment are not secure, it is also possible for a malicious person to create an illegal transaction and send it to the node in the block chain. Once an illegal transaction is sent to the node and written to the block chain it is nearly impossible to cancel the transaction. Therefore, prior measures to prevent illegal transactions being created are particularly important. It is necessary to carefully evaluate the risks related to management of signing secret keys and illegal transaction creation and to consider appropriate safety measures. In addition, it is necessary to consider the loss of the signing secret key. When the signing secret key is lost, it becomes impossible to use the Crypto Asset stored in the address corresponding to the signing private key. As for the risk concerning the signing secret key, consider the secret key for signature and the environment surrounding it based on the basic model in Section 5.2 in Section 8.2.1.
-As for the asset data, since the contents of data, data format, management form, and details of processing vary from exchanges to exchanges, this document considers the model more abstracted. Common contents of asset data to be protected include the total amount of Crypto Asset and legal currency deposited by the customer at the exchanges, the amount of Crypto Asset and legal currency held by the exchanges, customer account number and Crypto Asset An address and so on are conceivable. If such asset data is illegally rewritten by a malicious one, it will also cause damage to customers and impede the work of the exchanges. The asset data is discussed in section 8.2.2.
-In addition to protecting important information such as transaction signature private key and asset data, it is also necessary to consider risks such as system outage so that customers can smoothly control their own assets. Risks related to system outages are discussed in Section 8.2.3.
+In the basic model of {{a-basic-model-of-online-system-of-a-crypto-assets-exchange-and-its-functional-components}}, pay attention to the signing secret key and the asset data as an information asset which is particularly important from the viewpoint of protecting customer assets.
+If the signing secret key and the surrounding environment are not secure, it is also possible for a malicious person to create an illegal transaction and send it to the node in the block chain. Once an illegal transaction is sent to the node and written to the block chain it is nearly impossible to cancel the transaction. Therefore, prior measures to prevent illegal transactions being created are particularly important. It is necessary to carefully evaluate the risks related to management of signing secret keys and illegal transaction creation and to consider appropriate safety measures. In addition, it is necessary to consider the loss of the signing secret key. When the signing secret key is lost, it becomes impossible to use the Crypto Asset stored in the address corresponding to the signing private key. As for the risk concerning the signing secret key, consider the secret key for signature and the environment surrounding it based on the basic model in {{a-basic-model-of-online-system-of-a-crypto-assets-exchange-and-its-functional-components}} in {{risks-related-to-signing-keys}}.
+As for the asset data, since the contents of data, data format, management form, and details of processing vary from exchanges to exchanges, this document considers the model more abstracted. Common contents of asset data to be protected include the total amount of Crypto Asset and legal currency deposited by the customer at the exchanges, the amount of Crypto Asset and legal currency held by the exchanges, customer account number and Crypto Asset An address and so on are conceivable. If such asset data is illegally rewritten by a malicious one, it will also cause damage to customers and impede the work of the exchanges. The asset data is discussed in {{risks-related-to-asset-data}}.
+In addition to protecting important information such as transaction signature private key and asset data, it is also necessary to consider risks such as system outage so that customers can smoothly control their own assets. Risks related to system outages are discussed in {{risks-related-to-suspension-of-systems-and-operations}}.
 In addition to the information and risks mentioned in this section, there are risks inherent to each system of the Crypto Asset exchange and risks in cooperation with external business operators. It is necessary to conduct a detailed risk assessment on the actual system of the Crypto Asset exchange.
 
 ### Risks related to signing keys
@@ -360,7 +360,7 @@ d) Threat by fraudulent use
     - Intrusion into the customer asset management function (implementation)
     - Intrusion into the exchange operation modules
 
-The following sections outline each risk, and their security controls are shown in Section 9.2.2.
+The following sections outline each risk, and their security controls are shown in {{security-controls-at-digital-asset-custodian}}.
 
 #### Risk of loss of signing secret key
 
