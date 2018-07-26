@@ -118,8 +118,11 @@ In this section, a model online system of a crypto assets custodian that is used
 
 Followings are the basic model of a crypto assets custodian that this document deals with.
 
-<!-- ![Basic Model of Crypto Assets Custodian System](./CryptoAssetCustodiansSystemModeling.svg "Basic Model of Crypto Assets Custodian System") -->
-Figure 5-1 Basic Model of Crypto Assets Custodian
+~~~~~~~~~~
+https://raw.githubusercontent.com/VCGTF/draft-crypto-assets-security-considerations/master/CryptoAssetCustodiansSystemModeling.svg
+~~~~~~~~~~
+{: #fig-basic-model-of-crypto-assets-custodian title="Basic Model of Crypto Assets Custodian"}
+{{fig-basic-model-of-crypto-assets-custodian}} Basic Model of Crypto Assets Custodian
 
 - Customer Interface  
 Provides screen and input functions such as login process, account management (deposit/withdrawal instruction etc.) and trade instruction for the customers(users). Web application, API, etc.
@@ -191,11 +194,13 @@ When using existing implementations such as bitcoin wallet, bitcoin wallet is th
 
 ### Flow for the key generation and the key usage
 
-<!-- ![Lifecycle of Key](./SignatureKeyLifeCycle.svg "Lifecycle of Key") -->
-Fig. 5-2 Lifecycle of signature key, verification key and encryption/decryption key for signature key
+~~~~~~~~~~
+https://raw.githubusercontent.com/VCGTF/draft-crypto-assets-security-considerations/master/SignaureKeyLifeCycle.svg
+~~~~~~~~~~
+{: #fig-lifecycle-of-signature-key title="Lifecycle of signature key, verification key and encryption/decryption key for signature key"}
 
 After a pair of a signature key and a verification key (hereafter “key pair”) is generated, an address to receive transactions is generated from the verification key. By notifying a sender of crypto assets this address, the sender is able to transfer the asset to the address. When the recipient transfers the asset to the other address, the original recipient signs the transaction data which includes the transfer order.
-Inactive state of the signature key is the state such that the signature key is stored in confidential manner in the signature key management function of fIg.1. An example of inactivation is encryption by encryption/decryption key (e.g. pass phrase), that is,  the signature key is encrypted. In contrary, activation is the process to make the key usable to sign, by decrypting the inactivated key. The activation is assumed to be executed in transaction signing function if fig.1. Activation and inactivation may be executed in an implementation of wallet, when the wallet have both functions. The signature key is not needed after its generation until execution of signing to transaction. Thus, there is a way to manage the signature key in offline manner with storing the verification key and address online (see 9.2.2).
+Inactive state of the signature key is the state such that the signature key is stored in confidential manner in the signature key management function of {{fig-basic-model-of-crypto-assets-custodian}}. An example of inactivation is encryption by encryption/decryption key (e.g. pass phrase), that is,  the signature key is encrypted. In contrary, activation is the process to make the key usable to sign, by decrypting the inactivated key. The activation is assumed to be executed in transaction signing function if {{fig-basic-model-of-crypto-assets-custodian}}. Activation and inactivation may be executed in an implementation of wallet, when the wallet have both functions. The signature key is not needed after its generation until execution of signing to transaction. Thus, there is a way to manage the signature key in offline manner with storing the verification key and address online (see {{security-controls-at-crypto-assets-custodian}}).
 
 ### On the usage of multiple keys
 
@@ -314,7 +319,7 @@ In the crypto assets custodian, the role and risk of the signing key are extreme
 #### Risk analysis of signing secret key
 
 Risk analysis differs depending on the assumed threats, system configuration, threat modeling, and so on. In this section, we show a case study based on the following assumption as an example.
-Here, the threat concerning the signature secret key and the factors that can cause the threat are assumed as follows. In addition, we assumed the following as the actor giving input to the signing secret key based on Figure 5-1 in Chapter 5.
+Here, the threat concerning the signature secret key and the factors that can cause the threat are assumed as follows. In addition, we assumed the following as the actor giving input to the signing secret key based on {{fig-basic-model-of-crypto-assets-custodian}} in {{basic-description-of-a-model-online-system-of-a-crypto-assets-custodian}}.
 
 * Threats:
   - lost
@@ -546,10 +551,10 @@ In general, followings are required in management of private cryptographic keys.
 - Limit the number of access to private keys as minimum as possible.
 - Be prepared for unintentional lost of private keys.
 
-Followings are three basic security control to realize above. Additional security controls specific to crypto assets custodians are described in and after sub-clause 9.2.2.2.
+Followings are three basic security control to realize above. Additional security controls specific to crypto assets custodians are described in and after sub-clause {{security-controls-at-crypto-assets-custodian}}.
 
 1. State management of private keys  
-As described in figure 5-2, a private key has one of multiple states, and it may be active or inactive state in its operation. The private key should be in active state when it is used for signing or decryption. It is recommended to enforce to input some secret information to activate an inactive private key. This makes keep the inactive private key away from abuse, if the adversary does not have the secret information. This method ensure security of the private key against leakage and lost.  
+As described in {{fig-lifecycle-of-signature-key}}, a private key has one of multiple states, and it may be active or inactive state in its operation. The private key should be in active state when it is used for signing or decryption. It is recommended to enforce to input some secret information to activate an inactive private key. This makes keep the inactive private key away from abuse, if the adversary does not have the secret information. This method ensure security of the private key against leakage and lost.  
 It is also recommended to minimize the term of activation to limit the risk of abuse as minimum as possible. Unnecessary activation of secret key increases the risk of abuse, leakage and theft, though keeping the activation state is efficient from business viewpoint. On the other hand, frequent activation/inactivation may give impact to business efficiency. It is important to consider the trade-off between the risk and business efficiency and provide clear key management policy to customers.
 
 2. Administrator role separation and mutual check-and-balance  
@@ -598,13 +603,13 @@ This is a signature scheme which requires multiple isolated signing keys to sign
 
 In this sub-clause, following topics will be described.
 
-Security of wallet implementation
-Monitoring of private key access
-Log audit
+- Security of wallet implementation
+- Monitoring of private key access
+- Log audit
 
 ### Security controls at crypto assets custodian
 
-Following security controls addition to kay management in sub clause 9.2.2 will be described in this sub clause.
+Following security controls addition to kay management in sub clause {{security-controls-at-crypto-assets-custodian}} will be described in this sub clause.
 
 - Organization of information security
 - Category and management of assets
@@ -635,6 +640,7 @@ None.
 
 --- back
 
-# Contributors
+# Acknowledgements
+{:numbered="false"}
 
-- secWG + 松尾先生
+Thanks to Masanori Kusunoki, Yasushi Matsumoto, Natsuhiko Sakimura, Yuji Suga, Tatsuya Hayashi, Keiichi Hida and other members of the Security Working Group of Virtual Currency Governance Task Force.
