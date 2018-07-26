@@ -54,8 +54,6 @@ author:
 
 normative:
   RFC2119:
-
-informative:
   ISO.27001:2013:
     author:
       org: International Organization for Standardization
@@ -63,7 +61,7 @@ informative:
     date: 2013-10
     target: https://www.iso.org/standard/54534.html
     seriesinfo:
-      ISO/IEC JTC 1/SC 27: IT Security techniques
+      ISO/IEC: 27001:2013
   ISO.27002:2013:
     author:
       org: International Organization for Standardization
@@ -71,7 +69,8 @@ informative:
     date: 2013-10
     target: https://www.iso.org/standard/54533.html
     seriesinfo:
-      ISO/IEC JTC 1/SC 27: IT Security techniques
+      ISO/IEC: 27002:2013
+informative:
 
 --- abstract
 
