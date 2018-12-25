@@ -11,6 +11,7 @@ This is the working area for the individual Internet-Draft, "draft-vcgtf-crypto-
 Formatted text and HTML versions of the draft can be built using `make`.
 
 ```sh
+$ rm lib/addstyle.sed && touch lib/addstyle.sed
 $ make
 ```
 

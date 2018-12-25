@@ -24,6 +24,9 @@ jobs:
       - restore_cache:
           keys:
             - refcache
+      - remove_addstyle_sed:
+          name: "Remove addstyle.sed for xml2rfc --v3"
+          command: "rm lib/addstyle.sed && touch lib/addstyle.sed"
       - run:
           name: "Build Drafts"
           command: "make 'CLONE_ARGS=--reference ~/git-reference'"
