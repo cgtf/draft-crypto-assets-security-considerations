@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0) -->
-<svg version="1.1" id="レイヤー_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="841.9px" height="595.3px" viewBox="0 0 841.9 595.3" xml:space="preserve">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="841.9px" height="595.3px" viewBox="0 0 841.9 595.3" xml:space="preserve">
 	<rect x="118" y="164.9" fill="none" stroke="#000000" stroke-linejoin="round" stroke-miterlimit="10" width="179" height="61"/>
 	<rect x="127.3" y="172.2" fill-rule="evenodd" fill="#FFFFFF" width="162.8" height="15"/>
 	<rect x="118" y="332.9" fill="none" stroke="#000000" stroke-linejoin="round" stroke-miterlimit="10" width="179" height="62"/>
@@ -95,7 +94,7 @@
 		</tspan>
 		<tspan x="28.4" y="16" font-size="14px">for Signature Key
 		</tspan>
-		<tspan x="44.7" y="32" font-size="14px">‘Generation’</tspan>
+		<tspan x="44.7" y="32" font-size="14px">'Generation'</tspan>
 	</text>
 	<rect x="124" y="340.1" fill-rule="evenodd" fill="none" width="166.1" height="48.7"/>
 	<text transform="matrix(1 0 0 1 124.5467 352.106)">
@@ -103,56 +102,56 @@
 		</tspan>
 		<tspan x="28.4" y="16" font-size="14px">for Signature Key
 		</tspan>
-		<tspan x="58.8" y="32" font-size="14px">‘In-Use’</tspan>
+		<tspan x="58.8" y="32" font-size="14px">'In-Use'</tspan>
 	</text>
 	<rect x="407.1" y="19.2" fill-rule="evenodd" fill="none" width="155.9" height="34.5"/>
 	<text transform="matrix(1 0 0 1 445.3527 31.1891)">
 		<tspan x="0" y="0" font-size="14px">Master Seed</tspan>
-		<tspan x="1.9" y="16" font-size="14px">‘Generation’</tspan>
+		<tspan x="1.9" y="16" font-size="14px">'Generation'</tspan>
 	</text>
 	<rect x="407.1" y="89.7" fill-rule="evenodd" fill="none" width="155.9" height="34.5"/>
 	<text transform="matrix(1 0 0 1 445.3527 101.689)">
 		<tspan x="0" y="0" font-size="14px">Master Seed</tspan>
-		<tspan x="16" y="16" font-size="14px">‘In-Use’</tspan>
+		<tspan x="16" y="16" font-size="14px">'In-Use'</tspan>
 	</text>
 	<rect x="603.5" y="434.8" fill-rule="evenodd" fill="none" width="155.9" height="49.2"/>
 	<text transform="matrix(1 0 0 1 632.8415 446.8533)">
 		<tspan x="0" y="0" font-size="14px">Verification Key
 		</tspan>
-		<tspan x="24.9" y="16" font-size="14px">‘In-Use’</tspan>
+		<tspan x="24.9" y="16" font-size="14px">'In-Use'</tspan>
 		<tspan x="-19.8" y="32" font-size="14px">(Receive Transaction)</tspan>
 	</text>
 	<rect x="605.1" y="90.2" fill-rule="evenodd" fill="none" width="153.6" height="34.5"/>
 	<text transform="matrix(1 0 0 1 642.2167 102.1891)">
 		<tspan x="0" y="0" font-size="14px">Master Seed</tspan>
-		<tspan x="0" y="16" font-size="14px">‘Suspension’</tspan>
+		<tspan x="0" y="16" font-size="14px">'Suspension'</tspan>
 	</text>
 	<rect x="407.1" y="170.3" fill-rule="evenodd" fill="none" width="154.9" height="49.8"/>
 	<text transform="matrix(1 0 0 1 426.9387 182.3565)">
 		<tspan x="0" y="0" font-size="14px">Signature Key and</tspan>
 		<tspan x="-12" y="16" font-size="14px">Verification Key (Pair)
 		</tspan>
-		<tspan x="19.9" y="32" font-size="14px">‘Generation’</tspan>
+		<tspan x="19.9" y="32" font-size="14px">'Generation'</tspan>
 	</text>
 	<rect x="406" y="268.8" fill-rule="evenodd" fill="none" width="155.9" height="34.5"/>
 	<text transform="matrix(1 0 0 1 440.0037 280.8386)">
 		<tspan x="0" y="0" font-size="14px">Signature Key
 		</tspan>
-		<tspan x="2.3" y="16" font-size="14px">‘In-Activation’</tspan>
+		<tspan x="2.3" y="16" font-size="14px">'In-Activation'</tspan>
 	</text>
 	<rect x="407" y="434.8" fill-rule="evenodd" fill="none" width="155" height="50.3"/>
 	<text transform="matrix(1 0 0 1 440.5036 446.8139)">
 		<tspan x="0" y="0" font-size="14px">Signature Key
 		</tspan>
-		<tspan x="20.2" y="16" font-size="14px">‘In-Use’</tspan>
+		<tspan x="20.2" y="16" font-size="14px">'In-Use'</tspan>
 		<tspan x="-21" y="32" font-size="14px">(Sign to Transaction)</tspan>
 	</text>
 	<rect x="407.1" y="347.2" fill-rule="evenodd" fill="none" width="154.9" height="34.5"/>
 	<text transform="matrix(1 0 0 1 440.5666 359.1891)">
 		<tspan x="0" y="0" font-size="14px">Signature Key
 		</tspan>
-		<tspan x="10.5" y="16" font-size="14px">‘Activation’</tspan>
+		<tspan x="10.5" y="16" font-size="14px">'Activation'</tspan>
 	</text>
 	<rect x="406.6" y="540.1" fill-rule="evenodd" fill="none" width="155.9" height="16.7"/>
-	<text transform="matrix(1 0 0 1 444.8459 552.1461)" font-size="14px">‘Suspension’</text>
+	<text transform="matrix(1 0 0 1 444.8459 552.1461)" font-size="14px">'Suspension'</text>
 </svg>
