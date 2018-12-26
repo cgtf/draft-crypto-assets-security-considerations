@@ -862,9 +862,9 @@ On the other hand, hardware wallets MUST be subject to the third-party or indepe
 If introducing a software wallet from outside, it MUST consider the potentiality of containing a malicious code, vulnerability, and bugs.
 
 
-### Physical and enviornmental security
+### Physical and environmental security
 
-Cryptoassets custodians system MUST follow section "11. Physical and enviornmental security" on {{ISO.27002:2013}}.
+Cryptoassets custodians system MUST follow section "11. Physical and environmental security" on {{ISO.27002:2013}}.
 
 Cryptoassets custodians system MUST consider strict physical security protections for following elements.
 
@@ -876,7 +876,7 @@ If the signature key mentioned above is stored in the deactivated state, and als
 
 The security control to these signature key MUST be separated from the security control of the crypto assets custodian system. In addition to this control, access to facilities and environments which store media containing a signature key or information required to operate the signature key MUST be restricted. (See: {{security-controls-on-signature-keys}})
 
-Furthermore, countermeasures to lost or theft for the operational device MUST be taken place if the administration or operation is executed from remote place such as out of facility.
+Furthermore, countermeasures to loss or theft for the operational device MUST be taken place if the administration or operation is executed from a remote place such as out of a facility.
 
 ### Operations security
 
@@ -885,39 +885,39 @@ In addition to the standard, cryptoassets custodian systems SHALL comply the sec
 
 #### Protections from malicious software (Related to ISO.27002:2013 12.2)
 
-Detection and recovery measures of malware MUST be appropriately taken place according to configurations, environment of cryptoassets custodian systems and confidentiality and importance of informations handled in the systems.
+Detection and recovery measures of malware MUST be appropriately taken place according to configurations, the environment of cryptoassets custodian systems and confidentiality and importance of information handled in the systems.
 
-In general, one of prevention measures for malware is applying security patches to operating systems, middlewares of cryptoassets custodian systems. However, those patches MUST be applied upon sufficient confirmation based on importance and urgency of patch. Moreover, testing and deployment procedure of security patch MUST be considered beforehand just in case attacks against the vulnerability have already confirmed.
+In general, one of the prevention measures for malware is applying security patches to operating systems, middlewares of cryptoassets custodian systems. However, those patches MUST be applied upon sufficient confirmation based on the importance and urgency of a patch. Moreover, testing and deployment procedure of security patch MUST be considered beforehand just in case attacks against the vulnerability have already confirmed.
 
 #### Backup (Related to ISO.27002:2013 12.3)
 
-Upon making a backup of systems, strict security controls to important data which suffered serious damage by leakage such as the signature key or master seed, MUST be applied same as data subject to backup (e.g. an appropriate selection for storage, and enforcement of strict access controls.) Security controls such as distributed storage mentioned in {{security-controls-on-signature-keys}}), appropriate privilege separation on backup and restore between operators and people making an authorization, and operation with multiple parties are also important.
+Upon making a backup of systems, strict security controls to important data which suffered severe damage by leakages such as the signature key or master seed, MUST be applied same as data subject to backup (e.g., an appropriate selection for storage, and enforcement of strict access controls.) Security controls such as distributed storage mentioned in {{security-controls-on-signature-keys}}), proper privilege separation on backup and restore between operators and people making an authorization, and operation with multiple parties are also important.
 
 #### Logging and monitoring (Related to ISO.27002:2013 12.4) {#logging-and-monitoring}
 
-Crypto asset custodians systems MUST obtain / monitor / record logs properly (not limited to but include following logs).
+Crypto asset custodians systems MUST obtain/monitor/record logs properly (not limited to but include following logs).
 
-- Logs on the environment where the crypto currency custodians system
-  Collecting and monitoring of event log outputted from the system components such as middleware, operating systems and computers detects abnormal state of environment where the system runs. Collected logs are used to investigate a cause in a case of incident.
+- Logs on the environment where the cryptoassets custodian system
+  Collecting and monitoring of event log outputted from the system components such as middleware, operating systems, and computers detects an abnormal state of environment where the system runs. Collected logs are used to investigate a cause in a case of the incident.
 - Logs on the processing of components of crypto assets custodians system
-  Collecting and monitoring of the processing logs from each component detects abnormal state of crypto assets custodians system. Collecting proper logs is used as a proof of proper processing inside the crypto assets custodians system, and also used to investigate a cause in a case of incident.
+  Collecting and monitoring of the processing logs from each component detects an abnormal state of crypto assets custodians system. Collecting proper logs is used as a proof of proper processing inside the crypto assets custodians system, and also used to investigate a cause in a case of the incident.
 - Access log of signature key
-  Information such as date, source terminal and operator(not a role but an information to identify an operator) MUST be obtained and recorded in a case of operations such as activation and deactivation of the signature key, access to activated signature key and backup/restore. Those records MUST be validated against the records such as operational procedures, operating hours, on a periodical inspection such as weekly inspection. Moreover, in case where the signature key is managed online,  operational log such as creation of transaction signature by operator MUST be recorded and validated as well.
+  Information such as date, a source terminal, and operator(not a role but information to identify an operator) MUST be obtained and recorded in a case of operations such as activation and deactivation of the signature key, access to the activated signature key and backup/restore. Those records MUST be validated against the records such as operational procedures, operating hours, on a periodical inspection such as weekly inspection. Moreover, in a case where the signature key is managed online,  operational log such as the creation of transaction signature by operator MUST be recorded and validated as well.
 - Log on remittance from wallet managed by custodians
-  Logs on remittance MUST be monitored real-time against attempt of outgoing coin transfer in case where signature key and backup are unexpectedly leaked. In case where an unexpected remittance has occurred in one of the wallets, monitoring logs helps timely detecting the incidents, suspending all multi-signature operations, rechecking on other existing wallets, and migrating to another wallets using different signature key.
+  Logs on remittance MUST be monitored real-time against the attempt of outgoing coin transfer in a case where the signature key and backup are unexpectedly leaked. In a case where an unexpected remittance has occurred in one of the wallets, monitoring logs helps timely detecting the incidents, suspending all multi-signature operations, rechecking on other existing wallets, and migrating to other wallets using a different signature key.
 - Access log of administration remote terminal
   If a remote access to cryptoassets custodian system is permitted, audit information such as date, source IP address, terminal information(e.g. terminal ID, latest result of security evaluation if it’s possible) and destination IP address (or hostname) MUST be obtained and recorded for auditing which checks the accesses are from/in authorized range.
-- Traffic log between the inside and the outside (e.g. the Internet)
-  As mentioned in {{network-security-management}}, Inbound traffic to cryotoassets custodian systems such as traffic from the Internet MUST be restricted to permitted external network or permitted protocol. Inbound traffic from disallowed network and traffic using disallowed protocol are denied at firewall and other middleboxes. Logs from those equipments are effective to protect customers from malicious access in terms of not only cryptoassets custodian system but also the information security.
-  Usually outbound traffic from protected assets such as cryptoassets custodian systems, to the Internet and other systems is not a subject to logging. However, those logs are useful in cases such as investigations on incidents (e.g. malicious usage of signature key, theft of signature key)  and detection of incident , so entire traffic or network flow are RECOMMENDED to be acquired according to protocols / destinations.
+- Traffic log between the inside and the outside (e.g., the Internet)
+  As mentioned in {{network-security-management}}, Inbound traffic to cryotoassets custodian systems such as traffic from the Internet MUST be restricted to a permitted external network or permitted protocol. Inbound traffic from disallowed network and traffic using disallowed protocol are denied at the firewall and other middleboxes. Logs from that equipment are effective to protect customers from malicious access in terms of not only cryptoassets custodian system but also the information security.
+  Usually, outbound traffic from protected assets such as cryptoassets custodian systems to the Internet and other systems is not a subject to logging. However, those logs are useful in cases such as investigations on incidents (e.g., malicious usage of the signature key, theft of signature key)  and detection of the incident, so entire traffic or network flow are RECOMMENDED to be acquired according to protocols/destinations.
 - Customers access log
-  Customers access log MUST be obtained since those logs are used to detect malicious login or request. Also, those logs are used as an evidence in a case of incidents. In a case of malicious login, custodians MUST notify its customer.
-  - Provide an information about malicious activity to customers
-    Providing a feature to allow customer to confirm login history, source IP address, region and terminal information, and login notification by a push notification or an e-mail are effective to detect a malicious access after the incident. Feature protecting an account and alerting to user in cases when detecting login from unknown source address or terminal, or detecting consecutive login to multiple account from same source IP address, are effective to protect user from malicious access.
-- Images/videos recorded by surveillance camera and entry/exit records
-Storing images/videos recorded by surveillance camera and entry/exit records for proper period enables validating if physical safety control measures work properly after the incident.
+  Customers access log MUST be obtained since those logs are used to detect malicious login or request. Also, those logs are used as evidence in a case of incidents. In a case of malicious login, custodians MUST notify its customer.
+  - Provide information about the malicious activity to customers
+    Providing a feature to allow a customer to confirm login history, source IP address, region, and terminal information, and login notification by a push-notification or an e-mail are effective to detect malicious access after the incident. Feature protecting an account and alerting to a user in cases when detecting login from unknown source address or terminal, or detecting consecutive login to multiple accounts from the same source IP address, are effective to protect a user from malicious access.
+- Images/videos recorded by a surveillance camera and entry/exit records
+Storing images/videos recorded by the surveillance camera and entry/exit records for proper period enables validating if physical safety control measures work properly after the incident.
 
-Detecting a malicious process execution (e.g. malware), a malicious access, an abnormal state of cryptoassets custodians system by monitoring logs mentioned above comprehensively are important. Moreover, storing those evidence is important to prevent an internal fraud and exonerate person involved from charge. Security Operation Center (SOC) may help monitoring system. Outsourcing to trusted operators about detection and notification of threats in operation of SOC may be helpful.
+Detecting a malicious process execution (e.g., malware), malicious access, an abnormal state of cryptoassets custodians system by monitoring logs mentioned above comprehensively are important. Moreover, storing those evidence is important to prevent internal fraud and exonerate person involved from the charge. Security Operation Center (SOC) may help to monitor the system. Outsourcing to trusted operators about detection and notification of threats in operation of SOC may be helpful.
 
 ### Communications security
 
@@ -927,48 +927,48 @@ Since assets are managed in a state accessible from the Internet on cryptoassets
 
 #### Network security management (Related to ISO.27002:2013 clause 13.1.1) {#network-security-management}
 
-As same as security control measures to general systems, measures such as definition of a boundary to external network, restriction of connection to a network system(e.g. firewall), stop unnecessary services or close unnecessary ports, obtaining and monitoring logs and malicious access detection MUST be considered and performed.
+As same as security control measures to general systems, measures such as a definition of a boundary to the external network, restriction of connection to a network system(e.g., firewall), stop unnecessary services or close unnecessary ports, obtaining and monitoring logs and malicious access detection MUST be considered and performed.
 
-For logs, logs of internal systems MUST be monitored to detect internal malicious access, as well as monitoring of boundary to external network. (See: {{logging-and-monitoring}})
+For logs, logs of internal systems MUST be monitored to detect internal malicious access, as well as monitoring of boundary to the external network. (See: {{logging-and-monitoring}})
 
 Secure communication with proper mutual authentication such as TLS(Transport Layer Security) MUST be used to protect from attacks to communication between modules such as eavesdropping and manipulation in a case where modules of cryptoassets custodians systems are remotely located.
 
 #### Network segmentation (Related to ISO.27002:2013 13.1.3)
 
-It is important to limit a connection between cryptoassets custodians systems and other systems/the Internet as minimum as possible to reduce a risk of exposing against attacks through network. Measures as follow such as network segmentations and limitation to connection MUST be considered.
+It is important to limit a connection between cryptoassets custodians systems and other systems/the Internet as minimum as possible to reduce risk of exposing against attacks through a network. Measures as follow such as network segmentation and limitation to connection MUST be considered.
 
 - Network isolation between custodians systems and other information systems
   - Objectives:
     Preventing a connection to custodians systems through information systems used in daily operations, which has been compromised due to malware infections caused by external attacks such as targeted attack.
   - Countermeasures:
-    Isolate a network between information systems used in daily operations and custodians system by segmentation of network or limiting an access.
-- Network isolcation at boundary to the Internet
+    Isolate a network between information systems used in daily operations and custodians system by segmentation of network or limiting access.
+- Network isolation at the boundary to the Internet
   - Objective:
-    Preventing access to important information such as signature key from attack though the Internet by minimizing and isolating modules which connect to the Internet.
+    Preventing access to critical information such as a signature key from attack through the Internet by minimizing and isolating modules which connect to the Internet.
   - Countermeasures:
-    Features connecting external services on the Internet to achieve a functionality of custodians system, transmit transactions or obtain blockchain data MUST be packaged as a module as minimum as possible or be isolated from other system such as locating on DMZ. Moreover, if modules are connecting to external services, access controls to those services MUST be properly performed.
-- Limitation on terminal used in custodians system administration
+    Features which connects external services on the Internet to achieve functionality of custodians system, transmit transactions or obtain blockchain data MUST be packaged as a module as minimum as possible or be isolated from other systems such as locating on DMZ. Moreover, if modules are connecting to external services, access controls to those services MUST be adequately performed.
+- Limitation on a terminal used in custodians system administration
   - Objective:
-    Preventing a malicious operation due to hijacking of terminal used in custodians system administration.
+    Preventing a malicious operation due to a hijacking of terminal used in custodians system administration.
   - Countermeasures:
-    Limiting a terminal which is able to connect to custodians system, such as a terminal to manage a custodians system administration function and a terminal running a administrative tool to order an operation to custodians system.
+    Limiting a terminal which can connect to custodians system, such as a terminal to manage a custodians system administration function and a terminal running an administrative tool to order operation to custodians system.
 
 #### System acquisition, development and maintenance
 
 Cryptoassets custodians system MUST follow section "14. System acquisition, development and maintenance" on {{ISO.27002:2013}}.
 
-Cryptoassets handled by cryptoassets custodians ranges from high liquidity cryptoassets dealt with by multiple custodians to emerging cryptoassets. It is important to reduce a risk regarding system acquisition, development and maintenance in addition to {{ISO.27002:2013}} as characteristics of blockchain network used by those cryptoassets varies. For example, following countermeasures are effective.
+Cryptoassets handled by cryptoassets custodians ranges from high liquidity cryptoassets dealt with by multiple custodians to emerging cryptoassets. It is important to reduce a risk regarding system acquisition, development and maintenance in addition to {{ISO.27002:2013}} as characteristics of blockchain network used by those cryptoassets varies. For example, the following countermeasures are effective.
 
 - Software development method
-  Secure software development method such as secure coding and code review MUST be used in software development of custodian system. Code review not only with development team but also with operational team is effective to detect a vulnerability from a viewpoint of operation.
+  Secure software development method such as secure coding and code review MUST be used in the software development of the custodian system. Code review not only with the development team but also with an operational team is effective to detect a vulnerability from the viewpoint of operation.
 - Penetration test
-  Conducting a penetration test helps detecting a known vulnerability at systems and results in obviating the attacking risk by attacker in advance.
+  Conducting a penetration test helps to detect a known vulnerability at systems and results in obviating the attacking risk by the attacker in advance.
 - Integration test with blockchain network
-  Test MUST be performed not only with test network of blockchain but also with production network of blockchain. Risk assessment MUST be taken with understanding of limitation of test on the production network such as high-load test.
-- Privilege separation on operation
-  Privilege separation such as limiting code reviewed software deployment to the production environment to system operating team is effective to prevent tampering attacks from internal.
+  Test MUST be performed not only with the test network of blockchain but also with production network of blockchain. Risk assessment MUST be taken with an understanding of limitation of test on the production network such as high-load test.
+- Privilege separation on the operation
+  Privilege separation such as limiting code reviewed software deployment to the production environment to the system operating team is effective to prevent tampering attacks from internal.
 - Prohibiting using default (factory-configured) values
-  Any factory-configured authentication information such as password MUST NOT be used regardless of hardware / software, development environment or production environment.
+  Any factory-configured authentication information such as password MUST NOT be used regardless of hardware/software, development environment or production environment.
 
 ### Supplier relationships
 
@@ -982,50 +982,50 @@ Administrative measures according to {{ISO.27002:2013}} MUST be taken in terms o
 
 Cryptoassets custodians system MUST follow section "16. Information security incident management" on {{ISO.27002:2013}}.
 
-Since cyber attacks got complex, cyber security incidents unprecedented in the past could occur, especially in cryptoassets custodians. In addition to security control measures as a preparation to expected threat in advance, Emergency response framework MUST be prepared in a case of incidents caused by unknown threat. For example, establishment of internal CSIRT(Computer Security Incident Response Team) and building a relationship with external organizations.
+Since cyber attacks got complex, cyber security incidents unprecedented in the past could occur, especially in cryptoassets custodians. In addition to security control measures as a preparation to expected threat in advance, Emergency response framework MUST be prepared in a case of incidents caused by an unknown threat. For example, the establishment of internal CSIRT(Computer Security Incident Response Team) and building a relationship with external organizations.
 
 ### Information security aspect of business continuity management
 
 Cryptoassets custodians system MUST follow section "17. Information security aspect of business continuity management" on {{ISO.27002:2013}}.
 
-Requirements, Processes, Procedures and control measures to secure information security for cryptoassets custodian in a case of severe situation(such as disaster or crisis) MUST to be established, documented, performed and maintained. In this case, administrative measures in a case where countermeasures has performed or in a period of severe situation, MUST be verified periodically. Moreover, operators MUST consider to shutdown the system situationally.
+Requirements, Processes, Procedures and control measures to secure information security for the cryptoassets custodian in a case of the severe situation(such as disaster or crisis) MUST be established, documented, performed and maintained. In this case, administrative measures in a case where countermeasures have performed or in a period of a severe situation MUST be verified periodically. Moreover, operators MUST consider to shut down the system situationally.
 
-- In a case where facilities (including a facilities used as a office) are unavailable
+- In a case where facilities (including facilities used as an office) are unavailable
   - Power outage
   - Damages of building
-  - Act of nature (e.g. earthquakes, fires (including sprayed water for neighborhoods fire), water outage, flood)
-  - Other reasons (e.g. facilities are unavailable or access to the facilities are prohibited by law / regulations / authorities.)
+  - An act of nature (e.g., earthquakes, fires (including sprayed water for neighborhoods fire), water outage, flood)
+  - Other reasons (e.g., facilities are unavailable, or access to the facilities are prohibited by law/regulations/authorities.)
 - In a case where it’s difficult to continue the system
-  - In a case of becoming difficult to continue running a emergency electric generator.
-  - Long suspension of public transportation services, pandemic of disease, lack of human resources by act of nature.
-  - Failure of communication network
-  - Failure of equipments
-  - Failure of the system (regardless of reasons such as failure of program or cyber attacks)
+  - In a case of becoming difficult to continue running an emergency electric generator.
+  - Long suspension of public transportation services, a pandemic of disease, lack of human resources by an act of nature.
+  - Failure of a communication network
+  - Failure of equipment
+  - Failure of the system (regardless of reasons such as failure of a program or cyber attacks)
   - Loss of paper wallet or hardware wallet.
-  - Suspension of outsource contractor’s business
+  - Suspension of outsourcing contractor’s business
   - Leakage or loss of signature key
-- In a case of becoming difficult to continue business
-  - Business-suspension order by law / regulations.
+- In the case of becoming difficult to continue business
+  - Business-suspension order by law/regulations.
 
 #### Maintaining availability of the system
 
-Cryptoassets custodians system MUST be designed and implemented to have an enough scalability and redundancy for users with consideration of number of users, peak date/time of transactions, system response time, maintenance period/frequency and securing a human resource for operation. Moreover, consideration for increasing a capacity of the system MUST be performed in advance with enough threshold (e.g. number of transactions or memory usage during a peak period).
+Cryptoassets custodians system MUST be designed and implemented to have enough scalability and redundancy for users with consideration of a number of users, peak date/time of transactions, system response time, maintenance period/frequency and securing a human resource for operation. Moreover, consideration for increasing the capacity of the system MUST be performed in advance with enough threshold (e.g., number of transactions or memory usage during a peak period).
 
 ### Compliance
 
-Cryptoassets custodians MUST respect guidelines or laws of the region or country. (See Appendix 3 for country of Japan)
+Cryptoassets custodians MUST respect the guidelines or laws of the region or country. (See Appendix 3 for a country of Japan)
 
 ## Other cryptoassets custodians system specific issues
 
 ### Advance notice to user for maintenance
 
-Cryptoassets custodians are RECOMMENDED to publish a notice of maintenance schedule in advance in a case where periodical schedule especially service suspension is planned in night. Also, Cryptoassets custodians are RECOMMENDED to provide an information regarding failure of the system at other FQDN/IP addresses to avert high volume traffic to web server in addition to usual way of notice such as by e-mail or on web site, in a case of emergency maintenance.
+Cryptoassets custodians are RECOMMENDED to publish a notice of maintenance schedule in advance in a case where periodical schedule especially service suspension is planned in a night. Also, Cryptoassets custodians are RECOMMENDED to provide information regarding the failure of the system at other FQDN/IP addresses to avert high volume traffic to the web server in addition to usual way of notice such as by e-mail or on the website, in a case of emergency maintenance.
 
-Moreover, cryptoassets custodians are RECOMMENDED to put forth an effort to minimize an affected area from a viewpoint of user protection in a case of service suspension caused by sudden issues such as attacks from external.
+Moreover, cryptoassets custodians are RECOMMENDED to put forth an effort to minimize an affected area from a viewpoint of user protection in a case of service suspension caused by immediate issues such as attacks from external.
 
 # Future work
 
-Disussion of distributed exchange (DEX) is currently out-of-the-scope of this document.
+Discussion of distributed exchange (DEX) is currently out-of-the-scope of this document.
 
 # Security Considerations
 
