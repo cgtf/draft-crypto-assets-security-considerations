@@ -199,7 +199,7 @@ When using existing implementations such as bitcoin wallet, bitcoin wallet is th
 ## The flow leading to the sending of the transaction
 
 - Deposit Phase
-  1. Customers send fiat to custodian’s bank account.
+  1. Customers send fiat to custodian's bank account.
   1. Custodians shall confirm to receive fiat, and shall update assets database to reflect customer asset information.
 - Input coin phase
   1. Customer transfer cryptoassets to the address instructed by custodians. Transfer shall be made by cryptoassets wallet for customer such as tools or services (other custodians or Web wallet)
@@ -214,7 +214,7 @@ When using existing implementations such as bitcoin wallet, bitcoin wallet is th
   1. Transaction messages with digital signature shall be delivered to all nodes on blockchain by transaction broadcaster.
 - Instruction to transfer from Customer Assets Management Function
   1. Administrator instructs to send cryptoassets to address through interface of Management Functions. For Example, it may send between address managed inside custodians.
-  1. Instructions to transfer shall be processed on Management Function, and shall be processed as described 2 to 4 on “output coin”. Transactions with digital signature  shall be delivered to all nodes on blockchain.
+  1. Instructions to transfer shall be processed on Management Function, and shall be processed as described 2 to 4 on "output coin". Transactions with digital signature  shall be delivered to all nodes on blockchain.
 
 ## Types of keys that are used for signature and encryption
 
@@ -400,7 +400,7 @@ Of these, theft and fraudulent use are regarded as threats that can only be caus
 
 [^3]: For example, in conjunction with a specific legitimate operation, a signature key is sent to an attacker, or a backdoor that tamper with the signature instruction of a transaction is installed.
 
-| ﻿Risk | Threat factor | Dissappearance | Leakage | Theft | Fraudulent use |
+| Risk | Factor | Loss | Leakage | Theft | Illegal use |
 |------------------------------------------------|-------------------------------------------------------------------------|----------------|---------|-------|----------------|
 | Illegal operation(Route is legitimate) | End user's own malice | Y | Y | Y | Y |
 |  | The malice of the manager of the customer property management system | Y | Y | Y | Y |
@@ -674,7 +674,7 @@ Cryptoassets Custodians shall consider about risks of lost assets by foreign fac
 Cryptoassets Custodians shall mainly consider about security management described below:
 
 - Interested parties (from "4. Context of organization", {{ISO.27001:2013}})
-  To protect assets of cryptoassets custodian’s customer. Division of responsibility between outsourced and cryptoassets custodians such as management of signature keys for cryptoassets. Impact of business such as money laundering shall be considered from other viewpoint.
+  To protect assets of cryptoassets custodian's customer. Division of responsibility between outsourced and cryptoassets custodians such as management of signature keys for cryptoassets. Impact of business such as money laundering shall be considered from other viewpoint.
 - Policy (from "5. Leadership", {{ISO.27001:2013}})
   Cryptoassets custodians shall establish information security policy that includes information security objectives and controls. Information security policy shall be disclosed so that customers can browse.
 - Continual improvement and risk assessment (from "6. Planning", "8. Operation", "9. Performance evaluation", and "10.Improvement", {{ISO.27001:2013}})
@@ -696,7 +696,7 @@ Sections {{information-security-policies}} to {{compliance}} below are followed 
 ### Information security policies
 
 Information security policies shall be defined to follow section 5 on {{ISO.27002:2013}}.
-Information security objectives on Cryptoassets Custodians shall include conservation of customer’s asset, requirements of business, compliance with legal and contractual requirements, social responsibilities.
+Information security objectives on Cryptoassets Custodians shall include conservation of customer's asset, requirements of business, compliance with legal and contractual requirements, social responsibilities.
 Information security policies shall contain policies about access controls ( on {{access-control}} ), cryptographic controls ( on {{security-controls-on-signature-keys}} ), operations security ( on {{operations-security}} ), and communications security ( on {{communications-security}} ) .
 
 ### Organization of information security
@@ -753,7 +753,7 @@ Cryptoassets custodians shall not concentrate duties for one operator or adminis
 - Multi factor authentication, risk-based authentication
   It shall be carried out to register customer and set access controls strictly to avoid defraud customer funds, changing to fiat and money laundering by spoofing customers.
 - Confirmation of intention according to risk of operation
-  To be consistent with convenience of customers and safety of service, It shall be considered to make different level to authenticate by risks of customer’s operation. For example, low risk operations such as display balance of account or details of trade may be allowed by single factor authentication, but update transactions such as trading coins or changing address or account shall be authenticated by additional factor.
+  To be consistent with convenience of customers and safety of service, It shall be considered to make different level to authenticate by risks of customer's operation. For example, low risk operations such as display balance of account or details of trade may be allowed by single factor authentication, but update transactions such as trading coins or changing address or account shall be authenticated by additional factor.
   In addition, operations it may cause damages such as output coin or order of fiat transaction shall be ordered to confirm by additional authenticate or to confirm intention by operator.
 - Data preservation on deleting account
   Cryptoassets custodians shall implement system be able to rollback after erasing for certain period if customer stated spoofed or unauthorized access. Cryptoassets custodians shall delete account if requested from customer, but they also shall consider about risks that attacker spoofed to customer requests to delete account.
@@ -907,7 +907,7 @@ Crypto asset custodians systems MUST obtain/monitor/record logs properly (not li
 - Log on remittance from wallet managed by custodians
   Logs on remittance MUST be monitored real-time against the attempt of outgoing coin transfer in a case where the signature key and backup are unexpectedly leaked. In a case where an unexpected remittance has occurred in one of the wallets, monitoring logs helps timely detecting the incidents, suspending all multi-signature operations, rechecking on other existing wallets, and migrating to other wallets using a different signature key.
 - Access log of administration remote terminal
-  If a remote access to cryptoassets custodian system is permitted, audit information such as date, source IP address, terminal information(e.g. terminal ID, latest result of security evaluation if it’s possible) and destination IP address (or hostname) MUST be obtained and recorded for auditing which checks the accesses are from/in authorized range.
+  If a remote access to cryptoassets custodian system is permitted, audit information such as date, source IP address, terminal information(e.g. terminal ID, latest result of security evaluation if it's possible) and destination IP address (or hostname) MUST be obtained and recorded for auditing which checks the accesses are from/in authorized range.
 - Traffic log between the inside and the outside (e.g., the Internet)
   As mentioned in {{network-security-management}}, Inbound traffic to cryotoassets custodian systems such as traffic from the Internet MUST be restricted to a permitted external network or permitted protocol. Inbound traffic from disallowed network and traffic using disallowed protocol are denied at the firewall and other middleboxes. Logs from that equipment are effective to protect customers from malicious access in terms of not only cryptoassets custodian system but also the information security.
   Usually, outbound traffic from protected assets such as cryptoassets custodian systems to the Internet and other systems is not a subject to logging. However, those logs are useful in cases such as investigations on incidents (e.g., malicious usage of the signature key, theft of signature key)  and detection of the incident, so entire traffic or network flow are RECOMMENDED to be acquired according to protocols/destinations.
@@ -996,14 +996,14 @@ Requirements, Processes, Procedures and control measures to secure information s
   - Damages of building
   - An act of nature (e.g., earthquakes, fires (including sprayed water for neighborhoods fire), water outage, flood)
   - Other reasons (e.g., facilities are unavailable, or access to the facilities are prohibited by law/regulations/authorities.)
-- In a case where it’s difficult to continue the system
+- In a case where it's difficult to continue the system
   - In a case of becoming difficult to continue running an emergency electric generator.
   - Long suspension of public transportation services, a pandemic of disease, lack of human resources by an act of nature.
   - Failure of a communication network
   - Failure of equipment
   - Failure of the system (regardless of reasons such as failure of a program or cyber attacks)
   - Loss of paper wallet or hardware wallet.
-  - Suspension of outsourcing contractor’s business
+  - Suspension of outsourcing contractor's business
   - Leakage or loss of signature key
 - In the case of becoming difficult to continue business
   - Business-suspension order by law/regulations.
