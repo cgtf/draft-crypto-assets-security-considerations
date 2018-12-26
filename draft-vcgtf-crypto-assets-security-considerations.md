@@ -313,40 +313,41 @@ In a cryptasset using a distributed ledger, there are a variety of cryptoassets 
 
 Although it is not exactly the case of unauthorized transactions, there was a vulnerability called transaction malleability as a past case of bitcoins. With this vulnerability, if the node relaying the transaction is malicious, it is also possible to make transactions illegally manipulate, thereby making it impossible to find the transaction stored in the block (make it impossible to search by transaction ID). There is also the possibility of an attack that make duplicate by requesting transmission of the cryptoassets again from the counterparty by making the approved transaction appear as not approved. This attack is performed after sending the transaction to the nodes, so it is characteristic that the sender can not take measures beforehand before sending. Regarding transaction malleability, it is now possible to avoid it by using SegWit in bitcoins. However, as a lesson from this case, effective defense measures can not be made effective only with the cryptoassets custodian that becomes the sender or receiver of the cryptoassets with respect to faults and threats due to another vulnerability of bitcoins and other cryptoassets.
 
-# Risks around cryptoassets custodians
+# Risks of cryptoassets custodian
 
 ## About this chapter
 
-Here, the main risks around cryptoasset custodians operation are categorized as those related to the system of the virtual currency exchange office and external factors such as the blockchain outside the control of the virtual currency exchange office.
-Risks related to the system of the virtual currency exchanges are organized in terms of threats and factors, actors that pose a threat. Organize in terms of possible incidents with risks due to external factors such as block chains.Some of these risks are attributable to the characteristics and properties of the virtual currency mentioned in {{characteristics-of-cryptoassets-in-blockchain-and-distributed-ledger}}
+Below in this section, some risks custodian shall consider for system and for foreign factor outside of control from custodian such as blockchain is described. The risks for systems in custodians are listed as threat, factor, and actor may cause threat. The risks for foreign factor outside of control from custodian such as blockchain are listed from incident. Some risks may be caused by property or quality described in {{characteristics-of-cryptoassets-in-blockchain-and-distributed-ledger}}.
 
-In addition, there may be risks inherent in systems and operations that are different for each company. Each business operator needs to identify the risks to be dealt with while taking into consideration the risks shown in this section, taking into consideration different systems and operations for each business operator.After that, it is desirable to determine the priority of the control measures by evaluating the impact each risk can have on the business.
+On the other hand, there are some risks based on operations or systems implemented by each custodians. Custodians shall pick up risks to deal with control to refer these risks with understanding with system or operation of custodian. Custodians shall evaluate impacts may affected from risks, and shall decide controls and its priority.
 
 
-## System risks around cryptoasset custodians
+## Risks of cryptoassets custodian system
 
-Here are the typical risks to the information assets held by the system of the cryptoassets custodians.
+In this section, major risks regarding information asset which cryptoassets custodian system holds are listed.
+Among the fundamental model shown in {{basic-description-of-a-model-system-of-a-cryptoassets-custodian}}, the signature key and asset data are focused as significant information asset to protect customers asset.
 
-In the basic model of {{a-basic-model-of-cryptoassets-custodians-system-and-its-functional-components}}, pay attention to the signing secret key and the asset data as an information asset which is particularly important from the viewpoint of protecting customer assets.
+The attacker may be able to broadcast a malicious transaction to nodes of distributed-ledger after generating the transaction if the signature key and surrounding environment are not safe.
 
-If the signature key and the environment surrounding it are not secure, it is also possible for a malicious person to create an illegal transaction and send it to the node of the distribution register.
+Withdrawing transaction is almost impossible once the malicious transaction has been broadcasted and built into the blockchain.
+Therefore, prior countermeasures to prevent generating the malicious transaction are essential.
 
-Once an illegal transaction is sent to the node and written to the blockchain it is nearly impossible to cancel the transaction.
 
-Therefore, prior measures to prevent illegal transactions being created are particularly important.
-It is necessary to carefully evaluate risks related to management of signature keys and illegal transaction creation and to consider appropriate safety measures.
+Moreover, consideration to a loss of signature key is also essential.
+Cryptoassets stored in the address associated with the signature key become unavailable in a case where the signature key has been lost.
 
-<!-- TODO: signature key? needed to be reviewed -->
-In addition, it is necessary to consider the loss of the signature key. When the signature key is lost, it becomes impossible to use the cryptoassets stored in the address corresponding to the signature key. As for the risk concerning the signature key, consider the secret key for signature and the environment surrounding it based on the basic model in {{fig-basic-model-of-cryptoassets-custodian}} in {{risks-around-the-signature-key}}.
+Risk regarding the signature key including the signature key and surrounding environment are mentioned in {{risks-around-the-signature-key}} based on {{fig-basic-model-of-cryptoassets-custodian}}.
 
-As for the asset data, since the contents of data, data format, management form, and details of processing vary from exchanges to exchanges, this document considers the model more abstracted.
-<!-- TODO: Needed to be reviewed -->
-Common contents of asset data to be protected include the total amount of cryptoassets and fiat currency deposited by the customer at the exchanges, the amount of CryptoAssets and fiat currency held by the exchanges, customer account number and virtual currency An address and so on are conceivable.
-If such asset data is illegally rewritten by a malicious one, it will also cause damage to customers and impede the work of the exchanges. The asset data is discussed in {{risks-related-to-assets-data}}.
+In this document, the model is described more abstract as the content of data, data format, management model or details of processing regarding asset data varies among custodians.
+Record such as client assets (both cryptoassets and fiat currency), assets of custodians(both cryptoassets and fiat currency), clients' account information, or address of cryptoassets is listed as common content of asset data subject to protection.
+Manipulation to those asset data caused by the attacker results in damage to client assets or affect to the custodians' operation.
+Risks related to assets data are discussed in {{risks-related-to-assets-data}}.
 
-In addition to protecting important information such as transaction signature key and asset data, it is also necessary to consider risks such as system outage so that customers can smoothly control their own assets. Risks related to system outages are discussed in {{risks-related-to-suspension-of-systems-and-operations}}.
+Risks of system outage MUST be considered concerning availability which allows clients to control their assets in addition to the protection of important information such as the signature key or assets data.
+Risks of system control are discussed in {{risk-of-system-outage}}.
 
-In addition to the information and risks mentioned in this section, there are risks inherent to each system of the cryptoassets custodians and risks in cooperation with external business operators. It is necessary to conduct a detailed risk assessment on the actual system of the cryptoassets custodians.
+In addition to information or risks mentioned in this section, system specific risks varied among cryptoassets custodian or risks regarding external contractor MUST be considered.
+Detailed risk analysis MUST be performed against the actual system of the cryptoassets custodian.
 
 ### Risks around the signature key
 In the cryptoassets custodians, the role and risk of the signature key are extremely large.
@@ -652,7 +653,7 @@ Depending on the platform, there are cases where handling of crypto assets by th
 
 ## General
 
-Below is basis of  security controls about risks written in {{risks-around-cryptoassets-custodians}}.
+Below is basis of  security controls about risks written in {{risks-of-cryptoassets-custodian}}.
 
 To promote understanding and coverage, all security controls in this chapter are followed by below: {{ISO.27001:2013}} , {{ISO.27002:2013}}.
 There are some specific considerations for Cryptoassets Custodians to follow ISOs.
@@ -737,7 +738,7 @@ There are some factors to permit access: Only office hours or predetermined hour
 Cryptoassets custodians shall consider for access control policies by roles or authorities of operators and administrators for each system.
 Access control shall be set minimum to run functions or softwares permitted for  operators or administrators, not only for applications.
 
-Any damage may be happened by miss or injustice operations on transferring assets or managing signature keys as described {{system-risks-around-cryptoasset-custodians}}.
+Any damage may be happened by miss or injustice operations on transferring assets or managing signature keys as described {{risks-of-cryptoassets-custodian-system}}.
 To deter these threats, Confirmation of or approval by multiple operators or multiple administrators shall be needed on important operations such as transferring assets and operations for signature key.
 Cryptoassets custodians shall not concentrate duties for one operator or administrator, decentralize of duties for multiple operators or administrators shall be needed.
 
