@@ -1041,4 +1041,4 @@ None.
 # Acknowledgements
 {:numbered="false"}
 
-Thanks to Masanori Kusunoki, Yasushi Matsumoto, Natsuhiko Sakimura, Yuji Suga, Tatsuya Hayashi, Keiichi Hida, Kenichi Sugawara, Naochika Hanamura ,and other members of the Security Working Group of CryptoAssets Governance Task Force.
+Thanks to Masanori Kusunoki, Yasushi Matsumoto, Natsuhiko Sakimura, Yuji Suga, Tatsuya Hayashi, Keiichi Hida, Kenichi Sugawara, Naochika Hanamura, and other members of the Security Working Group of CryptoAssets Governance Task Force.
