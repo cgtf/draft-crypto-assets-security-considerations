@@ -11,7 +11,7 @@ workgroup:
 keyword: Internet-Draft
 
 stand_alone: yes
-pi: [toc, sortrefs, symrefs]
+pi: [toc, sortrefs, symrefs, compact, comments]
 
 author:
  -
@@ -110,10 +110,7 @@ This document does not focus on following items.
 
 # Conventions and Definitions
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
-document are to be interpreted as described in BCP 14 {{RFC2119}} {{!RFC8174}}
-when, and only when, they appear in all capitals, as shown here.
+{::boilerplate bcp14}
 
 # Terminology
 
@@ -135,7 +132,7 @@ A basic model of cryptoassets custodians system is shown on {{fig-basic-model-of
 
 ~~~
 ~~~
-{: artwork-src="CryptoAssetCustodiansSystemModeling.svg" artwork-type="svg" #fig-basic-model-of-cryptoassets-custodian title="Basic Model of Cryptoassets Custodians system"}
+{: artwork src="https://raw.githubusercontent.com/VCGTF/draft-crypto-assets-security-considerations/master/CryptoAssetCustodiansSystemModeling.svg" artwork-type="svg" #fig-basic-model-of-cryptoassets-custodian title="Basic Model of Cryptoassets Custodians system"}
 
 
 - Interface (Web Application, APIs)
@@ -232,8 +229,9 @@ When using existing implementations such as bitcoin wallet, bitcoin wallet is th
 ### Flow for the key generation and key usage
 
 ~~~
+
 ~~~
-{: artwork-src="SignaureKeyLifeCycle.svg" artwork-type="svg" #fig-lifecycle-of-signature-key-verification-keys title="Lifecycle of signature key, verification key and encryption/decryption key for signature key"}
+{: artwork src="https://raw.githubusercontent.com/VCGTF/draft-crypto-assets-security-considerations/master/SignaureKeyLifeCycle.svg" artwork-type="svg" #fig-lifecycle-of-signature-key-verification-keys title="Lifecycle of signature key, verification key and encryption/decryption key for signature key"}
 
 After a pair of keys (signature & verification, hereafter "key pair") is generated, an addressed  to receive transaction is derived from the verification key. By providing a sender of digital  assets this address, the sender is able to transfer one or more assets to this address. When the recipient transfers the assets to another address, the original recipient signs the transaction  data which includes the transfer order.
 
@@ -248,7 +246,7 @@ The signature key is not needed after it's generation until a transaction has to
 
 ~~~
 ~~~
-{: artwork-src="SignaureKeyLifeCycleHDWallet.svg" artwork-type="svg" #fig-lifecycle-of-signature-key-in-hd-wallet title="Lifecycle of signature key, verification key and encryption/decryption key for signature key in case of deterministic wallet"}
+{: artwork src="https://raw.githubusercontent.com/VCGTF/draft-crypto-assets-security-considerations/master/SignaureKeyLifeCycleHDWallet.svg" artwork-type="svg" #fig-lifecycle-of-signature-key-in-hd-wallet title="Lifecycle of signature key, verification key and encryption/decryption key for signature key in case of deterministic wallet"}
 
 The deterministic wallet is a mechanism that generates one master seed and generates multiple signature key pairs from that master seed. It is possible to regenerate each signature key pair from the master seed by backing up the master seed and restoring it. On the other hand, if the master seed is stolen, the crypto assets which are managed by all signature key pairs (and addresses) derived from the master seed may be stolen. Also, if the master seed is lost, all signature key pairs will not be able to be regenerated.
 
@@ -802,7 +800,7 @@ There is a type of offline key management (as known as "cold wallet") which isol
 
 ~~~
 ~~~
-{: artwork-src="CryptoAssetCustodiansSystem_OfflineManagement.svg" artwork-type="svg" #fig-cryptoassetcustodianssystem-offlinemanagement title="Example of offline signature key management"}
+{: artwork src="https://raw.githubusercontent.com/VCGTF/draft-crypto-assets-security-considerations/master/CryptoAssetCustodiansSystem_OfflineManagement.svg" artwork-type="svg" #fig-cryptoassetcustodianssystem-offlinemanagement title="Example of offline signature key management"}
 
 In this case, it REQUIREs some kind of offline operations to make the system use signature key.
 
