@@ -12,6 +12,7 @@ keyword: Internet-Draft
 
 stand_alone: yes
 pi: [toc, sortrefs, symrefs, compact, comments]
+coding: us-ascii
 
 author:
  -
@@ -20,10 +21,10 @@ author:
     organization: "SECOM Co., Ltd. Intelligent System Laboratory"
     abbrev: "SECOM IS Lab."
     street:
+    - Shimorenjaku 8-10-16
     - SECOM SC Center
-    - 8-10-16 Shimorenjaku
-    city: Mitaka, Tokyo
-    code: '181-8528'
+    region: Tokyo, Mitaka
+    code: "181-8528"
     country: JAPAN
     email: satomasa756@gmail.com
  -
@@ -32,10 +33,10 @@ author:
     organization: "SECOM Co., Ltd. Intelligent System Laboratory"
     abbrev: "SECOM IS Lab."
     street:
+    - Shimorenjaku 8-10-16
     - SECOM SC Center
-    - 8-10-16 Shimorenjaku
-    city: Mitaka, Tokyo
-    code: '181-8528'
+    region: Tokyo, Mitaka
+    code: "181-8528"
     country: JAPAN
     email: m-shimaoka@secom.co.jp
  -
@@ -45,10 +46,10 @@ author:
     organization: Mercari, Inc. R4D
     abbrev: Mercari R4D
     street:
+    - Roppongi 6-10-1
     - Roppongi Hills Mori Tower 25F
-    - 6-10-1 Roppongi
-    city: Minato, Tokyo
-    code: '106-6125'
+    region: Tokyo, Minato
+    code: "106-6125"
     country: JAPAN
     email: nunnun@mercari.com
 
@@ -71,6 +72,21 @@ normative:
     seriesinfo:
       ISO/IEC: 27002:2013
 informative:
+  LISK-ISSUE:2088:
+    author:
+      -
+        ins: MaciejBaj
+    title: Check INT_32 range for transaction timestamps
+    date: 2018-06
+    target: https://github.com/LiskHQ/lisk/issues/2088
+  CVE-2018-10299:
+    title: CVE-2018-10299
+    author:
+      org: MITRE Corporation
+    target: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10299
+    date: 2018-04-22
+    seriesinfo:
+      CVE: 2018-10299
 
 --- abstract
 
@@ -334,7 +350,7 @@ Therefore, prior countermeasures to prevent generating the malicious transaction
 Moreover, consideration to a loss of signature key is also essential.
 Cryptoassets stored in the address associated with the signature key become unavailable in a case where the signature key has been lost.
 
-Risk regarding the signature key including the signature key and surrounding environment are mentioned in {{risks-around-the-signature-key}} based on {{fig-basic-model-of-cryptoassets-custodian}}.
+Risk regarding the signature key including the signature key and surrounding environment are mentioned in {{risks-related-to-signature-keys}} based on {{fig-basic-model-of-cryptoassets-custodian}}.
 
 In this document, the model is described more abstract as the content of data, data format, management model or details of processing regarding asset data varies among custodians.
 Record such as client assets (both cryptoassets and fiat currency), assets of custodians(both cryptoassets and fiat currency), clients' account information, or address of cryptoassets is listed as common content of asset data subject to protection.
@@ -347,27 +363,30 @@ Risks of system control are discussed in {{risk-of-system-outage}}.
 In addition to information or risks mentioned in this section, system specific risks varied among cryptoassets custodian or risks regarding external contractor MUST be considered.
 Detailed risk analysis MUST be performed against the actual system of the cryptoassets custodian.
 
-### Risks around the signature key
-In the cryptoassets custodians, the role and risk of the signature key are extremely large.
-This not only makes it possible to transfer coins, it is due to the property that it is difficult to revocation of the signature key against leakage / theft due to the anonymity of the cryptoassets, and roll back of the transaction.
-In this section, we show the risk of fraudulent use that could lead to loss of signature key, leakage / theft, and damage of value. It also shows supply chain risk as a risk when introducing Wallet related to signature key.
+### Risks related to signature keys
+
+Both role and risks of signature keys are extremely large on cryptoasset exchange.
+Signature keys enables to transfer coins, but it comes from properties of difficulties for revocation of lost, leakage, stolen, and rollback transaction.
+Some risks about signature keys are listed in this section.
+In addition, risks about supply chain related to risks install wallets handles signature keys.
 
 
-#### Risk analysis around the signature key
+#### Risk analysis related to signature key
 
-Risk analysis differs depending on the assumed threats, system configuration, threat modeling, and so on. In this section, we show a case study based on the following assumption as an example.
+Risk analysis may depend on threats assumption, structure of system, and threats model, the results for each custodians shall be different. Some case study are described in this section.
 
-Here, the threat concerning the signature key and the factors that can cause the threat are shown in following. In addition, we assumed the following as the actor giving input to the signing secret key based on {{fig-basic-model-of-cryptoassets-custodian}} in {{basic-description-of-a-model-system-of-a-cryptoassets-custodian}}.
+Threats for signature keys and its actors are assumed as listed below.
+And actors are assumed as input of signature key in {{fig-basic-model-of-cryptoassets-custodian}}.
 
 * Threats:
-  - Lost
+  - Loss
   - Leakage, Theft
-  - Fraudulent use
+  - Unauthorized Use
 
 * Factors of Threats:
-  - Misoperation
+  - Error in operation
   - Maliciousness (of legitimate person)
-  - Impersonation (for legitimate person)
+  - Spoofing (for legitimate person))
   - Malicious intentions of outsiders
   - Unintended behavior (system)
 
@@ -377,105 +396,42 @@ Here, the threat concerning the signature key and the factors that can cause the
   - Customer assets management function
   - Incoming Coin management function
 
-Factors of threats are roughly classified as threats, and in this paper, they are organized as follows.
+Factors of threats are organized as follow.
 
-Mis-operation: An act that an authorized user (including an administrator) of the system operated unintentionally. For example, it was supposed to be an operation to coin 100,000 JPY, accidentally coining out 1 million JPY.
+<!-- TODO: begin: native check -->
+Error in operation: A human error caused by an authorized user (including an administrator) during operation of the system. For example, the expected operation was to withdraw coin equivalent to 100,000 JPY. But, the actual operation is withdrawing coin equivalent to 1,000,000 JPY.
 
-Maliciousness (of legitimate person): Acts performed by a legitimate user (including administrator) of the system with malicious intent. For example, theft or unauthorized use of the signature key due to internal fraud. In this case, the purpose is identification of acts that can be factors, and the purpose and incentive of the act is not concerned.
+Malicious acts by authorized person: An act committed with malice by an authorized person (including an administrator). For example, theft or unauthorized use of the signature key by the insider. Purpose or incentive of the act is not concerned.
 
-<!-- TODO: Needed to be reviewed -->
-Impersonation: An act other than a legitimate user of the system to steal legitimate user's credential and impersonate a user and do something[^2]. For example, an external attacker impersonates a customer to instruct orders or remittance of coins, or an internal criminal who does not have operators or administrator privilege accesses the system with operator / administrator authority and issues an asset transfer instruction or transaction Generation / Signature etc illegally. Especially for users, it is necessary to consider the possibility of pretending to be the principal at the initial registration and stealing the authentication information.
+Spoofing(of authorized person): Impersonation with a stolen credential of an authorized person. For example, the order to sell/buy/transfer cryptoassets by an external attacker impersonating a client; the malicious order of transfer or generation/signing of a transaction through access to the system with the legitimate operator/administrator credential by an unauthorized insider. Especially, theft and abuse of credential upon an account registration by impersonating a legitimate user MUST be considered. Note: Impersonation which is not caused by theft of legitimate user/authorized person's credential (e.g., Privilege escalation) are mentioned in "malicious acts by outsiders."
 
-<!-- TODO: Needed to be reviewed -->
-Malicious intentions of outsiders: an act of an outsider accessing the system maliciously in a manner other than impersonation. For example, by using malicious intrusion of the system to exploit the vulnerability of the system, malware is mixed into the exchanging site system via targeted mail to the exchanges administrator, etc. from the outside and the secret key for signature (or transaction creation etc.) Allow remote control of etc.
+Malicious acts by outsiders: Access or operation to the system by outsiders with malicious purpose excluding spoofing. (e.g., external unauthorized access by exploiting a vulnerability; remote access to the system which enables outsiders to operate to the signature key or generate a transaction by a targetted attack to an administrator of the custodians' system.)
 
-Unintended behavior: The system behaves unexpectedly by the designer or operator irrespective of the intention or malice of the operation. For example, a signature key leaks due to a bug in the custodians management function, a wrong amount of transaction is created regardless of the content of the operation, and so on.
+Unintended behavior: An unintended behavior of the system regardless of intention or malice. (e.g., leakage of the signature key caused by bugs of the system, generation of a transaction including an incorrect amount of assets regardless of operation.)
 
-[^2]: Impersonation acts (for example privilege escalation) that are not based on the stealing of legitimate user credential, and the act of stolen credential itself are treated as the following "malicious intentions of outsiders".
+<!-- TODO: end: native check -->
 
-<!-- TODO: Table number -->
-Of these, theft and fraudulent use are regarded as threats that can only be caused by clear malicious factors. As a result, the risks to be assumed are shown in Table 6-2. Although it can be considered that theft or fraudulent use will occur as a result of multiple factors being overlapped[^3] in the operation different from the operation instruction or the erroneous operation of the human system, anything that can be covered in the control of the theft or fraudulent use It should be noted that here is only an analysis for analysis.
+Theft and unauthorized use are threats that can only be caused by a clear malicious factor.
+Risks to be considered as a result of threats are listed in {{tab-risks-for-signature-key}}.
+Please note that theft and unauthorized use could happen in a case where multiple factors such as an error in operation or unintended behavior are occurred. (e.g., insertion of backdoor that transmits a signature key or tampers a signing order to the transaction in conjunction with a specific legitimate operation.) This case can be covered in countermeasures of theft or unauthorized use.
 
-[^3]: For example, in conjunction with a specific legitimate operation, a signature key is sent to an attacker, or a backdoor that tamper with the signature instruction of a transaction is installed.
-
-| Risk | Factor | Loss | Leakage | Theft | Illegal use |
-|------------------------------------------------|-------------------------------------------------------------------------|----------------|---------|-------|----------------|
-| Illegal operation(Route is legitimate) | End user's own malice | Y | Y | Y | Y |
-|  | The malice of the manager of the customer property management system | Y | Y | Y | Y |
+| Risk | Factor | Loss | Leakage | Theft | Unauthorized Use |
+|---------------------------------------------------------|-----------------------------------------------------------------------------|------|---------|-------|------------------|
+| Illegal operation(Route is legitimate) | End user's malicious operation  | Y | Y | Y | Y |
+|  | Malicious operation by administrator of customer assets management function | Y | Y | Y | Y |
 |  | Impersonation to end users | Y | Y | Y | Y |
-|  | Exchange internal crime (spoofing to administrator) | Y | Y | Y | Y |
-| From the outside Intrusion | Illegal intrusion into the Tx signature part | Y | Y | Y | Y |
-|  | Illegal entry into coin determination section | Y | Y | Y | Y |
-|  | Illegal intrusion into customer asset management system | Y | Y | Y | Y |
-|  | Unauthorized intrusion into the exchange management system | Y | Y | Y | Y |
-| Operation different from operation instruction | Unintended behaviors of Tx signature part (eg bug) | Y | Y | - | - |
-|  | Unintended behaviors (such as bugs) of the coin determining unit | Y | Y | - | - |
-|  | Unintended behaviors (such as bugs) of customer asset management system | Y | Y | - | - |
-|  | Unintended behaviors of the exchange management system (eg bugs) | Y | Y | - | - |
-| Erroneous manipulation of human system | Misuse of end user | Y | Y | - | - |
-|  | Misoperation of administrator of customer property management system | Y | Y | - | - |
+|  | Insider impersonating an administrator | Y | Y | Y | Y |
+| Intrusion from outside | Intrusion into Tx signing function | Y | Y | Y | Y |
+|  | Intrusion into incoming coin management function | Y | Y | Y | Y |
+|  | Intrusion into customer asset management function | Y | Y | Y | Y |
+|  | Intrusion into custodian operation function | Y | Y | Y | Y |
+| Incorrect behavior different from operation instruction | Unintended behaviors of Tx signing function | Y | Y | - | - |
+|  | Unintended behaviors of incoming coin management function | Y | Y | - | - |
+|  | Unintended behaviors of customer asset management function | Y | Y | - | - |
+|  | Unintended behaviors of custodian operation function | Y | Y | - | - |
+| Human error | Error in operation by end user | Y | Y | - | - |
+|  | Error in operation by administrator of customer asset management function | Y | Y | - | - |
 {: #tab-risks-for-signature-key title="List of possible risks for signature key"}
-
-<!-- 1. Threat by lost
-  - Risk of Unauthorized operation (with legitimate path)
-      - End-user's malice
-      - Operator's malice in Custodian
-      - Spoofing to end users
-      - internal frauds (spoofing to operators)
-  - Risk of Intrusion from the outside
-      - Intrusion into the transaction signing modules
-      - Intrusion into the incoming coin management function (implementation)
-      - Intrusion into the customer asset management function (implementation)
-      - Intrusion into the exchange operation modules
-  - Risk of System Behaviors different from human operation
-      - Unintended behaviors of the transaction signing modules
-      - Unintended behaviors of the incoming coin management function (implementation)
-      - Unintended behaviors of the customer asset management function  (implementation)
-      - Unintended behaviors of the exchange operation modules
-  - Risk of mis-operation (by human error)
-      - Mis-operation of end user
-      - Mis-operation of operator
-2. Threat by leakage
-  - Risk of Unauthorized operation (with legitimate path)
-      - End-user's malice
-      - Operator's malice in Custodian
-      - Spoofing to end users
-      - internal frauds (spoofing to operators)
-  - Risk of Intrusion from the outside
-      - Intrusion into the transaction signing modules
-      - Intrusion into the incoming coin management function (implementation)
-      - Intrusion into the customer asset management function (implementation)
-      - Intrusion into the exchange operation modules
-  - Risk of System Behaviors different from human operation
-      - Unintended behaviors of the transaction signing modules
-      - Unintended behaviors of the incoming coin management function (implementation)
-      - Unintended behaviors of the customer asset management function  (implementation)
-      - Unintended behaviors of the exchange operation modules
-  - Risk of mis-operation (by human error)
-      - Mis-operation of end user
-      - Mis-operation of operator
-3. Threat by theft
-  - Risk of Unauthorized operation (with legitimate path)
-      - End-user's malice
-      - Operator's malice in Custodian
-      - Spoofing to end users
-      - internal frauds (spoofing to operators)
-  - Risk of Intrusion from the outside
-      - Intrusion into the transaction signing modules
-      - Intrusion into the incoming coin management function (implementation)
-      - Intrusion into the customer asset management function (implementation)
-      - Intrusion into the exchange operation modules
-4. Threat by fraudulent use
-  - Risk of Unauthorized operation (with legitimate path)
-      - End-user's malice
-      - Operator's malice in Custodian
-      - Spoofing to end users
-      - internal frauds (spoofing to operators)
-  - Risk of Intrusion from the outside
-      - Intrusion into the transaction signing modules
-      - Intrusion into the incoming coin management function (implementation)
-      - Intrusion into the customer asset management function (implementation)
-      - Intrusion into the exchange operation modules -->
 
 <!-- TODO: Section Number -->
 The following sections outline each risk. The control measures corresponding to each risk are shown in Section 7.3, and the correspondence table between each risk and control measures is shown in Appendix 2.
@@ -500,7 +456,7 @@ Both leakage and theft are similar in terms of leakage of sensitive information 
 The fraudulent use risk shown in {{tab-risks-for-signature-key}} is an enumeration of events having a possibility of being caused by something with a malicious intention, paying attention to the input (operation instruction) to the signature secret key. Typically, there is a risk of illegal use due to illegal invasion or impersonation from the outside.
 
 <!-- TODO: Review needed -->
-Unauthorized use of the signature key is not only direct operation instructions but also unauthorized manipulation in each flow before unsigned data is input to the key management module (Necessary: ​​Names with others). For example, illegal use by the following route can be considered.
+Unauthorized use of the signature key is not only direct operation instructions but also unauthorized manipulation in each flow before unsigned data is input to the key management module (Necessary: Names with others). For example, illegal use by the following route can be considered.
 
 - The program of the transaction signature part is falsified and the coin destination and the amount of money are changed. The verification process that should be originally performed by the transaction signature unit is invalidated.
 - The pre-signature transaction data created by the transaction creation unit is tampered with and the amount and address are changed. Alternatively, pre-signature transaction data that should not be originally created is created and inserted into the input to the transaction signing function.
@@ -569,89 +525,105 @@ In countries where the crypto assets custodian office is stipulated, licensing s
 
 ## Risks from external factors
 
-<!-- TODO: Update contents from Japanese edition -->
-Even if the systems and operations of the crypto assets custodian are appropriately operated, if the blockchain / network in which the crypto assets operates and the Internet infrastructure supporting the connection between the nodes are attacked, On the other hand, the service cannot be continued or the transaction can not be handled properly.
+Even if a cryptoassets custodian performs its operation appropriately, the cryptoassets custodian could not continue the service or might not execute transactions when encountering attack to the blockchain network and/or the network infrastructure connecting each node.
 
-### Risks related to the Internet infrastructure and authentication infrastructure
+### Risks related to the Internet, Web PKI, and users environment
 
-#### Internet routing and name resolution attacks
+#### Attack to Internet routing and DNS
 
-<!-- TODO: Update contents from Japanese edition -->
-An attacker interferes with routing of the Internet such as route hijacking and domain name resolution (Domain Name Service), hindering the reachability to the custodians and guiding it to a fake custodian office or block chain It is possible to intentionally cause a branch by hindering synchronization. This method can be considered not only by malicious attackers but also by ISP etc. based on instructions from the government.
+Attackers can lower the reachability to cryptoassets custodians, lure a user into the fake cryptoassets custodian, or fork deliberately by preventing the synchronization of the blockchain, through the intervention in routing or DNS, such as BGP hijacking.
+These methods might be used by not only malicious attackers, ISPs acting governments order.
 
-#### Attacks on Web PKI
 
-<!-- TODO: Update contents from Japanese edition -->
-Many crypto assets custodian offices provide services on the Web, and TLS and server certificates are used for user authenticity verification and encryption of sites. When a certificate authority issuing a server certificate is attacked, it may be possible to impersonate the site, or if the server certificate is revoked, the service cannot be provided.
+#### Attack to Web PKI
 
-#### Attack on Messaging
+Most cryptoassets custodians provide their services on the Web and use TLS and server certificates for authenticity and confidentiality of their website.
+When the certification authority issuing their certificates encounter an attack, it yields to enable to spoofing the cryptoassets custodians' website.
+When the certificate is revoked, the cryptoassets custodian might not be able to provide own service.
 
-<!-- TODO: Update contents from Japanese edition -->
-By intervening with an e-mail or other messaging system, an attacker can fraud and block SMS / MMS of e-mails and mobile phones used for interaction with users and delivery of one-time passwords. When a user's message is fraudulent, it is possible to log in as a user and reset the password.
+#### Attack to messaging systems
 
-#### Risks around device environment infection
+Attackers can swindle or block the e-mail and SMS using for delivering One-Time Password, through the intervention in messaging systems such as SMS or e-mail.
+When a users message is swindled, attackers can log in as the spoofed user or reset the password.
 
-<!-- TODO: Update contents from Japanese edition -->
+#### Risks related to users environment infection
 
-### Risks around cryptocurrency blockchain
+When a user's environment such as PC and smartphone is infected by malware, any secrets such as credentials in the environment might be swindled.
 
-<!-- TODO: Update contents from Japanese edition -->
+### Risks related to cryptocurrency blockchain
 
-#### Crypto assets blockchain fork, split
+#### Split or fork of blockchain
 
-TODO: Update contents from Japanese edition
+A distributed ledger might be forked by specification changes without consensus in developers community.
+There are two cases around the fork; one is that the transaction before the fork is executed and recorded in both ledgers after the fork, another one is that the transaction before the fork is executed and recorded in only one ledger.
 
-#### Re-org of Blockchain by 51% attack and selfish mining
+#### Blockchain Re-organization caused by 51% attack or selfish mining
 
-TODO: Update contents from Japanese edition
+When a block which is committed in the past is discarded, the transaction included in the discarded block might be rolled back.
+The transaction included in the discarded block is disabled, and cryptoassets or fiat money paid in compensation for the transaction might be swindled.
 
-#### Compromise of hash function and cryptographic algorithm
+#### Compromising cryptographic algorithm and hash function
 
-TODO: Update contents from Japanese edition
+Improvement of performance of computing power and the discovery of effective attack might cause being compromisation of the cryptographic algorithm and hash function.
 
-#### Inadequate consensus algorithm
-By misusing a bug in the agreement algorithm, fake transaction information is sent to a specific node and disguised as to whether or not to send money to the counter party. For example, in the case of the MtGOX case in 2014, double payment attacks abusing Transaction Malleability occurred frequently in piggybacking.
+#### Inadequate blockchain specification and implimentation
 
-#### Abrupt change in hash rate
+In the cryptoassets Lisk, there were implementations in which the timestamp value of the transaction allowed implementation of numerical value input in a range not permitted by the internal database so that each node could not process the transaction and block generation stopped{{LISK-ISSUE:2088}}.
+This issue was fixed within several hours after the problem occurred and the node updated the client software, and the network was sequentially recovered.
+However, the transactions could not be processed in the blockchain for a certain period.
 
-TODO: Update contents from Japanese edition
+There are cases that token value collapses due to inadequate implementations of smart contract. In Beautychain Token (BEC) of ERC20 token issued on Ethereum, there is a vulnerability that causes overflow in the smart contract, so there is an attack which derives greatly exceeded tokens over the upper limit, then the worth of BEC was collapsed. {{CVE-2018-10299}}
 
-### Risks arising from external reputation databases
+#### Rapid changes in hash rate
+
+When the hash rate increases or decreases rapidly, it might take very long time for generating blocks using the remaining node.
+
+### Risks from external reputation
 
 #### Bank account frozon
 
-<!-- TODO: Update contents from Japanese edition -->
-As a part of AML / CFT, there are cases where banks refuse to open accounts related to the work of the crypto assets custodian office, the risk that the bank accounts will be frozen, such as receiving guidance from the regulatory authorities or accident is there. In the event that the account is frozen, the business of depositing and withdrawing a legal currency with the user as a crypto assets custodian office is stopped.
+Banks might freeze an account of cryptoassets custodians operation, by the guidance of regulatory as a countermeasure for AML/CFT, or by some accidents/incidents.
+This freeze results in a suspending a deposit/withdraw operation of clients fiat assets.
 
-#### Crypto assets address
+#### Address of cryptocurency
 
-<!-- TODO: Update contents from Japanese edition -->
-As a part of AML/CFT, when another crypto assets custodian trader remittles to another crypto assets address, there are cases where it is checked whether the remittance destination address does not correspond to a high risk transaction. In the case where the address of the hot wallet of the custodian office is registered as a problematic address, it is assumed that the custodian of the crypto assets with such a service can not be performed smoothly. Since it is common in many cases that criminal remit crypto assets stolen for disturbance to a known address, there is a risk that the address of the hot wallet of the crypto assets custodian office will be classified as a high risk customer by mistake.
+As countermeasures for AML/CFT, other cryptoassets custodian Y might assess whether the destination address of cryptoassets custodian X have a high deal risk when a user of Y transfers some assets to the address of X.
+If an address of X is blacklisted, the transaction between X and Y might not be executed smoothly.
 
-#### Filtering and blocking for Web sites
+Since criminals often transfer the stolen "cryptoassets" to unmalicious third party's address for disrupting investigation, the address might be involuntarily categorized as high-risk.
 
-<!-- TODO: Update contents from Japanese edition -->
-There is a risk that the URL of the crypto assets custodian office is filtered by the network or blocked by the ISP so that the user can not access it. Also, if it is recognized as a malware distribution site or the like, there is a risk that it will not be displayed as a search result or it will be impossible to browse from the browser.
+#### Filtering or blocking website
+
+Users might not be able to access cryptoassets custodian when its URL is filtered out by network operators or is blocked by ISPs.
+When a cryptoassets custodian’s website is recognized as used for malware distribution, its URL might not be appeared in search results or not be able to browse in the browser.
 
 #### Email
 
-<!-- TODO: Update contents from Japanese edition -->
-As a measure against spam mails, most of mail servers provide mail rejection based on reputation and classification function of spam mails. If the e-mail delivered by the custodian is judged as spam, it may be impossible to contact the user.
+Most mail servers provide a filtering service or a classifying service based on reputation, as countermeasures for spam mail.
+If the e-mail from the cryptoassets custodian is recognized as spam mail, the custodian might not be able to contact the user.
 
 #### Appraisal of a smartphone application
 
-<!-- TODO: Update contents from Japanese edition -->
-Depending on the platform, there are cases where handling of crypto assets by the application is restricted. If the examination of the smartphone application is dropped, the user may not be able to download the smartphone application for accessing the custodian and may be unable to use the service.
+Application delivery platform might limit applications from handling cryptoassets.
+When the application provided by a cryptoassets custodian could not be approved by the platforms, a user cannot download the application for access to the custodian, and cannot use the services.
 
-#### Users ID theft
+#### ID theft
 
-<!-- TODO: Update contents from Japanese edition -->
+There is some case where attacker acts malicious instruction spoofing as a user, for example:
+- list based attack,
+- theft of ID, password or other credentials, by a malware infection, and
+- theft of API access token.
+
+The distinctive purposes of spoofing are:
+- theft of fiat currency or cryptoassets by unauthorized withdrawals,
+- money laundering by cashing cryptoassets with an account in the name of other people, and
+- profit shifting by market manipulation by unauthorized buy and sell cryptoassets.
 
 # Considerations of security controls on Cryptoassets Custodians
 
 ## General
 
-Below is basis of  security controls about risks written in {{risks-of-cryptoassets-custodian}}.
+Below is a basis of security controls about risks written in {{risks-of-cryptoassets-custodian}}.
 
 To promote understanding and coverage, all security controls in this chapter are followed by below: {{ISO.27001:2013}} , {{ISO.27002:2013}}.
 There are some specific considerations for Cryptoassets Custodians to follow ISOs.
@@ -676,7 +648,7 @@ Cryptoassets Custodians shall mainly consider about security management describe
 - Policy (from "5. Leadership", {{ISO.27001:2013}})
   Cryptoassets custodians shall establish information security policy that includes information security objectives and controls. Information security policy shall be disclosed so that customers can browse.
 - Continual improvement and risk assessment (from "6. Planning", "8. Operation", "9. Performance evaluation", and "10.Improvement", {{ISO.27001:2013}})
-  As described in {{risks-around-cryptocurrency-blockchain}}, numbers of cryptoassets have been developed and its speed of evolve is rapid, Cryptoassets Custodians shall monitor security risks about cryptoassets in addition to information security management applied in general. Cryptoassets Custodians shall review and improve security controls in according to situation.
+  As described in {{risks-related-to-cryptocurrency-blockchain}}, numbers of cryptoassets have been developed and its speed of evolve is rapid, Cryptoassets Custodians shall monitor security risks about cryptoassets in addition to information security management applied in general. Cryptoassets Custodians shall review and improve security controls in according to situation.
 
 ## Considerations about security controls on Cryptoassets Custodians
 
@@ -771,7 +743,7 @@ Amount of cryptoassets in Hot Wallet MUST be limited to a minimum amount and iso
 The minimum amount means the amount which can be temporarily paid within the time it takes to withdraw the assets from the secure place.
 Custodian can be refunded to the customers from the remain assets even if the assets in Hot Wallet leaks.
 
-　Custodians MUST choose an appropriate cryptographic technology that has been evaluated its security by third party in accordance with purpose of use, as with general information systems.
+Custodians MUST choose an appropriate cryptographic technology that has been evaluated its security by third party in accordance with purpose of use, as with general information systems.
 Also they MUST decide the life cycle of signature key, and MUST implement and operate appropriate controls.
 
 #### Basics of Signature Key Management
@@ -1039,4 +1011,4 @@ None.
 # Acknowledgements
 {:numbered="false"}
 
-Thanks to Masanori Kusunoki, Yasushi Matsumoto, Natsuhiko Sakimura, Yuji Suga, Tatsuya Hayashi, Keiichi Hida, Kenichi Sugawara, Naochika Hanamura, and other members of the Security Working Group of CryptoAssets Governance Task Force.
+Thanks to Masanori Kusunoki, Yasushi Matsumoto, Natsuhiko Sakimura, Yuji Suga, Tatsuya Hayashi, Keiichi Hida, Kenichi Sugawara, Naochika Hanamura, and other members of the Security Working Group of [CryptoAssets Governance Task Force](https://vcgtf.github.io).
