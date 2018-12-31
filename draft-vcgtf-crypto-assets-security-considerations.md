@@ -430,26 +430,31 @@ Please note that theft and unauthorized use could happen in a case where multipl
 |  | Unintended behaviors of custodian operation function | Y | Y | - | - |
 | Human error | Error in operation by end user | Y | Y | - | - |
 |  | Error in operation by administrator of customer asset management function | Y | Y | - | - |
-{: #tab-risks-for-signature-key title="List of possible risks for signature key"}
+{: #tab-risks-for-signature-key title="List of possible risks for signature key, Y means applicable risk exists, - means no applicable risk exists"}
 
-<!-- TODO: Section Number -->
-The following sections outline each risk. The control measures corresponding to each risk are shown in Section 7.3, and the correspondence table between each risk and control measures is shown in Appendix 2.
+The following sections outline each risk.
+The control measures corresponding to each risk are shown in {{considerations-about-security-controls-on-cryptoassets-custodians}}.
 
 #### Risk of loss of signature key
 
-These risks list events that have the possibility of causing disappearance, paying attention to the input (operation instruction) to the signature key.
-As a typical risk, loss of the secret key for signature due to erroneous operation by the administrator may be considered.
+Risks listed below are an event which causes loss of the signature key from a viewpoint of input to the signature key such as order or operation.
+
+As a typical event, loss of the signature key caused by human error in operation by the administrator of the custodians' system may be considered.
 
 #### Leakage and theft risk of signature key
 
-Intentional operation by malicious intention is essential, but leakage can be caused by negligence without malice. For this reason, leakage risk and theft risk need to be separated and organized.
+In most case, theft is caused by the operation of a malicious person.
+By contrast, leakage could happen by error or fault not requiring the malice.
+Therefore, the risk of theft and the risk of leakage MUST be separately considered.
 
-The leakage risk shown in {{tab-risks-for-signature-key}} lists events that have the possibility of causing leakage including negligence, paying attention to the input (operation instruction) to the signature key. Typically, an internal criminal, leakage risk due to unintentional behavior, illegal invasion, etc. can be considered.
+The risks of leakage shown in {{tab-risks-for-signature-key}} are lists of the event which potentially causes leakage of the signature key including the leakage caused by error/fault regarding the input to the signature key such as an order or an operation.
+For example, an internal criminal, unintentional behavior of the system and intrusion to the system.
 
-Likewise, the theft risk enumerates events that have the possibility of being woken up by some sort of malicious intention, paying attention to the input (operation instruction) to the signature key. Typically, there is a risk of leakage from internal criminals or unauthorized intrusion from the outside.
+Likewise, the risks of theft are lists of the event which potentially causes the theft of the signature key by a malicious person.
+For example, an internal criminal and intrusion to the system.
 
-Both leakage and theft are similar in terms of leakage of sensitive information to the outside, and the control measures are common. This will be described later in section 7.3.6.
-<!--  TODO: replace 7.3.6 with reference id -->
+Regarding the leakage of sensitive information to the outside, both leakage and theft are similar, and the countermeasures are same.
+The countermeasures are discussed in {{security-controls-on-signature-keys}}.
 
 #### Fraudulent use risk around the signature key
 The fraudulent use risk shown in {{tab-risks-for-signature-key}} is an enumeration of events having a possibility of being caused by something with a malicious intention, paying attention to the input (operation instruction) to the signature secret key. Typically, there is a risk of illegal use due to illegal invasion or impersonation from the outside.
@@ -649,7 +654,7 @@ Cryptoassets Custodians shall mainly consider about security management describe
 - Continual improvement and risk assessment (from "6. Planning", "8. Operation", "9. Performance evaluation", and "10.Improvement", {{ISO.27001:2013}})
   As described in {{risks-related-to-cryptocurrency-blockchain}}, numbers of cryptoassets have been developed and its speed of evolve is rapid, Cryptoassets Custodians shall monitor security risks about cryptoassets in addition to information security management applied in general. Cryptoassets Custodians shall review and improve security controls in according to situation.
 
-## Considerations about security controls on Cryptoassets Custodians
+## Considerations about security controls on Cryptoassets custodians
 
 Cryptoassets Custodians shall determine information security objectives and controls from viewpoint listed below:
 
