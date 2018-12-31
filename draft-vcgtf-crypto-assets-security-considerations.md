@@ -12,7 +12,6 @@ keyword: Internet-Draft
 
 stand_alone: yes
 pi: [toc, sortrefs, symrefs, compact, comments]
-coding: us-ascii
 
 author:
  -
@@ -358,7 +357,7 @@ Manipulation to those asset data caused by the attacker results in damage to cli
 Risks related to assets data are discussed in {{risks-related-to-assets-data}}.
 
 Risks of system outage MUST be considered concerning availability which allows clients to control their assets in addition to the protection of important information such as the signature key or assets data.
-Risks of system control are discussed in {{risk-of-system-outage}}.
+Risks of system control are discussed in {{risks-of-system-suspension-due-to-infrastructure}}.
 
 In addition to information or risks mentioned in this section, system specific risks varied among cryptoassets custodian or risks regarding external contractor MUST be considered.
 Detailed risk analysis MUST be performed against the actual system of the cryptoassets custodian.
@@ -496,32 +495,32 @@ Among the threats of asset data, the following examples are considered as incide
 - For example, by rewriting the list of addresses associated with the customer, illegal recombination of the amount held between customers or between customers and custodians within the asset data within the custodian will be made. As a transaction in the block chain the result is not reflected, assets that a customer or custodian should have had is lost.
 - Risks related to asset data can be thought of as a problem similar to general financial and settlement systems, but transactions can be canceled if transactions are written to the blockchain as a result of fraud against asset data It is necessary to consider it on the premise that there is no property.
 
-### Risks related to suspension of systems and operations
+### Risks of suspention on system and operation
 
-<!-- TODO: Update contents from Japanese edition -->
-The system of the crypto assets custodian office is software, hardware, network, and the like constituting the crypto assets custodian. In addition, the term "operation" refers to an operation performed manually, such as operation monitoring of a switching center system, account opening, remittance instruction, wallet deposit / withdrawal. It is conceivable that the system and work may be stopped due to various factors.
-Risks related to suspension of systems and operations can be regarded as problems similar to general financial and payment systems. However, the fact that the crypto assets custodian office is connected to the Internet all the time, not the dedicated communication network at all times, that it is operating 24 hours a day, 365 days, that many crypto assets custodians are built on the public cloud infrastructure, crypto assets custodian It is necessary to consider it based on the fact that the operating situation of the place has a large effect on the crypto assets price and it tends to be an object of attack.
+Cryptoassets custodians' systems are composed of software, hardware, networks. Operations are classified as monitoring, opening an account, an order of transfer, deposit/withdrawal of (crypto/fiat) assets from the wallet, and any operations by the operator. The system may be suspended due to various factors.
+
+Cryptoassets custodians' system tends to be a subject to the attack due to following: the systems are connected to the Internet for 24 hours 365 days, not by the leased line, many of the systems are deployed on cloud services, prices of cryptoassets are effected from operating condition of the cryptoassets custodians. Therefore, countermeasures to the attack MUST be considered.
 
 #### Risks related to network congestion
 
-<!-- TODO: Update contents from Japanese edition -->
-Crypto assets custodians frequently receive denial of service attacks. As a target of a denial-of-service attack, publicly-released top page, API endpoint, etc. are common, but when an attacker knows the system configuration and a business system or operation monitoring system is placed on the Internet, A case of receiving a denial of service attack may be considered.
+Cryptoassets custodians may be attacked by DoS and traffic flooding attack. In general, targets of attack are a top page of the Website, API endpoint, etc., but operation and monitoring system deployed on the Internet may be a target of DoS attack in a case where the attacker acquired the information of the system beforehand.
 
-#### Risk of system outage
 
-<!-- TODO: Update contents from Japanese edition -->
-It is conceivable that the data center, the cloud infrastructure, etc. where the system is installed are stopped, and the system and operations are stopped. The system can be stopped due to various factors such as power outage due to natural disasters and disruption of communication, large scale failure due to mistake by cloud infrastructure operator, large scale system failure due to mistake of infrastructure operation, failure of software release.
+#### Risks of system suspension due to infrastructure
 
-#### Risks related to Operator
+System and operation may be suspended in a case data center or cloud infrastructure where custodian's system is deployed are suspended.
+The system may be suspended due to various factors such as blackout and disruption of communication due to acts of nature, due to operation failure by cloud or infrastructure, and failure of software release.
 
-<!-- TODO: Update contents from Japanese edition -->
-Even if the system itself is in operation, if operations monitoring and tasks of personnel responsible for the operation are hindered, the work will be suspended. For example, regular inspections of power facilities at operation bases, disruption of transportation means due to catastrophic changes and strikes, protest activities and rush of press reporters may hinder the entrance and exit of buildings and halt operations.
-In addition, when personnel are using the same transportation method or participating in the same event, there is a risk that many personnel can not operate due to the same accident such as traffic accident or food poisoning.
+
+#### Risks of system suspension due to the operator
+
+Even if the system is in operation, there is a possibility that the service may be suspended if operation monitoring and the activities of the operator in charge of work are hindered.
+For example, there is a possibility that business would be suspended due to various factors such as periodic inspection of power supply facilities at operational sites, disruption of transportation by disaster, strikes, and obstruction of building access by protest activities and rush of reporters.
+There are also risks that many personnel cannot operate due to the same reasons, such as using the same transportation method, participating in the same event, or traffic accident or food poisoning.
 
 #### Regulatory risks
 
-<!-- TODO: Update contents from Japanese edition -->
-In countries where the crypto assets custodian office is stipulated, licensing system or registration system, business may be suspended due to business improvement order, business suspension order, deletion of registration etc etc.
+In countries where the cryptoassets custodian is defined by law and should be licensed or registered, operations may be suspended by order of business improvement, operation suspends, deletion of license or registration issued by the authority.
 
 ## Risks from external factors
 
