@@ -99,11 +99,11 @@ This document gives guidance as to what security measure should the cryptoassets
 
 This document reports especially on the appropriate management of the signature key by the cryptoassets custodians to avoid the unintended transactions for its customers.
 
- The document organizes recommendations for considering security as a purpose of protecting users' assets by operators of cryptoassets custodians.
+The document organizes recommendations for considering security as a purpose of protecting users' assets by operators of cryptoassets custodians.
 Among the assets to be protected, in particular, the signature key of the cryptoassets has a different characteristic from the conventional information system and needs attention.
 Particular emphasis is given to points that should be kept in mind for the cryptoassets custodians to properly manage the signature key and to prevent illegal transactions that the customer does not intend.
-<!-- TODO: Change Chapter # -->
-The basic model of the cryptoassets custodians system covered in this document is shown in Chapter 5.
+
+The basic model of the cryptoassets custodians system covered in this document is shown in {{basic-description-of-a-model-system-of-a-cryptoassets-custodian}}.
 A system in a form different from this basic model, for example, a system where an operator manages a signature key provided by a user (e.g. online wallet), is handled in another complementary document or later revision of this document.
 
 # Scope of this document
@@ -256,8 +256,7 @@ The opposite process of decrypting the signature key, will return the key in act
 
 Activation and deactivation of keys is part of the function set of certain wallets.
 
-<!-- TODO: Section number -->
-The signature key is not needed after it's generation until a transaction has to be signed. Therefore this allows for the store and manage signature keys offline, while keeping the verification key and addresses online (see 7.3.6.2).
+The signature key is not needed after it's generation until a transaction has to be signed. Therefore this allows for the store and manage signature keys offline, while keeping the verification key and addresses online (See: {{offline-key-management}}).
 
 ~~~
 ~~~
@@ -281,8 +280,7 @@ Even if {{fig-lifecycle-of-signature-key-verification-keys}} indicates operation
 
 ### About this section
 
-<!-- TODO: Chapter number -->
-In the handling of cryptoassets using blockchain / distributed ledger, there are things to emphasize and different characteristics compared with general information systems and usages of private/encryption keys. In considering the risk assessment described in Chapter 6 and the security requirements and measures based thereon, it is necessary to pay attention to these characteristics.
+In the handling of cryptoassets using blockchain / distributed ledger, there are things to emphasize and different characteristics compared with general information systems and usages of private/encryption keys. In considering the risk assessment described in {{risks-of-cryptoassets-custodian}} and the security requirements and measures based thereon, it is necessary to pay attention to these characteristics.
 
 ### Importance of signature keys
 
@@ -674,12 +672,12 @@ Cryptoassets Custodians shall determine information security objectives and cont
 
 There are some considerations described in {{basis-for-consideration-about-security-management}} about security controls based on system risks at Cryptoassets Custodians.
 There is a guidance for security controls as {{ISO.27002:2013}}, Cryptoassets Custodians shall refer it to design and / or identify security controls.
-Sections {{information-security-policies}} to {{compliance}} below are followed to {{ISO.27002:2013}} and describe items to be especially noted in the virtual currency exchange system.
+{{information-security-policies}} to {{compliance}} below are followed to {{ISO.27002:2013}} and describe items to be especially noted in the virtual currency exchange system.
 
 
 ### Information security policies
 
-Information security policies shall be defined to follow section 5 on {{ISO.27002:2013}}.
+Information security policies shall be defined to follow {{basic-description-of-a-model-system-of-a-cryptoassets-custodian}} on {{ISO.27002:2013}}.
 Information security objectives on Cryptoassets Custodians shall include conservation of customer's asset, requirements of business, compliance with legal and contractual requirements, social responsibilities.
 Information security policies shall contain policies about access controls ( on {{access-control}} ), cryptographic controls ( on {{security-controls-on-signature-keys}} ), operations security ( on {{operations-security}} ), and communications security ( on {{communications-security}} ) .
 
