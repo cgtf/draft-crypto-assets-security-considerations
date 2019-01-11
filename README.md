@@ -2,9 +2,9 @@
 
 This is the working area for the individual Internet-Draft, "draft-vcgtf-crypto-assets-security-considerations".
 
-* [Editor's Copy](https://vcgtf.github.io/draft-crypto-assets-security-considerations/#go.draft-vcgtf-crypto-assets-exchange-security-considerations.html)
+* [Editor's Copy](https://cgtf.github.io/draft-crypto-assets-security-considerations/#go.draft-vcgtf-crypto-assets-exchange-security-considerations.html)
 * [Individual Draft](https://tools.ietf.org/html/draft-vcgtf-crypto-assets-security-considerations)
-* [Compare Editor's Copy to Individual Draft](https://vcgtf.github.io/draft-crypto-assets-security-considerations/#go.draft-vcgtf-crypto-assets-exchange-security-considerations.diff)
+* [Compare Editor's Copy to Individual Draft](https://cgtf.github.io/draft-crypto-assets-security-considerations/#go.draft-vcgtf-crypto-assets-exchange-security-considerations.diff)
 
 ## Building the Draft
 
@@ -22,4 +22,4 @@ This requires that you have the necessary software installed.  See
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/VCGTF/draft-crypto-assets-security-requirements/blob/master/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/cgtf/draft-crypto-assets-security-requirements/blob/master/CONTRIBUTING.md).
