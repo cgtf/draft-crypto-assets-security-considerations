@@ -22,4 +22,4 @@ This requires that you have the necessary software installed.  See
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/cgtf/draft-crypto-assets-security-requirements/blob/master/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/cgtf/draft-crypto-assets-security-considerations/blob/master/CONTRIBUTING.md).
