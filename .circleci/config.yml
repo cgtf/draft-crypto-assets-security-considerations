@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
       - image: martinthomson/i-d-template:latest
+        environment:
+          xml2rfc: "xml2rfc --v3 -q"
     working_directory: ~/draft
 
     steps:
