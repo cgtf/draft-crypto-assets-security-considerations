@@ -95,7 +95,7 @@ This document discusses technical and operational risks of cryptoassets custodia
 
 # Introduction
 
-This document gives guidance as to what security measure should the cryptoassets custodians consider and implement to protect the asset of its customers. The management of the sigature key for cryptoassets especially has different aspects than other types of information systems and requires special attention.
+This document gives guidance as to what security measure should the cryptoassets custodians consider and implement to protect the asset of its customers. The management of the signature key for cryptoassets especially has different aspects than other types of information systems and requires special attention.
 
 This document reports especially on the appropriate management of the signature key by the cryptoassets custodians to avoid the unintended transactions for its customers.
 
@@ -509,7 +509,7 @@ Following example shows the incidents caused by unauthorized manipulation among 
 
 Risks of assets data may be considered as risks of system in financial service and settlement service. However, countermeasures to the incident that transaction(s) has merged into blockchain as a result of unauthorized manipulation to the assets data MUST be considered with an understanding that transaction broadcast to the network is irreversible.
 
-### Risks of suspention on system and operation
+### Risks of suspension on system and operation
 
 Cryptoassets custodians' systems are composed of software, hardware, networks. Operations are classified as monitoring, opening an account, an order of transfer, deposit/withdrawal of (crypto/fiat) assets from the wallet, and any operations by the operator. The system may be suspended due to various factors.
 
@@ -578,7 +578,7 @@ The transaction included in the discarded block is disabled, and cryptoassets or
 
 Improvement of performance of computing power and the discovery of effective attack might cause being compromisation of the cryptographic algorithm and hash function.
 
-#### Inadequate blockchain specification and implimentation
+#### Inadequate blockchain specification and implementation
 
 In the cryptoassets Lisk, there were implementations in which the timestamp value of the transaction allowed implementation of numerical value input in a range not permitted by the internal database so that each node could not process the transaction and block generation stopped{{LISK-ISSUE:2088}}.
 This issue was fixed within several hours after the problem occurred and the node updated the client software, and the network was sequentially recovered.
@@ -592,7 +592,7 @@ When the hash rate increases or decreases rapidly, it might take very long time 
 
 ### Risks from external reputation
 
-#### Bank account frozon
+#### Bank account frozen
 
 Banks might freeze an account of cryptoassets custodians operation, by the guidance of regulatory as a countermeasure for AML/CFT, or by some accidents/incidents.
 This freeze results in a suspending a deposit/withdraw operation of clients fiat assets.
@@ -684,7 +684,7 @@ Information security policies shall contain policies about access controls ( on 
 ### Organization of information security
 
 Cryptoassets custodians shall follow "6. Organization of information security" on {{ISO.27002:2013}}, and shall establish management framework to implement and operate of information security.
-Cryptoassets custodians shall consider about threats such as illegal acquisition of signature keys or illegal creation of transaction cafully.
+Cryptoassets custodians shall consider about threats such as illegal acquisition of signature keys or illegal creation of transaction carefully.
 Segregation of duties shall be fully examined to manage of signature keys for signing or to permit create transactions.
 
 ### Human resource security
@@ -728,7 +728,7 @@ Cryptoassets custodians shall not concentrate duties for one operator or adminis
 
 - Strict personal identification on setup account
   Account shall be set up by strict personal identification, and account information shall be sent to the person itself. For example,. personal identification shall be operated by identification document issued by public organization, and shall be sent letter to the address without forwarding. Personal identification shall be carried out in accordance with relevant laws, regulations, treaty such as FATF. Replacement of pictures on identification document, or falsification of attribute information are typical treats for personal identification. In order to operate personal identification strictly, it shall be carried out to verify by software or visual check, and verify by electric method such as signature that is hard to falsificate.
-- Managing credential and multifactor authentication
+- Managing credential and multi factor authentication
   For user authentication, it is expected to prevent from spoofing and internal injustice by installing risk-based authentication on not normal access ( such as characteristic of terminal or route, and different time slot from usual ) and multi factor authentication on spoofing by leakage of single credential.
   It is NOT recommended to deliver one-time-password by unprotected transmission line as email because there is a risk of impersonation or fraud on the transfer route.
   Confirming telephone number by SMS was valid for verifying owner and reachability, but that has been RESTRICTED by NIST, so personal authentication technology such as possession identification and transaction authentication technology should be applied. SMS may be one factor used to recovery account, but not measure to confirm existence and authenticate.
@@ -800,7 +800,7 @@ Multi-signature REQUIREs an authorization process with multi-stakeholders, and i
 
 Authorization process with multiple stakeholder can expect for general countermeasure for malicious generation of a transaction. Note, however, that security controls for the leakage and/or lost of signature key are still needed.
 
-Since a multi-signature scheme is provided by software, its logic and implementations are varied with some blockchain. e.g., multi-signature in ethereum is implemented on smart contract, so that there are various implementations with each wallet software.
+Since a multi-signature scheme is provided by software, its logic and implementations are varied with some blockchain. e.g., multi-signature in Ethereum is implemented on smart contract, so that there are various implementations with each wallet software.
 Also some blockchains might not support multi-signature, therefore some cryptoassets could not adopt multi-signature.
 
 Also, there is another similar scheme "Secret Sharing Scheme" which is applicable to privilege separation. This is a management technology in distributed environment which has divided secret respectively, and one of the countermeasures for leakage and/or lost of signature key. However, this scheme is rather technology for single stakeholder with multi-location operation than multi-stakeholders, because it REQUIREs a validation scheme separately for the transaction to each stakeholder and a management of the divided secret is rather depend to implementation than signature key.
