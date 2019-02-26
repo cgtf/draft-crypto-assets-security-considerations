@@ -5,6 +5,7 @@ This is the working area for the individual Internet-Draft, "draft-vcgtf-crypto-
 * [Editor's Copy](https://cgtf.github.io/draft-crypto-assets-security-considerations/#go.draft-vcgtf-crypto-assets-exchange-security-considerations.html)
 * [Individual Draft](https://tools.ietf.org/html/draft-vcgtf-crypto-assets-security-considerations)
 * [Compare Editor's Copy to Individual Draft](https://cgtf.github.io/draft-crypto-assets-security-considerations/#go.draft-vcgtf-crypto-assets-exchange-security-considerations.diff)
+* [Original Document for this draft in Japanese](https://docs.google.com/document/d/1-6YF_Flj05tjwgVE4SrNWyBJ4zDFhPBfyxObuwhjENA/edit?usp=sharing)
 
 ## Building the Draft
 
