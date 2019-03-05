@@ -10,7 +10,7 @@ This is the working area for the individual Internet-Draft, "draft-vcgtf-crypto-
 ## Building the Draft
 
 Formatted text and HTML versions of the draft can be built using `make`.
-`xml2rfc >= 2.12.3` is required since this draft has embed SVG figures.
+`xml2rfc >= 2.21.0` is required since this draft has embed SVG figures.
 
 ```sh
 $ rm lib/addstyle.sed && touch lib/addstyle.sed
