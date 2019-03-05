@@ -86,6 +86,22 @@ informative:
     date: 2018-04-22
     seriesinfo:
       CVE: 2018-10299
+  BIP-0010:
+    title: Multi-Sig Transaction Distribution
+    author:
+      name: Alan Reiner
+    date: 2011-10-28
+    target: https://github.com/bitcoin/bips/blob/master/bip-0010.mediawiki
+    seriesinfo:
+      BIP: 10
+  BIP-0011:
+    title: M-of-N Standard Transactions
+    author:
+      name: Gavin Andresen
+    date: 2011-10-18
+    target: https://github.com/bitcoin/bips/blob/master/bip-0011.mediawiki
+    seriesinfo:
+      BIP: 10
 
 --- abstract
 
@@ -795,7 +811,7 @@ If there is not an explicit approval process for the signature key used in the o
 #### Privilege separation of signature keys (Authorization process) {#privilege-separation-of-signature-keys}
 
 Both privilege separation and two-person control of signature key management are effective as shown in {{security-controls-on-signature-keys}}.
-In addition, there is multi-signature as a typical scheme for blockchain[^9][^10].
+In addition, there is multi-signature as a typical scheme for blockchain{{BIP-0010}}{{BIP-0011}}.
 Multi-signature REQUIREs an authorization process with multi-stakeholders, and it is achieved by signing with the signature keys managed by each stakeholder. Each stakeholder MUST verify other signatures technically if exists, and MUST validate the practical consistency of the transaction.
 
 Authorization process with multiple stakeholders can expect for a general countermeasure for malicious generation of a transaction. Note, however, that security controls for the leakage and/or loss of the signature key are still needed.
@@ -804,9 +820,6 @@ Since a multi-signature scheme is provided by software, its logic and implementa
 Also, some blockchains might not support multi-signature, therefore some cryptoassets could not adopt multi-signature.
 
 Also, there is another similar scheme "Secret Sharing Scheme" which is applicable to privilege separation. This is a management technology in a distributed environment which has divided secret respectively, and one of the countermeasures for leakage and/or lost of signature key. However, this scheme is rather a technology for single stakeholder with multi-location operation than multi-stakeholders, because it REQUIREs a validation scheme separately for the transaction to each stakeholder and management of the divided secret is rather depend to implementation than the signature key.
-
-[^9]: BIP-0010: Multi-Sig Transaction Distribution https://github.com/bitcoin/bips/blob/master/bip-0010.mediawiki
-[^10]: BIP-0011: M-of-N Standard Transactions https://github.com/bitcoin/bips/blob/master/bip-0011.mediawiki
 
 #### Backup for Signature Key
 
