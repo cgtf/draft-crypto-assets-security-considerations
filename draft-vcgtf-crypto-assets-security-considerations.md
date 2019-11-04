@@ -1,10 +1,9 @@
 ---
 title: General Security Considerations for Cryptoassets Custodians
 abbrev: General Security Considerations for Cryptoassets Custodians
-docname: draft-cgtf-crypto-assets-security-considerations-latest
+docname: draft-vcgtf-crypto-assets-security-considerations-latest
 category: info
 date: {DATE}
-updates: draft-vcgtf-crypto-assets-security-considerations-04
 
 ipr: trust200902
 area: General
@@ -47,9 +46,9 @@ author:
     abbrev: Mercari R4D
     street:
     - Roppongi 6-10-1
-    - Roppongi Hills Mori Tower 43F
+    - Roppongi Hills Mori Tower 25F
     region: Tokyo, Minato
-    code: "106-6143"
+    code: "106-6125"
     country: JAPAN
     email: nunnun@mercari.com
 
