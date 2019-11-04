@@ -46,9 +46,9 @@ author:
     abbrev: Mercari R4D
     street:
     - Roppongi 6-10-1
-    - Roppongi Hills Mori Tower 25F
+    - Roppongi Hills Mori Tower 43F
     region: Tokyo, Minato
-    code: "106-6125"
+    code: "106-6143"
     country: JAPAN
     email: nunnun@mercari.com
 
