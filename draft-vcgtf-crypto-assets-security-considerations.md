@@ -42,11 +42,11 @@ author:
     role: editor
     ins: H. Nakajima
     name: Hirotaka Nakajima
-    organization: Mercari, Inc. R4D
-    abbrev: Mercari R4D
+    organization: Mercari, Inc.
+    abbrev: Mercari
     street:
     - Roppongi 6-10-1
-    - Roppongi Hills Mori Tower 43F
+    - Roppongi Hills Mori Tower 18F
     region: Tokyo, Minato
     code: "106-6143"
     country: JAPAN
