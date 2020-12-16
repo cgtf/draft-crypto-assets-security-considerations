@@ -48,7 +48,7 @@ author:
     - Roppongi 6-10-1
     - Roppongi Hills Mori Tower 18F
     region: Tokyo, Minato
-    code: "106-6143"
+    code: "106-6118"
     country: JAPAN
     email: nunnun@mercari.com
 
