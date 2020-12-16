@@ -5,9 +5,9 @@
 Network Working Group                                            M. Sato
 Internet-Draft                                               M. Shimaoka
 Intended status: Informational                             SECOM IS Lab.
-Expires: 20 December 2020                               H. Nakajima, Ed.
+Expires: 19 June 2021                                   H. Nakajima, Ed.
                                                                  Mercari
-                                                            18 June 2020
+                                                        16 December 2020
 
 
       General Security Considerations for Cryptoassets Custodians
@@ -18,6 +18,13 @@ Abstract
    This document discusses the technical and operational risks of
    cryptoassets custodians and its security controls to avoid the
    unintended transactions for its customers.
+
+Discussion Venues
+
+   This note is to be removed before publishing as an RFC.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/cgtf/draft-crypto-assets-security-considerations.
 
 Status of This Memo
 
@@ -34,12 +41,22 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 December 2020.
+   This Internet-Draft will expire on 19 June 2021.
 
 Copyright Notice
 
    Copyright (c) 2020 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
+
+
+
+
+
+
+Sato, et al.              Expires 19 June 2021                  [Page 1]
+
+Internet-Draft  General Security Considerations for Cryp   December 2020
+
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents (https://trustee.ietf.org/
@@ -50,20 +67,12 @@ Copyright Notice
    as described in Section 4.e of the Trust Legal Provisions and are
    provided without warranty as described in the Simplified BSD License.
 
-
-
-
-Sato, et al.            Expires 20 December 2020                [Page 1]
-
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
-
-
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
    2.  Scope of this document  . . . . . . . . . . . . . . . . . . .   4
    3.  Conventions and Definitions . . . . . . . . . . . . . . . . .   4
-   4.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   4
+   4.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   5
    5.  Basic description of a model system of a cryptoassets
            custodian . . . . . . . . . . . . . . . . . . . . . . . .   5
      5.1.  General . . . . . . . . . . . . . . . . . . . . . . . . .   5
@@ -97,6 +106,14 @@ Table of Contents
    7.  Considerations of security controls on Cryptoassets
            Custodians  . . . . . . . . . . . . . . . . . . . . . . .  27
      7.1.  General . . . . . . . . . . . . . . . . . . . . . . . . .  27
+
+
+
+Sato, et al.              Expires 19 June 2021                  [Page 2]
+
+Internet-Draft  General Security Considerations for Cryp   December 2020
+
+
      7.2.  Basis for consideration about security management . . . .  28
      7.3.  Considerations about security controls on Cryptoassets
            custodians  . . . . . . . . . . . . . . . . . . . . . . .  28
@@ -106,14 +123,6 @@ Table of Contents
        7.3.4.  Asset management  . . . . . . . . . . . . . . . . . .  29
        7.3.5.  Access control  . . . . . . . . . . . . . . . . . . .  30
        7.3.6.  Security controls on signature keys . . . . . . . . .  32
-
-
-
-Sato, et al.            Expires 20 December 2020                [Page 2]
-
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
-
-
        7.3.7.  Physical and environmental security . . . . . . . . .  37
        7.3.8.  Operations security . . . . . . . . . . . . . . . . .  38
        7.3.9.  Communications security . . . . . . . . . . . . . . .  40
@@ -154,21 +163,18 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
    cryptoassets custodians to properly manage the signature key and to
    prevent illegal transactions that the customer does not intend.
 
+
+
+Sato, et al.              Expires 19 June 2021                  [Page 3]
+
+Internet-Draft  General Security Considerations for Cryp   December 2020
+
+
    The basic model of the cryptoassets custodians system covered in this
    document is shown in Section 5.  A system in a form different from
    this basic model, for example, a system where an operator manages a
    signature key provided by a user (e.g. online wallet), is handled in
    another complementary document or later revision of this document.
-
-
-
-
-
-
-Sato, et al.            Expires 20 December 2020                [Page 3]
-
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
-
 
 2.  Scope of this document
 
@@ -213,18 +219,17 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
+
+
+Sato, et al.              Expires 19 June 2021                  [Page 4]
+
+Internet-Draft  General Security Considerations for Cryp   December 2020
+
+
 4.  Terminology
 
    Terms used in this document are defined in
    [I-D.nakajima-crypto-asset-terminology]
-
-
-
-
-Sato, et al.            Expires 20 December 2020                [Page 4]
-
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
-
 
 5.  Basic description of a model system of a cryptoassets custodian
 
@@ -267,20 +272,20 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
    *  Blockchain Node Connects to another blockchain nodes to retrieve
       blockchain data.
 
+
+
+
+
+
+Sato, et al.              Expires 19 June 2021                  [Page 5]
+
+Internet-Draft  General Security Considerations for Cryp   December 2020
+
+
    *  Incoming Coin management Function Checks transaction stored in
       blockchain and confirm whether incoming coins are involved in the
       specified addresses.  Update an assets database according to the
       transaction from blockchain.
-
-
-
-
-
-
-Sato, et al.            Expires 20 December 2020                [Page 5]
-
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
-
 
    *  Order processing function A group of functions that receives
       orders from customers and performs processing related to trading
@@ -326,17 +331,15 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
    *  Operator Authentication Function Authenticates the administrators.
 
+
+
+Sato, et al.              Expires 19 June 2021                  [Page 6]
+
+Internet-Draft  General Security Considerations for Cryp   December 2020
+
+
    *  Operator Audit Database Manages auditing data related to the
       authentication of the administrators.
-
-
-
-
-
-Sato, et al.            Expires 20 December 2020                [Page 6]
-
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
-
 
    We defined each functional element to distinguish functions
    logically, and do not show the actual arrangement on the actual
@@ -383,16 +386,15 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
           custodians operations functions shall be updated into the
           asset database.
 
-   *  Instructions to output coins from customers
 
 
 
-
-
-Sato, et al.            Expires 20 December 2020                [Page 7]
+Sato, et al.              Expires 19 June 2021                  [Page 7]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
+
+   *  Instructions to output coins from customers
 
       1.  Customers access to interface and instruct it to transfer its
           cryptoassets to other address.  (Instruct to output coins)
@@ -424,7 +426,7 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 5.4.1.  Type of keys
 
-     +---------------+-----------------------------------------------+
+     +===============+===============================================+
      | Types         | Description                                   |
      +===============+===============================================+
      | Signature Key | A private key for signing transactions        |
@@ -440,16 +442,16 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
      | key for       | protected                                     |
      | signature key |                                               |
      +---------------+-----------------------------------------------+
+
+
+
+Sato, et al.              Expires 19 June 2021                  [Page 8]
+
+Internet-Draft  General Security Considerations for Cryp   December 2020
+
+
      | Master Seed   | A seed, e.g. random number, to generate a     |
      |               | signature key in deterministic wallet         |
-
-
-
-Sato, et al.            Expires 20 December 2020                [Page 8]
-
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
-
-
      +---------------+-----------------------------------------------+
 
                            Table 1: Type of keys
@@ -499,11 +501,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-
-
-Sato, et al.            Expires 20 December 2020                [Page 9]
+Sato, et al.              Expires 19 June 2021                  [Page 9]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
    The deterministic wallet is a mechanism that generates one master
@@ -557,9 +557,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 10]
+Sato, et al.              Expires 19 June 2021                 [Page 10]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
 5.4.4.  On the suspension of keys
@@ -613,9 +613,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 11]
+Sato, et al.              Expires 19 June 2021                 [Page 11]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
 5.5.3.  Diversity of implementations
@@ -669,9 +669,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 12]
+Sato, et al.              Expires 19 June 2021                 [Page 12]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
 5.5.4.1.  Rolling back due to re-organization
@@ -725,9 +725,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 13]
+Sato, et al.              Expires 19 June 2021                 [Page 13]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
 5.5.5.2.  Handling unapproved transactions
@@ -781,9 +781,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 14]
+Sato, et al.              Expires 19 June 2021                 [Page 14]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
 6.1.  About this chapter
@@ -837,9 +837,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 15]
+Sato, et al.              Expires 19 June 2021                 [Page 15]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
    of asset data subject to protection.  Manipulation to those asset
@@ -893,9 +893,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 16]
+Sato, et al.              Expires 19 June 2021                 [Page 16]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
       -  Spoofing (for legitimate person))
@@ -949,9 +949,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 17]
+Sato, et al.              Expires 19 June 2021                 [Page 17]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
    Unintended behavior: An unintended behavior of the system regardless
@@ -969,101 +969,101 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
    legitimate operation.)  This case can be covered in countermeasures
    of theft or unauthorized use.
 
-   +-----------------+---------------+----+-------+-----+--------------+
-   | Risk            | Factor        |Loss|Leakage|Theft| Unauthorized |
+   +=================+===============+====+=======+=====+==============+
+   | Risk            |Factor         |Loss|Leakage|Theft| Unauthorized |
    |                 |               |    |       |     | Use          |
    +=================+===============+====+=======+=====+==============+
-   | Illegal         | End user's    | Y  | Y     | Y   | Y            |
-   | operation(Route | malicious     |    |       |     |              |
-   | is legitimate)  | operation     |    |       |     |              |
+   | Illegal         |End user's     |Y   |Y      |Y    | Y            |
+   | operation(Route |malicious      |    |       |     |              |
+   | is legitimate)  |operation      |    |       |     |              |
    +-----------------+---------------+----+-------+-----+--------------+
-   |                 | Malicious     | Y  | Y     | Y   | Y            |
-   |                 | operation by  |    |       |     |              |
-   |                 | the           |    |       |     |              |
-   |                 | administrator |    |       |     |              |
-   |                 | of customer   |    |       |     |              |
-   |                 | assets        |    |       |     |              |
-   |                 | management    |    |       |     |              |
-   |                 | function      |    |       |     |              |
+   |                 |Malicious      |Y   |Y      |Y    | Y            |
+   |                 |operation by   |    |       |     |              |
+   |                 |the            |    |       |     |              |
+   |                 |administrator  |    |       |     |              |
+   |                 |of customer    |    |       |     |              |
+   |                 |assets         |    |       |     |              |
+   |                 |management     |    |       |     |              |
+   |                 |function       |    |       |     |              |
    +-----------------+---------------+----+-------+-----+--------------+
-   |                 | Impersonation | Y  | Y     | Y   | Y            |
-   |                 | to end users  |    |       |     |              |
+   |                 |Impersonation  |Y   |Y      |Y    | Y            |
+   |                 |to end users   |    |       |     |              |
    +-----------------+---------------+----+-------+-----+--------------+
-   |                 | Insider       | Y  | Y     | Y   | Y            |
-   |                 | impersonating |    |       |     |              |
-   |                 | an            |    |       |     |              |
-   |                 | administrator |    |       |     |              |
+   |                 |Insider        |Y   |Y      |Y    | Y            |
+   |                 |impersonating  |    |       |     |              |
+   |                 |an             |    |       |     |              |
+   |                 |administrator  |    |       |     |              |
    +-----------------+---------------+----+-------+-----+--------------+
-   | Intrusion from  |Intrusion into | Y  | Y     | Y   | Y            |
-   | outside         | Tx signing    |    |       |     |              |
-   |                 | function      |    |       |     |              |
+   | Intrusion from  |Intrusion into |Y   |Y      |Y    | Y            |
+   | outside         |Tx signing     |    |       |     |              |
+   |                 |function       |    |       |     |              |
    +-----------------+---------------+----+-------+-----+--------------+
-   |                 |Intrusion into | Y  | Y     | Y   | Y            |
-   |                 | incoming coin |    |       |     |              |
-   |                 | management    |    |       |     |              |
-   |                 | function      |    |       |     |              |
+   |                 |Intrusion into |Y   |Y      |Y    | Y            |
+   |                 |incoming coin  |    |       |     |              |
+   |                 |management     |    |       |     |              |
+   |                 |function       |    |       |     |              |
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 18]
+Sato, et al.              Expires 19 June 2021                 [Page 18]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
    +-----------------+---------------+----+-------+-----+--------------+
-   |                 |Intrusion into | Y  | Y     | Y   | Y            |
+   |                 |Intrusion into |Y   |Y      |Y    | Y            |
    |                 |customer asset |    |       |     |              |
-   |                 | management    |    |       |     |              |
-   |                 | function      |    |       |     |              |
+   |                 |management     |    |       |     |              |
+   |                 |function       |    |       |     |              |
    +-----------------+---------------+----+-------+-----+--------------+
-   |                 |Intrusion into | Y  | Y     | Y   | Y            |
-   |                 | custodian     |    |       |     |              |
-   |                 | operation     |    |       |     |              |
-   |                 | function      |    |       |     |              |
+   |                 |Intrusion into |Y   |Y      |Y    | Y            |
+   |                 |custodian      |    |       |     |              |
+   |                 |operation      |    |       |     |              |
+   |                 |function       |    |       |     |              |
    +-----------------+---------------+----+-------+-----+--------------+
-   | Incorrect       | Unintended    | Y  | Y     | -   | -            |
+   | Incorrect       |Unintended     |Y   |Y      |-    | -            |
    | behavior is     |behaviors of Tx|    |       |     |              |
-   | different from  | signing       |    |       |     |              |
-   | operation       | function      |    |       |     |              |
+   | different from  |signing        |    |       |     |              |
+   | operation       |function       |    |       |     |              |
    | instruction     |               |    |       |     |              |
    +-----------------+---------------+----+-------+-----+--------------+
-   |                 | Unintended    | Y  | Y     | -   | -            |
-   |                 | behaviors of  |    |       |     |              |
-   |                 | incoming coin |    |       |     |              |
-   |                 | management    |    |       |     |              |
-   |                 | function      |    |       |     |              |
+   |                 |Unintended     |Y   |Y      |-    | -            |
+   |                 |behaviors of   |    |       |     |              |
+   |                 |incoming coin  |    |       |     |              |
+   |                 |management     |    |       |     |              |
+   |                 |function       |    |       |     |              |
    +-----------------+---------------+----+-------+-----+--------------+
-   |                 | Unintended    | Y  | Y     | -   | -            |
-   |                 | behaviors of  |    |       |     |              |
+   |                 |Unintended     |Y   |Y      |-    | -            |
+   |                 |behaviors of   |    |       |     |              |
    |                 |customer asset |    |       |     |              |
-   |                 | management    |    |       |     |              |
-   |                 | function      |    |       |     |              |
+   |                 |management     |    |       |     |              |
+   |                 |function       |    |       |     |              |
    +-----------------+---------------+----+-------+-----+--------------+
-   |                 | Unintended    | Y  | Y     | -   | -            |
-   |                 | behaviors of  |    |       |     |              |
-   |                 | custodian     |    |       |     |              |
-   |                 | operation     |    |       |     |              |
-   |                 | function      |    |       |     |              |
+   |                 |Unintended     |Y   |Y      |-    | -            |
+   |                 |behaviors of   |    |       |     |              |
+   |                 |custodian      |    |       |     |              |
+   |                 |operation      |    |       |     |              |
+   |                 |function       |    |       |     |              |
    +-----------------+---------------+----+-------+-----+--------------+
-   | Human error     | Error in      | Y  | Y     | -   | -            |
-   |                 | operation by  |    |       |     |              |
-   |                 | end user      |    |       |     |              |
+   | Human error     |Error in       |Y   |Y      |-    | -            |
+   |                 |operation by   |    |       |     |              |
+   |                 |end user       |    |       |     |              |
    +-----------------+---------------+----+-------+-----+--------------+
-   |                 | Error in      | Y  | Y     | -   | -            |
-   |                 | operation by  |    |       |     |              |
-   |                 | administrator |    |       |     |              |
-   |                 | of customer   |    |       |     |              |
-   |                 | asset         |    |       |     |              |
-   |                 | management    |    |       |     |              |
-   |                 | function      |    |       |     |              |
+   |                 |Error in       |Y   |Y      |-    | -            |
+   |                 |operation by   |    |       |     |              |
+   |                 |administrator  |    |       |     |              |
+   |                 |of customer    |    |       |     |              |
+   |                 |asset          |    |       |     |              |
+   |                 |management     |    |       |     |              |
+   |                 |function       |    |       |     |              |
    +-----------------+---------------+----+-------+-----+--------------+
 
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 19]
+Sato, et al.              Expires 19 June 2021                 [Page 19]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
        Table 2: List of possible risks for the signature key, Y means
@@ -1117,9 +1117,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 20]
+Sato, et al.              Expires 19 June 2021                 [Page 20]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
    *  A destination address of cryptoassets or amount of assets is
@@ -1173,9 +1173,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 21]
+Sato, et al.              Expires 19 June 2021                 [Page 21]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
    Cryptographic module validation program for products having a
@@ -1229,9 +1229,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 22]
+Sato, et al.              Expires 19 June 2021                 [Page 22]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
    *  Unauthorized manipulation to a number of assets stored in asset
@@ -1285,9 +1285,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 23]
+Sato, et al.              Expires 19 June 2021                 [Page 23]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
 6.2.3.3.  Risks of system suspension due to the operator
@@ -1341,9 +1341,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 24]
+Sato, et al.              Expires 19 June 2021                 [Page 24]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
 6.3.1.3.  Attack to messaging systems
@@ -1397,9 +1397,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 25]
+Sato, et al.              Expires 19 June 2021                 [Page 25]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
    However, the transactions could not be processed in the blockchain
@@ -1453,9 +1453,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 26]
+Sato, et al.              Expires 19 June 2021                 [Page 26]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
 6.3.3.4.  Email
@@ -1509,9 +1509,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 27]
+Sato, et al.              Expires 19 June 2021                 [Page 27]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
 7.2.  Basis for consideration about security management
@@ -1565,9 +1565,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 28]
+Sato, et al.              Expires 19 June 2021                 [Page 28]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
    There are some considerations described in Section 7.2 about security
@@ -1621,9 +1621,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 29]
+Sato, et al.              Expires 19 June 2021                 [Page 29]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
    of customers, cryptoassets custodians shall separate assets into
@@ -1677,9 +1677,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 30]
+Sato, et al.              Expires 19 June 2021                 [Page 30]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
 7.3.5.2.  Access control for customers (user authentication / API)
@@ -1733,9 +1733,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 31]
+Sato, et al.              Expires 19 June 2021                 [Page 31]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
    *  Data preservation on deleting an account Cryptoassets custodians
@@ -1789,9 +1789,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 32]
+Sato, et al.              Expires 19 June 2021                 [Page 32]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
 7.3.6.1.  Basics of Signature Key Management
@@ -1845,9 +1845,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 33]
+Sato, et al.              Expires 19 June 2021                 [Page 33]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
    3.  Backup of a signature key Lost of the signature key makes signing
@@ -1901,9 +1901,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 34]
+Sato, et al.              Expires 19 June 2021                 [Page 34]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
    Authorization process with multiple stakeholders can expect for a
@@ -1957,9 +1957,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 35]
+Sato, et al.              Expires 19 June 2021                 [Page 35]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
       cabinet or a vault with the key, and the access control to such
@@ -2013,9 +2013,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 36]
+Sato, et al.              Expires 19 June 2021                 [Page 36]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
    *  MUST consider trustworthy of software instructing a sign to
@@ -2069,9 +2069,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 37]
+Sato, et al.              Expires 19 June 2021                 [Page 37]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
 7.3.8.  Operations security
@@ -2125,9 +2125,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 38]
+Sato, et al.              Expires 19 June 2021                 [Page 38]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
    *  Logs on the processing of components of crypto assets custodians
@@ -2181,9 +2181,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 39]
+Sato, et al.              Expires 19 June 2021                 [Page 39]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
       as investigations on incidents (e.g., malicious usage of the
@@ -2237,9 +2237,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 40]
+Sato, et al.              Expires 19 June 2021                 [Page 40]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
 7.3.9.1.  Network security management (Related to ISO.27002:2013 clause
@@ -2293,9 +2293,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 41]
+Sato, et al.              Expires 19 June 2021                 [Page 41]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
       -  Countermeasures: Features which connects external services on
@@ -2349,9 +2349,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 42]
+Sato, et al.              Expires 19 June 2021                 [Page 42]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
    *  Privilege separation on the operation Privilege separation such as
@@ -2405,9 +2405,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 43]
+Sato, et al.              Expires 19 June 2021                 [Page 43]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
    measures in a case where countermeasures have performed or in a
@@ -2461,9 +2461,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 44]
+Sato, et al.              Expires 19 June 2021                 [Page 44]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
 7.3.12.1.  Maintaining availability of the system
@@ -2517,9 +2517,9 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 45]
+Sato, et al.              Expires 19 June 2021                 [Page 45]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
 11.1.  Normative References
@@ -2568,14 +2568,14 @@ Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
               Nakajima, H., Kusunoki, M., Hida, K., Suga, Y., and T.
               Hayashi, "Terminology for Cryptoassets", Work in Progress,
               Internet-Draft, draft-nakajima-crypto-asset-terminology-
-              03, 31 December 2019, <http://www.ietf.org/internet-
-              drafts/draft-nakajima-crypto-asset-terminology-03.txt>.
+              04, 2 July 2020, <http://www.ietf.org/internet-drafts/
+              draft-nakajima-crypto-asset-terminology-04.txt>.
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 46]
+Sato, et al.              Expires 19 June 2021                 [Page 46]
 
-Internet-DraGeneral Security Considerations for Cryptoassets   June 2020
+Internet-Draft  General Security Considerations for Cryp   December 2020
 
 
    [LISK-ISSUE_2088]
@@ -2616,7 +2616,7 @@ Authors' Addresses
    Mercari, Inc.
    Roppongi 6-10-1
    Roppongi Hills Mori Tower 18F, Tokyo, Minato
-   106-6143
+   106-6118
    Japan
 
    Email: nunnun@mercari.com
@@ -2629,4 +2629,4 @@ Authors' Addresses
 
 
 
-Sato, et al.            Expires 20 December 2020               [Page 47]
+Sato, et al.              Expires 19 June 2021                 [Page 47]
