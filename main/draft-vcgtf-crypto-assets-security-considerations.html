@@ -11,291 +11,820 @@
 <meta content="
        This document discusses the technical and operational risks of cryptoassets custodians and its security controls to avoid the unintended transactions for its customers. 
     " name="description">
-<meta content="xml2rfc 2.45.3" name="generator">
+<meta content="xml2rfc 3.5.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-vcgtf-crypto-assets-security-considerations-latest" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.5.0
+    Python 3.8.5
+    appdirs 1.4.4
+    ConfigArgParse 1.2.3
+    google-i18n-address 2.4.0
+    html5lib 1.1
+    intervaltree 3.0.2
+    Jinja2 2.11.2
+    kitchen 1.2.6
+    lxml 4.5.0
+    pycountry 19.8.18
+    pyflakes 2.1.1
+    PyYAML 5.3.1
+    requests 2.22.0
+    setuptools 45.2.0
+    six 1.14.0
+-->
 <link href="draft-vcgtf-crypto-assets-security-considerations.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
+<style type="text/css">@import url('https://martinthomson.github.io/i-d-template/fonts.css');
 
-<style type="text/css">/*<![CDATA[*/
-
+html {
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --small-font-size: 14.5px;
+}
 body {
-  font: 16px "Helvetica Neue","Open Sans",Helvetica,Calibri,sans-serif;
-  color: #333;
-  font-size-adjust: 0.5;
-  line-height: 24px;
+  max-width: 600px;
   margin: 75px auto;
-  max-width: 624px;
   padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
 }
 
-.title, .filename, h1, h2, h3, h4, h5 {
-  font: 16px "Roboto Condensed","Helvetica Neue","Open Sans",Helvetica,Calibri,sans-serif;
-  font-size-adjust: 0.5;
-  font-weight: bold;
-  color: #333;
-  line-height: 100%;
-  margin: 0.8em 0 0.3em;
-}
-.title, #rfc\.title h1 { font-size: 32px; }
-h1, section h1, h2, section h2, section h3, nav h2 { font-size: 20px; }
-h3, section h4, h4, section h5 { font-size: 16px; }
-h1 a[href], h2 a[href], h3 a[href], h4 a[href] {
-  color: #333;
-}
-
-table {
-  margin-left: 0em;
-  border-collapse: collapse;
-}
-th {
-  text-align: left;
-  border-bottom: 2px solid #ddd;
-}
-td {
-  border-top: 1px solid #ddd;
-  vertical-align: top;
-}
-tr:nth-child(2n+1) > td,
-tr:nth-child(2n+1) > th {
-  background-color: #f9f9f9;
-}
-td.reference {
-  max-width: 200px;
-  border-top: none;
-  padding-right: 1em;
-}
-.right {
-  text-align: right;
-}
-
-
-table.header, table#rfc\.headerblock {
-  width: 100%;
-}
-table.header td, table#rfc\.headerblock td {
-  border: none;
-  background-color: transparent;
-  color: black;
-  padding: 0;
-}
-.filename {
-  display: block;
-  color: rgb(119, 119, 119);
-  font-size: 20px;
-  font-weight: normal;
-  line-height: 100%;
-  margin: 10px 0 32px;
-}
-#rfc\.abstract+p, #rfc\.abstract p {
-  font-size: 20px;
-  line-height: 28px;
-}
-
-samp, tt, code, pre {
-  font: 15px Consolas, monospace;
-  font-size-adjust: none;
-}
-pre {
-  background-color: #eee;
-  border: 1px solid #ddd;
-  overflow-x: auto;
-  padding: 5px;
-  margin: 5px;
-}
-.figure, caption {
-  font-style: italic;
-  margin: 0 1.5em;
-  text-align: left;
-}
-
-address {
-  margin: 16px 2px;
-  line-height: 20px;
-}
-.vcard {
-  font-style: normal;
-}
-.vcardline {
-  display: block;
-}
-.vcardline .fn, address b {
-  font-weight: normal;
-}
-.vcardline .hidden {
+.ears {
   display: none;
 }
 
-dl {
+/* headings */
+#title, h1, h2, h3, h4, h5, h6 {
+  font-family: "Cabin Condensed", sans-serif;
+  font-weight: 600;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+#title {
+  padding: 1em 0 0.2em;
+  font-size: 32px;
+  line-height: 40px;
+  clear: both;
+}
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 26px;
+}
+h4, h5, h6 {
+  font-size: 18px;
+  line-height: 22px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+}
+#abstract+p, #abstract+p code, #abstract+p samp, #abstract+p tt {
+  font-size: 18px;
+  line-height: 24px;
+}
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+.alignCenter.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 1em 2em;
+}
+ol ol, ul ul, ol ul, ul ol {
   margin-left: 1em;
 }
-dl.dl-horizontal: {
-  margin-left: 0;
+li {
+  margin: 0 0 0.25em 0;
+}
+.ulCompact li {
+  margin: 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+}
+ul.empty li, .ulEmpty li {
+  margin-top: 0.5em;
+}
+ul.compact, .ulCompact,
+ol.compact, .olCompact {
+  line-height: 100%;
+  margin: 0 0 0 2em;
+}
+
+/* definition lists */
+dl {
 }
 dl > dt {
   float: left;
   margin-right: 1em;
 }
-dl.nohang > dt {
-  float: none;
-}
 dl > dd {
-  margin-bottom: .5em;
+  margin-bottom: .8em;
+  min-height: 1.3em;
 }
-dl.compact > dd {
+dl.compact > dd, .dlCompact > dd {
   margin-bottom: 0em;
 }
 dl > dd > dl {
   margin-top: 0.5em;
   margin-bottom: 0em;
 }
-ul.empty {
-  list-style-type: none;
-}
-ul.empty li {
-  margin-top: .5em;
-}
-
-hr {
-  border: 0;
-  border-top: 1px solid #eee;
-}
-hr.noprint {
+dd.break {
   display: none;
 }
 
-a {
+/* links */
+a, a[href].selfRef:hover {
   text-decoration: none;
 }
+a[href].selfRef {
+  color: var(--text-color);
+}
 a[href] {
-  color: #2a6496;
+  color: var(--link-color);
 }
 a[href]:hover {
-  background-color: #eee;
+  text-decoration: underline;
+}
+a[href].selfRef:hover {
+  background-color: var(--highlight-color);
+}
+a.xref {
+  white-space: nowrap;
 }
 
-ol, ul, li, p {
-  padding: 0;
-  margin: 0.5em 0 0.5em 2em;
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px 'Oxygen Mono', monospace;
 }
-li, p {
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+}
+@media screen {
+  pre {
+    display: inline-block;
+    overflow-x: auto;
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  pre + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+  table {
+    display: inline-block;
+    overflow-x: auto;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
   margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
 }
-address {
-  font-style: normal;
+blockquote {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
 }
 
-ul.toc ul {
-  margin: 0 0 0 2em;
+/* tables */
+table {
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
 }
-ul.toc li {
-  list-style: none;
+table.right {
+  margin-left: auto;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.left {
+  margin-right: auto;
+}
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+tr:nth-child(2n) > td {
+  background-color: var(--background-color);
+}
+tr:nth-child(2n+1) > td {
+  background-color: var(--highlight-color);
+}
+thead+tbody > tr:nth-child(2n) > td {
+  background-color: var(--highlight-color);
+}
+thead+tbody > tr:nth-child(2n+1) > td {
+  background-color: var(--background-color);
+}
+table caption {
+  margin: 0;
+  padding: 3px 1em;
+}
+table p {
   margin: 0;
 }
 
-@media screen and (min-width: 924px) {
-  body {
-    padding-right: 350px;
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  visibility: hidden;
+  user-select: none;
+}
+a.pilcrow[href] { color: #ddd; }
+a.pilcrow[href]:hover { text-decoration: none; }
+@media screen {
+  :hover > a.pilcrow {
+    visibility: visible;
   }
-  body>ul.toc, body>#rfc\.toc {
+  a.pilcrow:hover {
+    background-color: transparent;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+}
+
+.role {
+  font-variant: all-small-caps;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 8em;
+}
+#identifiers dt {
+  width: var(--identifier-width);
+  margin: 0;
+  clear: left;
+  float: left;
+  text-align: right;
+}
+#identifiers dd {
+  margin: 0 0 0 calc(1em + var(--identifier-width));
+  min-width: 5em;
+}
+#identifiers .authors .author {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+#identifiers .authors .org {
+  font-style: italic;
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: left;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+#toc nav ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+#toc nav li {
+  line-height: 1.3em;
+  margin: 0.75em 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+#toc a.xref {
+  white-space: normal;
+}
+/* references */
+.references dt {
+  text-align: right;
+  font-weight: bold;
+  min-width: 7em;
+}
+.references dd {
+  margin-left: 8em;
+  overflow: auto;
+}
+
+.refInstance {
+  margin-bottom: 1.25em;
+}
+
+.references .ascii {
+  margin-bottom: 0.25em;
+}
+
+/* index */
+.index ul {
+  margin: 0 0 0 1em;
+  padding: 0;
+  list-style: none;
+}
+.index ul ul {
+  margin: 0;
+}
+.index li {
+  margin: 0;
+  text-indent: -2em;
+  padding-left: 2em;
+  padding-bottom: 5px;
+}
+.indexIndex {
+  margin: 0.5em 0 1em;
+}
+.index a {
+  font-weight: 700;
+}
+/* make the index two-column on all but the smallest screens */
+@media (min-width: 500px) {
+  .index ul {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  .index ul ul {
+    column-count: 1;
+    column-gap: 0;
+  }
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  margin: 1em 0;
+}
+address.vcard .nameRole {
+  font-weight: 700;
+  margin-left: 0;
+}
+address.vcard .label {
+  margin: 0.5em 0;
+}
+address.vcard .type {
+  display: none;
+}
+.alternative-contact {
+  margin: 1.5em 0 1em;
+}
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses > section {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  #authors-addresses > section > h2 {
+    column-span: all;
+  }
+  /* hack for break-inside: avoid-column */
+  #authors-addresses address {
+    display: inline-block;
+    break-inside: avoid-column;
+  }
+}
+
+.rfcEditorRemove p:first-of-type {
+  font-style: italic;
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+/* alternative layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+  }
+  #toc.active {
+      opacity: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 2px 0 2px 6px;
+    padding-right: 1em;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 190px;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 8px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    background-color: var(--background-color);
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+  #toc.active nav {
+    display: block;
+  }
+  /* Make the collapsed ToC header render white on gray also when it's a link */
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+  #toc a.toplink {
+    margin-top: 2px;
+  }
+}
+
+/* alternative layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
     position: fixed;
     bottom: 0;
     right: 0;
-    right: calc(50vw - 500px);
-    width: 300px;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
     z-index: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 2em;
     overflow: auto;
     overscroll-behavior: contain;
+    scrollbar-width: thin;
   }
-  body>#rfc\.toc {
-    top: 55px;
+  #toc nav > ul  {
+    margin-bottom: 2em;
   }
-  body>ul.toc {
-    top: 100px;
-  }
-
-  ul.toc {
+  #toc ul {
     margin: 0 0 0 4px;
-    font-size: 12px;
-    line-height: 20px;
+    font-size: var(--small-font-size);
   }
-  ul.toc ul {
-    margin-left: 1.2em;
+  #toc ul p, #toc ul li {
+    margin: 2px 0;
+    line-height: 22px;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre {
+    page-break-inside: avoid;
+  }
+  figure {
+    overflow: scroll;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  h2+*, h3+*, h4+*, h5+*, h6+* {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
   }
 }
 
-.github-fork-ribbon-wrapper {
-  display: none;
-}
-@media screen and (min-width: 800px) {
-  /* "Fork me on GitHub" CSS ribbon based on
-   * https://github.com/simonwhitaker/github-fork-ribbon-css
-   */
-  .github-fork-ribbon {
-    position: absolute;
-    padding: 2px 0;
-    background-color: #a00;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
-    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
-    font: 700 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-    pointer-events: auto;
-
-    top: 38px;
-    right: -45px;
-
-    transform: rotate(45deg);
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
   }
-
-  .github-fork-ribbon a[href],
-  .github-fork-ribbon a[href]:hover {
-    color: #fff;
-    background-color: transparent;
-    text-decoration: none;
-    text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
-    text-align: center;
-
-    width: 190px;
-    line-height: 18px;
-
-    display: inline-block;
-    padding: 2px 0;
-
-    border: 1.5px dotted #fff;
-    border-color: rgba(255, 255, 255, 0.6);
+  @top-center {
+    content: normal;
+    border: none;
   }
-
-  .github-fork-ribbon-wrapper {
-    display: block;
-    width: 130px;
-    height: 130px;
-    position: absolute;
-    overflow: hidden;
-    top: 0; right: 0;
-    z-index: 2;
-    pointer-events: none;
+  @top-right {
+    content: normal;
+    border: none;
   }
 }
-@media screen and (min-width: 1000px) {
-  .github-fork-ribbon-wrapper {
-    position: fixed;
-  }
-  /*]]>*/</style>
-  <meta name="viewport" content="initial-scale=1.0">
 
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Changes introduced to fix issues found during implementation */
+
+/* Separate body from document info even without intervening H1 */
+section {
+  clear: both;
+}
+
+/* Top align author divs, to avoid names without organization dropping level with org names */
+.author {
+  vertical-align: top;
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin: 8px 0.5em 0;
+}
+
+/* Fix the dl styling to match the RFC 7992 attributes */
+dl > dt,
+dl.dlParallel > dt {
+  float: left;
+  margin-right: 1em;
+}
+dl.dlNewline > dt {
+  float: none;
+}
+
+/* Provide styling for table cell text alignment */
+table .text-left, table .text-left {
+  text-align: left;
+}
+table .text-center, table .text-center {
+  text-align: center;
+}
+table .text-right, table .text-right {
+  text-align: right;
+}
+
+/* Make the alternative author contact information look less like just another
+   author, and group it closer with the primary author contact information */
+.alternative-contact {
+  margin: 0.5em 0 0.25em 0;
+}
+address .non-ascii {
+  margin: 0 0 0 2em;
+}
+
+/* With it being possible to set tables with alignment
+  left, center, and right, { width: 100%; } does not make sense */
+table {
+  width: auto;
+}
+
+/* Avoid reference text that sits in a block with very wide left margin,
+   because of a long floating dt label.*/
+.references dd {
+  overflow: visible;
+}
+
+/* Control caption placement */
+caption {
+  caption-side: bottom;
+}
+
+/* Limit the width of the author address vcard, so names in right-to-left
+   script don't end up on the other side of the page. */
+
+address.vcard {
+  max-width: 20em;
+  margin-right: auto;
+}
+
+/* For address alignment dependent on LTR or RTL scripts */
+address div.left {
+  text-align: left;
+}
+address div.right {
+  text-align: right;
+}
+
+/* Give the table caption label the same styling as the figcaption */
+
+@media print {
+  .toplink {
+    display: none;
+  }
+
+  /* avoid overwriting the top border line with the ToC header */
+  #toc {
+    padding-top: 1px;
+  }
+
+  /* Avoid page breaks inside dl and author address entries */
+  dd {
+    page-break-before: avoid;
+  }
+  .vcard {
+    page-break-inside: avoid;
+  }
+
+}
+/* Tweak the bcp14 keyword presentation */
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+</style>
 <link href="rfc-local.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<script src="metadata.min.js"></script>
 <table class="ears">
 <thead><tr>
 <td class="left">Internet-Draft</td>
-<td class="center">General Security Considerations for Cryptoassets Custodians</td>
-<td class="right">June 2020</td>
+<td class="center">General Security Considerations for Cryp</td>
+<td class="right">December 2020</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Sato, et al.</td>
-<td class="center">Expires 20 December 2020</td>
+<td class="center">Expires 19 June 2021</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -308,12 +837,12 @@ ul.toc li {
 <dd class="internet-draft">draft-vcgtf-crypto-assets-security-considerations-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-06-18" class="published">18 June 2020</time>
+<time datetime="2020-12-16" class="published">16 December 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2020-12-20">20 December 2020</time></dd>
+<dd class="expires"><time datetime="2021-06-19">19 June 2021</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -356,7 +885,7 @@ ul.toc li {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 December 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 19 June 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -388,192 +917,192 @@ ul.toc li {
 <li class="ulEmpty toc compact" id="section-toc.1-1.1">
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a><a href="#section-toc.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.2">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.2">
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="xref">2</a>.  <a href="#name-scope-of-this-document" class="xref">Scope of this document</a><a href="#section-toc.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.3">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.3">
             <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="xref">3</a>.  <a href="#name-conventions-and-definitions" class="xref">Conventions and Definitions</a><a href="#section-toc.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.4">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-terminology" class="xref">Terminology</a><a href="#section-toc.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.5">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-basic-description-of-a-mode" class="xref">Basic description of a model system of a cryptoassets custodian</a><a href="#section-toc.1-1.5.1" class="pilcrow">¶</a></p>
 <ul class="ulEmpty toc compact">
 <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.1">
                 <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="xref">5.1</a>.  <a href="#name-general" class="xref">General</a><a href="#section-toc.1-1.5.2.1.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.5.2.2">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.2">
                 <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="xref">5.2</a>.  <a href="#name-a-basic-model-of-cryptoasse" class="xref">A basic model of cryptoassets custodians system and its functional components</a><a href="#section-toc.1-1.5.2.2.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.5.2.3">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.3">
                 <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="xref">5.3</a>.  <a href="#name-the-flow-leading-to-the-sen" class="xref">The flow leading to the sending of the transaction</a><a href="#section-toc.1-1.5.2.3.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.5.2.4">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.4">
                 <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="xref">5.4</a>.  <a href="#name-types-of-keys-that-are-used" class="xref">Types of keys that are used for signature and encryption</a><a href="#section-toc.1-1.5.2.4.1" class="pilcrow">¶</a></p>
 <ul class="ulEmpty toc compact">
 <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.4.2.1">
                     <p id="section-toc.1-1.5.2.4.2.1.1"><a href="#section-5.4.1" class="xref">5.4.1</a>.  <a href="#name-type-of-keys" class="xref">Type of keys</a><a href="#section-toc.1-1.5.2.4.2.1.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.5.2.4.2.2">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.4.2.2">
                     <p id="section-toc.1-1.5.2.4.2.2.1"><a href="#section-5.4.2" class="xref">5.4.2</a>.  <a href="#name-flow-for-the-key-generation" class="xref">Flow for the key generation and key usage</a><a href="#section-toc.1-1.5.2.4.2.2.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.5.2.4.2.3">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.4.2.3">
                     <p id="section-toc.1-1.5.2.4.2.3.1"><a href="#section-5.4.3" class="xref">5.4.3</a>.  <a href="#name-on-the-use-of-multiple-keys" class="xref">On the use of multiple keys</a><a href="#section-toc.1-1.5.2.4.2.3.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.5.2.4.2.4">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.4.2.4">
                     <p id="section-toc.1-1.5.2.4.2.4.1"><a href="#section-5.4.4" class="xref">5.4.4</a>.  <a href="#name-on-the-suspension-of-keys" class="xref">On the suspension of keys</a><a href="#section-toc.1-1.5.2.4.2.4.1" class="pilcrow">¶</a></p>
 </li>
-</ul>
+                </ul>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.5.2.5">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.5">
                 <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="xref">5.5</a>.  <a href="#name-characteristics-of-cryptoas" class="xref">Characteristics of cryptoassets in blockchain and distributed ledger</a><a href="#section-toc.1-1.5.2.5.1" class="pilcrow">¶</a></p>
 <ul class="ulEmpty toc compact">
 <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.5.2.1">
                     <p id="section-toc.1-1.5.2.5.2.1.1"><a href="#section-5.5.1" class="xref">5.5.1</a>.  <a href="#name-about-this-section" class="xref">About this section</a><a href="#section-toc.1-1.5.2.5.2.1.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.5.2.5.2.2">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.5.2.2">
                     <p id="section-toc.1-1.5.2.5.2.2.1"><a href="#section-5.5.2" class="xref">5.5.2</a>.  <a href="#name-importance-of-signature-key" class="xref">Importance of signature keys</a><a href="#section-toc.1-1.5.2.5.2.2.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.5.2.5.2.3">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.5.2.3">
                     <p id="section-toc.1-1.5.2.5.2.3.1"><a href="#section-5.5.3" class="xref">5.5.3</a>.  <a href="#name-diversity-of-implementation" class="xref">Diversity of implementations</a><a href="#section-toc.1-1.5.2.5.2.3.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.5.2.5.2.4">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.5.2.4">
                     <p id="section-toc.1-1.5.2.5.2.4.1"><a href="#section-5.5.4" class="xref">5.5.4</a>.  <a href="#name-possibility-of-blockchain-f" class="xref">Possibility of blockchain forks</a><a href="#section-toc.1-1.5.2.5.2.4.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.5.2.5.2.5">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.5.2.5">
                     <p id="section-toc.1-1.5.2.5.2.5.1"><a href="#section-5.5.5" class="xref">5.5.5</a>.  <a href="#name-risks-for-unauthorized-tran" class="xref">Risks for Unauthorized Transactions</a><a href="#section-toc.1-1.5.2.5.2.5.1" class="pilcrow">¶</a></p>
 </li>
-</ul>
+                </ul>
 </li>
-</ul>
+            </ul>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.6">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-risks-of-cryptoassets-custo" class="xref">Risks of cryptoassets custodian</a><a href="#section-toc.1-1.6.1" class="pilcrow">¶</a></p>
 <ul class="ulEmpty toc compact">
 <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.1">
                 <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="xref">6.1</a>.  <a href="#name-about-this-chapter" class="xref">About this chapter</a><a href="#section-toc.1-1.6.2.1.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.6.2.2">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.2">
                 <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="xref">6.2</a>.  <a href="#name-risks-of-cryptoassets-custod" class="xref">Risks of cryptoassets custodian system</a><a href="#section-toc.1-1.6.2.2.1" class="pilcrow">¶</a></p>
 <ul class="ulEmpty toc compact">
 <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.2.2.1">
                     <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="xref">6.2.1</a>.  <a href="#name-risks-related-to-signature-" class="xref">Risks related to signature keys</a><a href="#section-toc.1-1.6.2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.6.2.2.2.2">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.2.2.2">
                     <p id="section-toc.1-1.6.2.2.2.2.1"><a href="#section-6.2.2" class="xref">6.2.2</a>.  <a href="#name-risks-related-to-assets-dat" class="xref">Risks related to assets data</a><a href="#section-toc.1-1.6.2.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.6.2.2.2.3">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.2.2.3">
                     <p id="section-toc.1-1.6.2.2.2.3.1"><a href="#section-6.2.3" class="xref">6.2.3</a>.  <a href="#name-risks-of-suspension-on-syst" class="xref">Risks of suspension on system and operation</a><a href="#section-toc.1-1.6.2.2.2.3.1" class="pilcrow">¶</a></p>
 </li>
-</ul>
+                </ul>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.6.2.3">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.3">
                 <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="xref">6.3</a>.  <a href="#name-risks-from-external-factors" class="xref">Risks from external factors</a><a href="#section-toc.1-1.6.2.3.1" class="pilcrow">¶</a></p>
 <ul class="ulEmpty toc compact">
 <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.3.2.1">
                     <p id="section-toc.1-1.6.2.3.2.1.1"><a href="#section-6.3.1" class="xref">6.3.1</a>.  <a href="#name-risks-related-to-the-intern" class="xref">Risks related to the Internet, Web PKI, and users environment</a><a href="#section-toc.1-1.6.2.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.6.2.3.2.2">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.3.2.2">
                     <p id="section-toc.1-1.6.2.3.2.2.1"><a href="#section-6.3.2" class="xref">6.3.2</a>.  <a href="#name-risks-related-to-cryptocurr" class="xref">Risks related to cryptocurrency blockchain</a><a href="#section-toc.1-1.6.2.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.6.2.3.2.3">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.3.2.3">
                     <p id="section-toc.1-1.6.2.3.2.3.1"><a href="#section-6.3.3" class="xref">6.3.3</a>.  <a href="#name-risks-from-external-reputat" class="xref">Risks from external reputation</a><a href="#section-toc.1-1.6.2.3.2.3.1" class="pilcrow">¶</a></p>
 </li>
-</ul>
+                </ul>
 </li>
-</ul>
+            </ul>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.7">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-considerations-of-security-" class="xref">Considerations of security controls on Cryptoassets Custodians</a><a href="#section-toc.1-1.7.1" class="pilcrow">¶</a></p>
 <ul class="ulEmpty toc compact">
 <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.1">
                 <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="xref">7.1</a>.  <a href="#name-general-2" class="xref">General</a><a href="#section-toc.1-1.7.2.1.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.2">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.2">
                 <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="xref">7.2</a>.  <a href="#name-basis-for-consideration-abo" class="xref">Basis for consideration about security management</a><a href="#section-toc.1-1.7.2.2.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3">
                 <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="xref">7.3</a>.  <a href="#name-considerations-about-securi" class="xref">Considerations about security controls on Cryptoassets custodians</a><a href="#section-toc.1-1.7.2.3.1" class="pilcrow">¶</a></p>
 <ul class="ulEmpty toc compact">
 <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.1">
                     <p id="section-toc.1-1.7.2.3.2.1.1"><a href="#section-7.3.1" class="xref">7.3.1</a>.  <a href="#name-information-security-polici" class="xref">Information security policies</a><a href="#section-toc.1-1.7.2.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.2">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.2">
                     <p id="section-toc.1-1.7.2.3.2.2.1"><a href="#section-7.3.2" class="xref">7.3.2</a>.  <a href="#name-organization-of-information" class="xref">Organization of information security</a><a href="#section-toc.1-1.7.2.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.3">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.3">
                     <p id="section-toc.1-1.7.2.3.2.3.1"><a href="#section-7.3.3" class="xref">7.3.3</a>.  <a href="#name-human-resource-security" class="xref">Human resource security</a><a href="#section-toc.1-1.7.2.3.2.3.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.4">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.4">
                     <p id="section-toc.1-1.7.2.3.2.4.1"><a href="#section-7.3.4" class="xref">7.3.4</a>.  <a href="#name-asset-management" class="xref">Asset management</a><a href="#section-toc.1-1.7.2.3.2.4.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.5">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.5">
                     <p id="section-toc.1-1.7.2.3.2.5.1"><a href="#section-7.3.5" class="xref">7.3.5</a>.  <a href="#name-access-control" class="xref">Access control</a><a href="#section-toc.1-1.7.2.3.2.5.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.6">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.6">
                     <p id="section-toc.1-1.7.2.3.2.6.1"><a href="#section-7.3.6" class="xref">7.3.6</a>.  <a href="#name-security-controls-on-signat" class="xref">Security controls on signature keys</a><a href="#section-toc.1-1.7.2.3.2.6.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.7">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.7">
                     <p id="section-toc.1-1.7.2.3.2.7.1"><a href="#section-7.3.7" class="xref">7.3.7</a>.  <a href="#name-physical-and-environmental-" class="xref">Physical and environmental security</a><a href="#section-toc.1-1.7.2.3.2.7.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.8">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.8">
                     <p id="section-toc.1-1.7.2.3.2.8.1"><a href="#section-7.3.8" class="xref">7.3.8</a>.  <a href="#name-operations-security" class="xref">Operations security</a><a href="#section-toc.1-1.7.2.3.2.8.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.9">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.9">
                     <p id="section-toc.1-1.7.2.3.2.9.1"><a href="#section-7.3.9" class="xref">7.3.9</a>.  <a href="#name-communications-security" class="xref">Communications security</a><a href="#section-toc.1-1.7.2.3.2.9.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.10">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.10">
                     <p id="section-toc.1-1.7.2.3.2.10.1"><a href="#section-7.3.10" class="xref">7.3.10</a>. <a href="#name-supplier-relationships" class="xref">Supplier relationships</a><a href="#section-toc.1-1.7.2.3.2.10.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.11">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.11">
                     <p id="section-toc.1-1.7.2.3.2.11.1"><a href="#section-7.3.11" class="xref">7.3.11</a>. <a href="#name-information-security-incide" class="xref">Information security incident management</a><a href="#section-toc.1-1.7.2.3.2.11.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.12">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.12">
                     <p id="section-toc.1-1.7.2.3.2.12.1"><a href="#section-7.3.12" class="xref">7.3.12</a>. <a href="#name-information-security-aspect" class="xref">Information security aspect of business continuity management</a><a href="#section-toc.1-1.7.2.3.2.12.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.13">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.3.2.13">
                     <p id="section-toc.1-1.7.2.3.2.13.1"><a href="#section-7.3.13" class="xref">7.3.13</a>. <a href="#name-compliance" class="xref">Compliance</a><a href="#section-toc.1-1.7.2.3.2.13.1" class="pilcrow">¶</a></p>
 </li>
-</ul>
+                </ul>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.4">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.4">
                 <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="xref">7.4</a>.  <a href="#name-other-cryptoassets-custodia" class="xref">Other cryptoassets custodians system specific issues</a><a href="#section-toc.1-1.7.2.4.1" class="pilcrow">¶</a></p>
 <ul class="ulEmpty toc compact">
 <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.4.2.1">
                     <p id="section-toc.1-1.7.2.4.2.1.1"><a href="#section-7.4.1" class="xref">7.4.1</a>.  <a href="#name-advance-notice-to-user-for-" class="xref">Advance notice to user for maintenance</a><a href="#section-toc.1-1.7.2.4.2.1.1" class="pilcrow">¶</a></p>
 </li>
-</ul>
+                </ul>
 </li>
-</ul>
+            </ul>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.8">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.8">
             <p id="section-toc.1-1.8.1"><a href="#section-8" class="xref">8</a>.  <a href="#name-future-work" class="xref">Future work</a><a href="#section-toc.1-1.8.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.9">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.9">
             <p id="section-toc.1-1.9.1"><a href="#section-9" class="xref">9</a>.  <a href="#name-security-considerations" class="xref">Security Considerations</a><a href="#section-toc.1-1.9.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.10">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.10">
             <p id="section-toc.1-1.10.1"><a href="#section-10" class="xref">10</a>. <a href="#name-iana-considerations" class="xref">IANA Considerations</a><a href="#section-toc.1-1.10.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.11">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.11">
             <p id="section-toc.1-1.11.1"><a href="#section-11" class="xref">11</a>. <a href="#name-references" class="xref">References</a><a href="#section-toc.1-1.11.1" class="pilcrow">¶</a></p>
 <ul class="ulEmpty toc compact">
 <li class="ulEmpty toc compact" id="section-toc.1-1.11.2.1">
                 <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="xref">11.1</a>.  <a href="#name-normative-references" class="xref">Normative References</a><a href="#section-toc.1-1.11.2.1.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.11.2.2">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.11.2.2">
                 <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="xref">11.2</a>.  <a href="#name-informative-references" class="xref">Informative References</a><a href="#section-toc.1-1.11.2.2.1" class="pilcrow">¶</a></p>
 </li>
-</ul>
+            </ul>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.12">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.12">
             <p id="section-toc.1-1.12.1"><a href="#section-appendix.a" class="xref"></a><a href="#name-acknowledgements" class="xref">Acknowledgements</a><a href="#section-toc.1-1.12.1" class="pilcrow">¶</a></p>
 </li>
-<li class="ulEmpty toc compact" id="section-toc.1-1.13">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.13">
             <p id="section-toc.1-1.13.1"><a href="#section-appendix.b" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a><a href="#section-toc.1-1.13.1" class="pilcrow">¶</a></p>
 </li>
-</ul>
+        </ul>
 </nav>
 </section>
 </div>
@@ -601,22 +1130,22 @@ A system in a form different from this basic model, for example, a system where 
 <ul class="normal">
 <li class="normal" id="section-2-3.1">A cryptoassets custodians system that provides cryptoassets custodians work to customers (consumers and other exchanges)<a href="#section-2-3.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-2-3.2">Assets information managed by the cryptoassets custodians system (including the signature key of the cryptoassets)<a href="#section-2-3.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-2-3.2">Assets information managed by the cryptoassets custodians system (including the signature key of the cryptoassets)<a href="#section-2-3.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-2-3.3">The social impact which can be exerted by imperfect security measures of the cryptoassets custodians system<a href="#section-2-3.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-2-3.3">The social impact which can be exerted by imperfect security measures of the cryptoassets custodians system<a href="#section-2-3.3" class="pilcrow">¶</a>
 </li>
-</ul>
+      </ul>
 <p id="section-2-4">This document does not focus on the following items.<a href="#section-2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-5.1">Security measures for information systems used by daily operations by custodians operators<a href="#section-2-5.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-2-5.2">Security measures against blockchains that provide the mechanism of cryptoassets and distributed ledger itself<a href="#section-2-5.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-2-5.2">Security measures against blockchains that provide the mechanism of cryptoassets and distributed ledger itself<a href="#section-2-5.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-2-5.3">Operator's own management risk<a href="#section-2-5.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-2-5.3">Operator's own management risk<a href="#section-2-5.3" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-2-5.4">Specific requirements on separation of assets of customers and custodians/exchanges<a href="#section-2-5.4" class="pilcrow">¶</a>
+        <li class="normal" id="section-2-5.4">Specific requirements on separation of assets of customers and custodians/exchanges<a href="#section-2-5.4" class="pilcrow">¶</a>
 </li>
-</ul>
+      </ul>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -893,60 +1422,60 @@ A basic model of cryptoassets custodians system is shown on <a href="#fig-basic-
 <li class="normal" id="section-5.2-3.1">Interface (Web Application, APIs)
 Provides screen and input functions such as login process, account management (deposit/withdrawal instruction etc.) and trade instruction for the customers(users). Web application, API, etc.<a href="#section-5.2-3.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.2-3.2">Customer Authentication Function
+          <li class="normal" id="section-5.2-3.2">Customer Authentication Function
 Performs user authentication process for login to the cryptoassets custodians.<a href="#section-5.2-3.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.2-3.3">Customer Credentials
+          <li class="normal" id="section-5.2-3.3">Customer Credentials
 Manages required IDs for login and verification information related to user authentication process (e.g. password verification info.).<a href="#section-5.2-3.3" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.2-3.4">Customer Assets Management Function
+          <li class="normal" id="section-5.2-3.4">Customer Assets Management Function
 A group of functions to manage customer accounts. Receive instructions for deposit or withdrawal (outgoing coins) and perform processing according to the user instructions. Retrieve or update assets data.<a href="#section-5.2-3.4" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.2-3.5">Blockchain Node
+          <li class="normal" id="section-5.2-3.5">Blockchain Node
 Connects to another blockchain nodes to retrieve blockchain data.<a href="#section-5.2-3.5" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.2-3.6">Incoming Coin management Function
+          <li class="normal" id="section-5.2-3.6">Incoming Coin management Function
 Checks transaction stored in blockchain and confirm whether incoming coins are involved in the specified addresses. Update an assets database according to the transaction from blockchain.<a href="#section-5.2-3.6" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.2-3.7">Order processing function
+          <li class="normal" id="section-5.2-3.7">Order processing function
 A group of functions that receives orders from customers and performs processing related to trading of cryptoassets. Retrieves and updates assets data based on the orders.<a href="#section-5.2-3.7" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.2-3.8">Assets Database
+          <li class="normal" id="section-5.2-3.8">Assets Database
 Manages holdings of fiat currencies and cryptoassets. The database does not include the private keys for transaction signature. Assets are managed separately from the assets of the custodian for each customer.<a href="#section-5.2-3.8" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.2-3.9">
+          <li class="normal" id="section-5.2-3.9">
             <p id="section-5.2-3.9.1">Transaction Singing Function<a href="#section-5.2-3.9.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.2-3.9.2.1">Transaction Generator
   Generates transactions to be sent to the blockchain based on instructions from the customer asset management function or the custodians operation function.<a href="#section-5.2-3.9.2.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.2-3.9.2.2">Transaction Broadcaster
+              <li class="normal" id="section-5.2-3.9.2.2">Transaction Broadcaster
   Broadcasts the signed transaction to the blockchain. Connects to other nodes on the blockchain.<a href="#section-5.2-3.9.2.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.2-3.9.2.3">Transaction Signing Function
+              <li class="normal" id="section-5.2-3.9.2.3">Transaction Signing Function
   Generates digital signatures based on the instructed transaction contents and the signature key (or its IDs and its addresses).<a href="#section-5.2-3.9.2.3" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.2-3.9.2.4">Address Management
+              <li class="normal" id="section-5.2-3.9.2.4">Address Management
   Manages public keys with related to the signature keys, or addresses (such as values calculated from the public keys).<a href="#section-5.2-3.9.2.4" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.2-3.9.2.5">Signature Key Management Function
+              <li class="normal" id="section-5.2-3.9.2.5">Signature Key Management Function
   Manages the signature keys of the cryptoassets (keys used for signing the transaction). Sometimes signature keys are separately stored into the cold-wallet as security countermeasure.<a href="#section-5.2-3.9.2.5" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.2-3.9.2.6">Signature key generator
+              <li class="normal" id="section-5.2-3.9.2.6">Signature key generator
   Generates signature keys. The generated keys are registered in the signature key management function, and the public keys and addresses are registered in the address management function.<a href="#section-5.2-3.9.2.6" class="pilcrow">¶</a>
 </li>
-</ul>
+            </ul>
 </li>
-<li class="normal" id="section-5.2-3.10">Custodians Operation Modules
+          <li class="normal" id="section-5.2-3.10">Custodians Operation Modules
 A group of functions for custodians' operators or administrators. Based on operations from administrators, the module instructs generating new signature keys or transferring cryptoassets.<a href="#section-5.2-3.10" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.2-3.11">Operator Authentication Function
+          <li class="normal" id="section-5.2-3.11">Operator Authentication Function
 Authenticates the administrators.<a href="#section-5.2-3.11" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.2-3.12">Operator Audit Database
+          <li class="normal" id="section-5.2-3.12">Operator Audit Database
 Manages auditing data related to the authentication of the administrators.<a href="#section-5.2-3.12" class="pilcrow">¶</a>
 </li>
-</ul>
+        </ul>
 <p id="section-5.2-4">We defined each functional element to distinguish functions logically, and do not show the actual arrangement on the actual system. For example, in our actual system, the address management unit may be managed by an integrated database.
 Also, there are implementations with multiple functions packaged together. For example, each functional element of the transaction signature system may be integrated with the customer property management system, or the transaction signature system may be operating as another system.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
 <p id="section-5.2-5">When using existing implementations such as bitcoin wallet, bitcoin wallet is thought to provide the functions of the transaction signature system as just one implementation as a whole. It is also conceivable that some functions are provided by a remote subcontractor as in a form in which the function of the transaction signature system is provided by a remote server.<a href="#section-5.2-5" class="pilcrow">¶</a></p>
@@ -961,53 +1490,53 @@ Also, there are implementations with multiple functions packaged together. For e
 <li class="normal" id="section-5.3-1.1">
             <p id="section-5.3-1.1.1">Deposit Phase<a href="#section-5.3-1.1.1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-5.3-1.1.2">
-              <li id="section-5.3-1.1.2.1">Customers send fiat to custodian's bank account.<a href="#section-5.3-1.1.2.1" class="pilcrow">¶</a>
+<li id="section-5.3-1.1.2.1">Customers send fiat to custodian's bank account.<a href="#section-5.3-1.1.2.1" class="pilcrow">¶</a>
 </li>
-<li id="section-5.3-1.1.2.2">Custodians shall confirm to receive fiat, and shall update assets database to reflect customer asset information.<a href="#section-5.3-1.1.2.2" class="pilcrow">¶</a>
+              <li id="section-5.3-1.1.2.2">Custodians shall confirm to receive fiat, and shall update assets database to reflect customer asset information.<a href="#section-5.3-1.1.2.2" class="pilcrow">¶</a>
 </li>
-</ol>
+            </ol>
 </li>
-<li class="normal" id="section-5.3-1.2">
+          <li class="normal" id="section-5.3-1.2">
             <p id="section-5.3-1.2.1">Input coin phase<a href="#section-5.3-1.2.1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-5.3-1.2.2">
-              <li id="section-5.3-1.2.2.1">Customer transfer cryptoassets to the address instructed by custodians. The transfer shall be made by cryptoassets wallet for the customer such as tools or services (other custodians or Web wallet)<a href="#section-5.3-1.2.2.1" class="pilcrow">¶</a>
+<li id="section-5.3-1.2.2.1">Customer transfer cryptoassets to the address instructed by custodians. The transfer shall be made by cryptoassets wallet for the customer such as tools or services (other custodians or Web wallet)<a href="#section-5.3-1.2.2.1" class="pilcrow">¶</a>
 </li>
-<li id="section-5.3-1.2.2.2">Custodians shall confirm cryptoassets has been transferred to the address instructed and shall update the asset database to reflect asset information of the customer.<a href="#section-5.3-1.2.2.2" class="pilcrow">¶</a>
+              <li id="section-5.3-1.2.2.2">Custodians shall confirm cryptoassets has been transferred to the address instructed and shall update the asset database to reflect asset information of the customer.<a href="#section-5.3-1.2.2.2" class="pilcrow">¶</a>
 </li>
-</ol>
+            </ol>
 </li>
-<li class="normal" id="section-5.3-1.3">
+          <li class="normal" id="section-5.3-1.3">
             <p id="section-5.3-1.3.1">Trading phase<a href="#section-5.3-1.3.1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-5.3-1.3.2">
-              <li id="section-5.3-1.3.2.1">Customer access to interfaces to make instructions.<a href="#section-5.3-1.3.2.1" class="pilcrow">¶</a>
+<li id="section-5.3-1.3.2.1">Customer access to interfaces to make instructions.<a href="#section-5.3-1.3.2.1" class="pilcrow">¶</a>
 </li>
-<li id="section-5.3-1.3.2.2">Instructions to transfer shall be processed by custodians operations functions. The result of trade processed by custodians operations functions shall be updated into the asset database.<a href="#section-5.3-1.3.2.2" class="pilcrow">¶</a>
+              <li id="section-5.3-1.3.2.2">Instructions to transfer shall be processed by custodians operations functions. The result of trade processed by custodians operations functions shall be updated into the asset database.<a href="#section-5.3-1.3.2.2" class="pilcrow">¶</a>
 </li>
-</ol>
+            </ol>
 </li>
-<li class="normal" id="section-5.3-1.4">
+          <li class="normal" id="section-5.3-1.4">
             <p id="section-5.3-1.4.1">Instructions to output coins from customers<a href="#section-5.3-1.4.1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-5.3-1.4.2">
-              <li id="section-5.3-1.4.2.1">Customers access to interface and instruct it to transfer its cryptoassets to other address. (Instruct to output coins)<a href="#section-5.3-1.4.2.1" class="pilcrow">¶</a>
+<li id="section-5.3-1.4.2.1">Customers access to interface and instruct it to transfer its cryptoassets to other address. (Instruct to output coins)<a href="#section-5.3-1.4.2.1" class="pilcrow">¶</a>
 </li>
-<li id="section-5.3-1.4.2.2">Instructions to output coins shall be processed by customer assets management functions. Transaction generator shall make transaction messages based on instructions such as receive address or amount of cryptoassets.<a href="#section-5.3-1.4.2.2" class="pilcrow">¶</a>
+              <li id="section-5.3-1.4.2.2">Instructions to output coins shall be processed by customer assets management functions. Transaction generator shall make transaction messages based on instructions such as receive address or amount of cryptoassets.<a href="#section-5.3-1.4.2.2" class="pilcrow">¶</a>
 </li>
-<li id="section-5.3-1.4.2.3">Transaction messages shall be added a digital signature by transaction signing functions.<a href="#section-5.3-1.4.2.3" class="pilcrow">¶</a>
+              <li id="section-5.3-1.4.2.3">Transaction messages shall be added a digital signature by transaction signing functions.<a href="#section-5.3-1.4.2.3" class="pilcrow">¶</a>
 </li>
-<li id="section-5.3-1.4.2.4">Transaction messages with a digital signature shall be delivered to all nodes on blockchain by transaction broadcaster.<a href="#section-5.3-1.4.2.4" class="pilcrow">¶</a>
+              <li id="section-5.3-1.4.2.4">Transaction messages with a digital signature shall be delivered to all nodes on blockchain by transaction broadcaster.<a href="#section-5.3-1.4.2.4" class="pilcrow">¶</a>
 </li>
-</ol>
+            </ol>
 </li>
-<li class="normal" id="section-5.3-1.5">
+          <li class="normal" id="section-5.3-1.5">
             <p id="section-5.3-1.5.1">Instruction to transfer from Customer Assets Management Function<a href="#section-5.3-1.5.1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-5.3-1.5.2">
-              <li id="section-5.3-1.5.2.1">Administrator instructs to send cryptoassets to address through the interface of Management Functions. For Example, it may send between address managed inside custodians.<a href="#section-5.3-1.5.2.1" class="pilcrow">¶</a>
+<li id="section-5.3-1.5.2.1">Administrator instructs to send cryptoassets to address through the interface of Management Functions. For Example, it may send between address managed inside custodians.<a href="#section-5.3-1.5.2.1" class="pilcrow">¶</a>
 </li>
-<li id="section-5.3-1.5.2.2">Instructions to transfer shall be processed on Management Function, and shall be processed as described 2 to 4 on "output coin". Transactions with digital signature shall be delivered to all nodes on blockchain.<a href="#section-5.3-1.5.2.2" class="pilcrow">¶</a>
+              <li id="section-5.3-1.5.2.2">Instructions to transfer shall be processed on Management Function, and shall be processed as described 2 to 4 on "output coin". Transactions with digital signature shall be delivered to all nodes on blockchain.<a href="#section-5.3-1.5.2.2" class="pilcrow">¶</a>
 </li>
-</ol>
+            </ol>
 </li>
-</ul>
+        </ul>
 </section>
 </div>
 <div id="types-of-keys-that-are-used-for-signature-and-encryption">
@@ -1461,41 +1990,41 @@ And actors are assumed as the input of signature key in <a href="#fig-basic-mode
 <ul class="normal">
 <li class="normal" id="section-6.2.1.1-3.1.2.1">Loss<a href="#section-6.2.1.1-3.1.2.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-6.2.1.1-3.1.2.2">Leakage, Theft<a href="#section-6.2.1.1-3.1.2.2" class="pilcrow">¶</a>
+                  <li class="normal" id="section-6.2.1.1-3.1.2.2">Leakage, Theft<a href="#section-6.2.1.1-3.1.2.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-6.2.1.1-3.1.2.3">Unauthorized Use<a href="#section-6.2.1.1-3.1.2.3" class="pilcrow">¶</a>
+                  <li class="normal" id="section-6.2.1.1-3.1.2.3">Unauthorized Use<a href="#section-6.2.1.1-3.1.2.3" class="pilcrow">¶</a>
 </li>
-</ul>
+                </ul>
 </li>
-<li class="normal" id="section-6.2.1.1-3.2">
+              <li class="normal" id="section-6.2.1.1-3.2">
                 <p id="section-6.2.1.1-3.2.1">Factors of Threats:<a href="#section-6.2.1.1-3.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2.1.1-3.2.2.1">Error in operation<a href="#section-6.2.1.1-3.2.2.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-6.2.1.1-3.2.2.2">Maliciousness (of legitimate person)<a href="#section-6.2.1.1-3.2.2.2" class="pilcrow">¶</a>
+                  <li class="normal" id="section-6.2.1.1-3.2.2.2">Maliciousness (of legitimate person)<a href="#section-6.2.1.1-3.2.2.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-6.2.1.1-3.2.2.3">Spoofing (for legitimate person))<a href="#section-6.2.1.1-3.2.2.3" class="pilcrow">¶</a>
+                  <li class="normal" id="section-6.2.1.1-3.2.2.3">Spoofing (for legitimate person))<a href="#section-6.2.1.1-3.2.2.3" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-6.2.1.1-3.2.2.4">Malicious intentions of outsiders<a href="#section-6.2.1.1-3.2.2.4" class="pilcrow">¶</a>
+                  <li class="normal" id="section-6.2.1.1-3.2.2.4">Malicious intentions of outsiders<a href="#section-6.2.1.1-3.2.2.4" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-6.2.1.1-3.2.2.5">Unintended behavior (system)<a href="#section-6.2.1.1-3.2.2.5" class="pilcrow">¶</a>
+                  <li class="normal" id="section-6.2.1.1-3.2.2.5">Unintended behavior (system)<a href="#section-6.2.1.1-3.2.2.5" class="pilcrow">¶</a>
 </li>
-</ul>
+                </ul>
 </li>
-<li class="normal" id="section-6.2.1.1-3.3">
+              <li class="normal" id="section-6.2.1.1-3.3">
                 <p id="section-6.2.1.1-3.3.1">Actors:<a href="#section-6.2.1.1-3.3.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2.1.1-3.3.2.1">Custodians operation modules<a href="#section-6.2.1.1-3.3.2.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-6.2.1.1-3.3.2.2">Transaction Signing modules<a href="#section-6.2.1.1-3.3.2.2" class="pilcrow">¶</a>
+                  <li class="normal" id="section-6.2.1.1-3.3.2.2">Transaction Signing modules<a href="#section-6.2.1.1-3.3.2.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-6.2.1.1-3.3.2.3">Customer assets management function<a href="#section-6.2.1.1-3.3.2.3" class="pilcrow">¶</a>
+                  <li class="normal" id="section-6.2.1.1-3.3.2.3">Customer assets management function<a href="#section-6.2.1.1-3.3.2.3" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-6.2.1.1-3.3.2.4">Incoming Coin management function<a href="#section-6.2.1.1-3.3.2.4" class="pilcrow">¶</a>
+                  <li class="normal" id="section-6.2.1.1-3.3.2.4">Incoming Coin management function<a href="#section-6.2.1.1-3.3.2.4" class="pilcrow">¶</a>
 </li>
-</ul>
+                </ul>
 </li>
-</ul>
+            </ul>
 <p id="section-6.2.1.1-4">Factors of threats are organized as follow.<a href="#section-6.2.1.1-4" class="pilcrow">¶</a></p>
 <p id="section-6.2.1.1-5">Error in operation: A human error caused by an authorized user (including an administrator) during operation of the system. For example, the expected operation was to withdraw coin equivalent to 100,000 JPY. But, the actual operation is withdrawing coin equivalent to 1,000,000 JPY.<a href="#section-6.2.1.1-5" class="pilcrow">¶</a></p>
 <p id="section-6.2.1.1-6">Malicious acts by authorized person: An act committed with malice by an authorized person (including an administrator). For example, theft or unauthorized use of the signature key by the insider. Purpose or incentive of the act is not concerned.<a href="#section-6.2.1.1-6" class="pilcrow">¶</a></p>
@@ -1678,15 +2207,15 @@ Following example shows unauthorized use at an early stage of the process.<a hre
 <ul class="normal">
 <li class="normal" id="section-6.2.1.4-3.1">A destination address of cryptoassets or amount of assets is manipulated due to tampering of software at transaction signing function. The tamper disables designed validation process at the transaction signing function.<a href="#section-6.2.1.4-3.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-6.2.1.4-3.2">A destination address of cryptoassets or amount of assets is manipulated due to tampering of the unsigned transaction generated by transaction generator. Besides, an unauthorized transaction has generated and given to the transaction signing function.<a href="#section-6.2.1.4-3.2" class="pilcrow">¶</a>
+              <li class="normal" id="section-6.2.1.4-3.2">A destination address of cryptoassets or amount of assets is manipulated due to tampering of the unsigned transaction generated by transaction generator. Besides, an unauthorized transaction has generated and given to the transaction signing function.<a href="#section-6.2.1.4-3.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-6.2.1.4-3.3">A destination address of cryptoassets or amount of assets is manipulated due to tampering of software at transaction generator. An unsigned transaction has generated with an unauthorized direct operation to transaction generator.<a href="#section-6.2.1.4-3.3" class="pilcrow">¶</a>
+              <li class="normal" id="section-6.2.1.4-3.3">A destination address of cryptoassets or amount of assets is manipulated due to tampering of software at transaction generator. An unsigned transaction has generated with an unauthorized direct operation to transaction generator.<a href="#section-6.2.1.4-3.3" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-6.2.1.4-3.4">An incorrect amount or incorrect destination address of cryptoassets has transmitted from custodian operation function through transaction generator due to an internal crime, error in operation, or spoofing of the identity by the administrator.<a href="#section-6.2.1.4-3.4" class="pilcrow">¶</a>
+              <li class="normal" id="section-6.2.1.4-3.4">An incorrect amount or incorrect destination address of cryptoassets has transmitted from custodian operation function through transaction generator due to an internal crime, error in operation, or spoofing of the identity by the administrator.<a href="#section-6.2.1.4-3.4" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-6.2.1.4-3.5">Assets database has tampered in a case where the operation/order to transaction generator refers to the assets database. (See: <a href="#risks-related-to-assets-data" class="xref">Section 6.2.2</a>)<a href="#section-6.2.1.4-3.5" class="pilcrow">¶</a>
+              <li class="normal" id="section-6.2.1.4-3.5">Assets database has tampered in a case where the operation/order to transaction generator refers to the assets database. (See: <a href="#risks-related-to-assets-data" class="xref">Section 6.2.2</a>)<a href="#section-6.2.1.4-3.5" class="pilcrow">¶</a>
 </li>
-</ul>
+            </ul>
 <p id="section-6.2.1.4-4">As shown in the above example, the attacker is able to obtain cryptoassets without attacking to the signature key illicitly.
 In particular, countermeasures MUST be considered in a case where the system automates each process.<a href="#section-6.2.1.4-4" class="pilcrow">¶</a></p>
 <p id="section-6.2.1.4-5">Security control measures to the signature key MUST be performed.
@@ -1733,9 +2262,9 @@ In this section, a brief thought is given since detailed threat assessment and r
 <ul class="normal">
 <li class="normal" id="section-6.2.2-6.1">An incident that the malicious transaction generated by assets database which refers manipulated assets data has broadcasted through a legitimate process. (See: <a href="#risks-of-unauthorized-use-of-the-signature-key" class="xref">Section 6.2.1.4</a>)<a href="#section-6.2.2-6.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-6.2.2-6.2">Unauthorized manipulation to a number of assets stored in asset data between clients and/or between clients and custodians by tampering a list of cryptoassets address linked to clients. This enables losing assets of clients or custodians without broadcasting the transaction to the blockchain.<a href="#section-6.2.2-6.2" class="pilcrow">¶</a>
+            <li class="normal" id="section-6.2.2-6.2">Unauthorized manipulation to a number of assets stored in asset data between clients and/or between clients and custodians by tampering a list of cryptoassets address linked to clients. This enables losing assets of clients or custodians without broadcasting the transaction to the blockchain.<a href="#section-6.2.2-6.2" class="pilcrow">¶</a>
 </li>
-</ul>
+          </ul>
 <p id="section-6.2.2-7">Risks of assets data may be considered as risks of system in financial service and settlement service. However, countermeasures to the incident that transaction(s) has merged into blockchain as a result of unauthorized manipulation to the assets data MUST be considered with an understanding that transaction broadcast to the network is irreversible.<a href="#section-6.2.2-7" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1993,13 +2522,13 @@ Cryptoassets Custodians shall mainly consider about security management describe
 <li class="normal" id="section-7.2-2.1">Interested parties (from "4. Context of organization", <span>[<a href="#ISO.27001_2013" class="xref">ISO.27001_2013</a>]</span>)
 To protect assets of cryptoassets custodian's customer. Division of responsibility between outsourced and cryptoassets custodians such as management of signature keys for cryptoassets. Impact of business such as money laundering shall be considered from another viewpoint.<a href="#section-7.2-2.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.2-2.2">Policy (from "5. Leadership", <span>[<a href="#ISO.27001_2013" class="xref">ISO.27001_2013</a>]</span>)
+          <li class="normal" id="section-7.2-2.2">Policy (from "5. Leadership", <span>[<a href="#ISO.27001_2013" class="xref">ISO.27001_2013</a>]</span>)
 Cryptoassets custodians shall establish an information security policy that includes information security objectives and controls. Information security policy shall be disclosed so that customers can browse.<a href="#section-7.2-2.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.2-2.3">Continual improvement and risk assessment (from "6. Planning", "8. Operation", "9. Performance evaluation", and "10.Improvement", <span>[<a href="#ISO.27001_2013" class="xref">ISO.27001_2013</a>]</span>)
+          <li class="normal" id="section-7.2-2.3">Continual improvement and risk assessment (from "6. Planning", "8. Operation", "9. Performance evaluation", and "10.Improvement", <span>[<a href="#ISO.27001_2013" class="xref">ISO.27001_2013</a>]</span>)
 As described in <a href="#risks-related-to-cryptocurrency-blockchain" class="xref">Section 6.3.2</a>, numbers of cryptoassets have been developed and its speed of evolving is rapid, Cryptoassets Custodians shall monitor security risks about cryptoassets in addition to information security management applied in general. Cryptoassets Custodians shall review and improve security controls according to the situation.<a href="#section-7.2-2.3" class="pilcrow">¶</a>
 </li>
-</ul>
+        </ul>
 </section>
 </div>
 <div id="considerations-about-security-controls-on-cryptoassets-custodians">
@@ -2011,11 +2540,11 @@ As described in <a href="#risks-related-to-cryptocurrency-blockchain" class="xre
 <ul class="normal">
 <li class="normal" id="section-7.3-2.1">Risk treatment options to prevent from loss, steal, leakage, misuse of secret keys used for cryptoassets, customer data, and customer asset.<a href="#section-7.3-2.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3-2.2">Compliance with business<a href="#section-7.3-2.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-7.3-2.2">Compliance with business<a href="#section-7.3-2.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3-2.3">Compliance with legal and contractual requirements<a href="#section-7.3-2.3" class="pilcrow">¶</a>
+          <li class="normal" id="section-7.3-2.3">Compliance with legal and contractual requirements<a href="#section-7.3-2.3" class="pilcrow">¶</a>
 </li>
-</ul>
+        </ul>
 <p id="section-7.3-3">There are some considerations described in <a href="#basis-for-consideration-about-security-management" class="xref">Section 7.2</a> about security controls based on system risks at Cryptoassets Custodians.
 There is a guidance for security controls as <span>[<a href="#ISO.27002_2013" class="xref">ISO.27002_2013</a>]</span>, Cryptoassets Custodians shall refer it to design and / or identify security controls.
 <a href="#information-security-policies" class="xref">Section 7.3.1</a> to <a href="#compliance" class="xref">Section 7.3.13</a> below are followed to <span>[<a href="#ISO.27002_2013" class="xref">ISO.27002_2013</a>]</span> and describe items to be especially noted in the virtual currency exchange system.<a href="#section-7.3-3" class="pilcrow">¶</a></p>
@@ -2076,9 +2605,9 @@ To protect assets of customers, cryptoassets custodians shall separate assets in
 <ul class="normal">
 <li class="normal" id="section-7.3.5.1-2.1">Operators and administrators for custodians system. They will command to create keys or to transfer funds by software or terminal.<a href="#section-7.3.5.1-2.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.5.1-2.2">Administrators to maintain hardware, OS, databases, and middleware.<a href="#section-7.3.5.1-2.2" class="pilcrow">¶</a>
+              <li class="normal" id="section-7.3.5.1-2.2">Administrators to maintain hardware, OS, databases, and middleware.<a href="#section-7.3.5.1-2.2" class="pilcrow">¶</a>
 </li>
-</ul>
+            </ul>
 <p id="section-7.3.5.1-3">Management measures of signature keys such as activate, backup, restore are described on <a href="#security-controls-on-signature-keys" class="xref">Section 7.3.6</a>.
 Cryptoassets custodian shall be carried out to assign authority to operate properly and shall set access control.
 Access controls shall be include authorize and permit to connect custodians system from remote, authorize for external service if using as functions for cryptoasset custodians, authorize as a user for OS and databases, permit to enter and leave facilities systems or terminals installed.
@@ -2099,29 +2628,29 @@ Cryptoassets custodians shall not concentrate duties for one operator or adminis
 <li class="normal" id="section-7.3.5.2-1.1">Strict personal identification on setup account
 The account shall be set up by strict personal identification, and account information shall be sent to the person itself. For example, personal identification shall be operated by an identification document issued by the public organization and shall be sent a letter to the address without forwarding. Personal identification shall be carried out in accordance with relevant laws, regulations, treaty such as FATF. Replacement of pictures on an identification document or falsification of attribute information is typical treats for personal identification. In order to operate personal identification strictly, it shall be carried out to verify by software or visual check and verify by an electric method such as signature that is hard to falsification.<a href="#section-7.3.5.2-1.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.5.2-1.2">Managing credential and multi-factor authentication
+              <li class="normal" id="section-7.3.5.2-1.2">Managing credential and multi-factor authentication
 For user authentication, it is expected to prevent from spoofing and internal injustice by installing risk-based authentication on not normal access ( such as a characteristic of terminal or route, and different time slot from usual ) and multi factor authentication on spoofing by leakage of single credential.
 It is NOT recommended to deliver one-time-password by unprotected transmission line as email because there is a risk of impersonation or fraud on the transfer route.
 Confirming telephone number by SMS was valid for verifying owner and reachability, but that has been RESTRICTED by NIST, so personal authentication technology such as possession identification and transaction authentication technology should be applied. SMS may be one factor used to recovery account, but not measure to confirm the existence and authenticate.<a href="#section-7.3.5.2-1.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.5.2-1.3">Multi-factor authentication, risk-based authentication
+              <li class="normal" id="section-7.3.5.2-1.3">Multi-factor authentication, risk-based authentication
 It shall be carried out to register customer and set access controls strictly to avoid defraud customer funds, changing to fiat and money laundering by spoofing customers.<a href="#section-7.3.5.2-1.3" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.5.2-1.4">Confirmation of intention according to the risk of operation
+              <li class="normal" id="section-7.3.5.2-1.4">Confirmation of intention according to the risk of operation
 To be consistent with the convenience of customers and safety of service, It shall be considered to make a different level to authenticate by risks of customer's operation. For example, low-risk operations such as display balance of account or details of trade may be allowed by single-factor authentication, but update transactions such as trading coins or changing address or account shall be authenticated by an additional factor.
 In addition, operations it may cause damages such as output coin or order of fiat transaction shall be ordered to confirm by additional authenticate or to confirm intention by an operator.<a href="#section-7.3.5.2-1.4" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.5.2-1.5">Data preservation on deleting an account
+              <li class="normal" id="section-7.3.5.2-1.5">Data preservation on deleting an account
 Cryptoassets custodians shall implement system be able to rollback after erasing for a certain period if customer stated spoofed or unauthorized access. Cryptoassets custodians shall delete the account if requested from a customer, but they also shall consider about risks that attacker spoofed to customer requests to delete the account.<a href="#section-7.3.5.2-1.5" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.5.2-1.6">Signature key preservation on discontinue addresses
+              <li class="normal" id="section-7.3.5.2-1.6">Signature key preservation on discontinue addresses
 Signature keys linked to an account shall not be deleted even if the address of cryptoassets has no value. On a prediction for the general cryptoassets customer is allowed to send assets for any addresses and not technically prevented to send, signature keys for wallet stopped to use shall be taken back up for reuse because the possibility of receive coins to the address exists.<a href="#section-7.3.5.2-1.6" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.5.2-1.7">Consideration for supplying APIs
+              <li class="normal" id="section-7.3.5.2-1.7">Consideration for supplying APIs
 To set access control for operations by a customer, it shall be considered about not only operations of dialogue operations on the web but also APIs connecting from the application by smartphone and from external systems. For providing APIs, It shall be implemented to consider cases that are difficult to get explicit approval from customer. It shall comply with best practices shared in the industry based on the attack risk peculiar to API.
 For reference, it may be followed to Financial API by OpenID Foundation.<a href="#section-7.3.5.2-1.7" class="pilcrow">¶</a>
 </li>
-</ul>
+            </ul>
 </section>
 </div>
 </section>
@@ -2147,26 +2676,26 @@ Also, they MUST decide the life cycle of a signature key and MUST implement and 
 <ul class="normal">
 <li class="normal" id="section-7.3.6.1-2.1">They should be isolated from other informational assets. Rigorous access control is mandatory.<a href="#section-7.3.6.1-2.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.6.1-2.2">Limit the number of access to signature keys as minimum as possible.<a href="#section-7.3.6.1-2.2" class="pilcrow">¶</a>
+              <li class="normal" id="section-7.3.6.1-2.2">Limit the number of access to signature keys as minimum as possible.<a href="#section-7.3.6.1-2.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.6.1-2.3">Be prepared for unintentional lost of signature keys.<a href="#section-7.3.6.1-2.3" class="pilcrow">¶</a>
+              <li class="normal" id="section-7.3.6.1-2.3">Be prepared for unintentional lost of signature keys.<a href="#section-7.3.6.1-2.3" class="pilcrow">¶</a>
 </li>
-</ul>
+            </ul>
 <p id="section-7.3.6.1-3">Followings are three basic security control to realize above. Additional security controls specific to crypto assets custodians are described in and after sub-sections <a href="#offline-key-management" class="xref">Section 7.3.6.2</a>.<a href="#section-7.3.6.1-3" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-7.3.6.1-4">
-              <li id="section-7.3.6.1-4.1">State management of signature keys
+<li id="section-7.3.6.1-4.1">State management of signature keys
   As described in <a href="#fig-lifecycle-of-signature-key-verification-keys" class="xref">Figure 2</a>, a signature key has one of the multiple states generally, and it may be an active or inactive state in its operation. The signature key MUST be in an active state when it is used for signing (or decryption). It is recommended to enforce to input some secret information to activate from the inactive signature key. This makes keeping the inactive signature key away from abuse if the adversary does not have the secret information. This method ensures also the security of the signature key against leakage and lost.
   It is also recommended to minimize the term of activation to limit the risk of abuse as minimum as possible. Unnecessary activation of the signature key increases the risk of abuse, leakage, and theft, though keeping the activation state is efficient from a business viewpoint.
   On the other hand, frequent activation/inactivation may give impact to business efficiency. It is important to consider the trade-off between the risk and business efficiency and provide clear key management policy to customers.<a href="#section-7.3.6.1-4.1" class="pilcrow">¶</a>
 </li>
-<li id="section-7.3.6.1-4.2">Administrator role separation and two-person rule
+              <li id="section-7.3.6.1-4.2">Administrator role separation and two-person rule
   It is a fundamental form of operation of a critical business process which uses the signature key to perform cryptographic operations by multiple parties to prevent internal frauds and errors. For example, by setting separated privilege on digitally signing and approval to go into the area of signing operation, it becomes difficult for the single adversary to give a malicious digital signature without known by the third party. Additionally, the enforcement of the two-person rule is effective security control to internal frauds and misoperations.<a href="#section-7.3.6.1-4.2" class="pilcrow">¶</a>
 </li>
-<li id="section-7.3.6.1-4.3">Backup of a signature key
+              <li id="section-7.3.6.1-4.3">Backup of a signature key
   Lost of the signature key makes signing operations (by using the key) impossible any more. Thus backup of the signature key is an important security control. Since lost of the signature key makes signing operations impossible any more, backup of the signature key is an important security control. On the other hand, risks of leakage and theft of backup keys MUST be considered. It is needed to inactivate the backup keys.
   Additionally, monitoring the blockchain whether to perform the outgoing-coin from that address to detect the inappropriate backup and the illegal-use of little-used address.<a href="#section-7.3.6.1-4.3" class="pilcrow">¶</a>
 </li>
-</ol>
+            </ol>
 </section>
 </div>
 <div id="offline-key-management">
@@ -2499,17 +3028,17 @@ Also, some blockchains might not support multi-signature, therefore some cryptoa
 If a signature key is managed by a tamper-resistant key management device (device X) and X has cloning function, cloning the key to another device Y is the most secure way to back up the key, where the cloning function is the technique to copy the key with keeping confidentiality to other devices than X and Y
       <span class="cref" id="_11">For example, cloning via PC does not meet this requirement when the signature key is read into memory on the PC in the cloning.</span>. The implementation of the function is recommended to be evaluated/certified by certification programs like CMVP or FIPS 140. Note that, the cryptographic algorithms supported by such tamper-resistant key management devices are limited and all crypto assets systems can utilize it, but it is one of the most secure ways of backup.<a href="#section-7.3.6.4-3.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.6.4-3.2">Backup to storage for digital data
+              <li class="normal" id="section-7.3.6.4-3.2">Backup to storage for digital data
 Here, it is assumed to backup keys to storage like USB memory and DVD. There are two types of operations; one is backup data is stored in movable devices in an offline manner, the other is backup data is stored in an online accessible manner. If the device is movable, the possibility of steal and lost increases, thus the device MUST be kept in a cabinet or a vault with the key, and the access control to such cabinet/vault MUST be restricted.
 Of the backup storage is online, risks of leakage and theft MUST be assumed as same as the key management function implementation inside the cryptoassets custodian. In general, the same security control is recommended to such backup storage. If there is some additional operation, for example, the backup device is inactivated except for the time of restore, the security control may be modified with considering the operating environment. When it is not avoided the raw key data is outside of the key management function implementation, the custodian MUST deal with the problem of remained magnetics.<a href="#section-7.3.6.4-3.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.6.4-3.3">Backup to paper
+              <li class="normal" id="section-7.3.6.4-3.3">Backup to paper
 There is a way to backup keys in an offline manner, to print them to papers as a QR code or other machine readable ways. It is movable than storage for digital data and easy to identify. There remains some risk of leakage and theft by taking a photo by smartphone and so on.<a href="#section-7.3.6.4-3.3" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.6.4-3.4">Redundant with Sharing secret scheme
+              <li class="normal" id="section-7.3.6.4-3.4">Redundant with Sharing secret scheme
 Dividing of signature key to multiple parts, then managing them by multiple isolated systems is an effective measure to protect the keys against leakage and theft. This document does not recommend a specific technique but RECOMMENDs to implement this control based on a certain level of security evaluation like a secret sharing scheme. In that case, secure coding and mounting penetration test are REQUIRED to eliminate the implementation vulnerabilities. This method is also effective for backup devices.<a href="#section-7.3.6.4-3.4" class="pilcrow">¶</a>
 </li>
-</ul>
+            </ul>
 </section>
 </div>
 <div id="procurement-of-hardware-wallet">
@@ -2521,13 +3050,13 @@ Dividing of signature key to multiple parts, then managing them by multiple isol
 <ul class="normal">
 <li class="normal" id="section-7.3.6.5-2.1">MUST not use hardware obtained through the untrusted procurement route.<a href="#section-7.3.6.5-2.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.6.5-2.2">MUST apply the latest firmware and patches provided by the manufacturer.<a href="#section-7.3.6.5-2.2" class="pilcrow">¶</a>
+              <li class="normal" id="section-7.3.6.5-2.2">MUST apply the latest firmware and patches provided by the manufacturer.<a href="#section-7.3.6.5-2.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.6.5-2.3">Initialization and key generation MUST do themselves, SHOULD NOT use default settings without careful considerations.<a href="#section-7.3.6.5-2.3" class="pilcrow">¶</a>
+              <li class="normal" id="section-7.3.6.5-2.3">Initialization and key generation MUST do themselves, SHOULD NOT use default settings without careful considerations.<a href="#section-7.3.6.5-2.3" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.6.5-2.4">MUST consider trustworthy of software instructing a sign to hardware wallet, especially whether it supports multi-signature or signing at the offline environment.<a href="#section-7.3.6.5-2.4" class="pilcrow">¶</a>
+              <li class="normal" id="section-7.3.6.5-2.4">MUST consider trustworthy of software instructing a sign to hardware wallet, especially whether it supports multi-signature or signing at the offline environment.<a href="#section-7.3.6.5-2.4" class="pilcrow">¶</a>
 </li>
-</ul>
+            </ul>
 <p id="section-7.3.6.5-3">Additionally, when custodian uses only hardware wallets in the marketplace, they MUST manage it according to section <a href="#asset-management" class="xref">Section 7.3.4</a>.<a href="#section-7.3.6.5-3" class="pilcrow">¶</a></p>
 <p id="section-7.3.6.5-4">On the other hand, hardware wallets MUST be subject to the third-party or independent certification scheme for security.
 If introducing a software wallet from outside, it MUST consider the potentiality of containing malicious code, vulnerability, and bugs.<a href="#section-7.3.6.5-4" class="pilcrow">¶</a></p>
@@ -2545,11 +3074,11 @@ If introducing a software wallet from outside, it MUST consider the potentiality
 <ul class="normal">
 <li class="normal" id="section-7.3.7-3.1">Media containing a signature key. (Signature key management shown in <a href="#fig-basic-model-of-cryptoassets-custodian" class="xref">Figure 1</a>)<a href="#section-7.3.7-3.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.7-3.2">Media containing a signature key for cold wallet environment. (Signature key management for offline management shown in <a href="#fig-cryptoassetcustodianssystem-offlinemanagement" class="xref">Figure 4</a>.)<a href="#section-7.3.7-3.2" class="pilcrow">¶</a>
+            <li class="normal" id="section-7.3.7-3.2">Media containing a signature key for cold wallet environment. (Signature key management for offline management shown in <a href="#fig-cryptoassetcustodianssystem-offlinemanagement" class="xref">Figure 4</a>.)<a href="#section-7.3.7-3.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.7-3.3">Media containing a backup data of signature key<a href="#section-7.3.7-3.3" class="pilcrow">¶</a>
+            <li class="normal" id="section-7.3.7-3.3">Media containing a backup data of signature key<a href="#section-7.3.7-3.3" class="pilcrow">¶</a>
 </li>
-</ul>
+          </ul>
 <p id="section-7.3.7-4">If the signature key mentioned above is stored in the deactivated state, and also key encryption key to activate the signature key is controlled separately, the media containing the key encryption key MUST be strictly managed.<a href="#section-7.3.7-4" class="pilcrow">¶</a></p>
 <p id="section-7.3.7-5">The security control to these signature key MUST be separated from the security control of the crypto assets custodian system. In addition to this control, access to facilities and environments which store media containing a signature key or information required to operate the signature key MUST be restricted. (See: <a href="#security-controls-on-signature-keys" class="xref">Section 7.3.6</a>)<a href="#section-7.3.7-5" class="pilcrow">¶</a></p>
 <p id="section-7.3.7-6">Furthermore, countermeasures to loss or theft for the operational device MUST be taken place if the administration or operation is executed from a remote place such as out of a facility.<a href="#section-7.3.7-6" class="pilcrow">¶</a></p>
@@ -2589,35 +3118,35 @@ In addition to the standard, cryptoassets custodian systems SHALL comply with th
 <li class="normal" id="section-7.3.8.3-2.1">Logs on the environment where the cryptoassets custodian system
 Collecting and monitoring of event log outputted from the system components such as middleware, operating systems, and computers detects an abnormal state of environment where the system runs. Collected logs are used to investigate a cause in the case of the incident.<a href="#section-7.3.8.3-2.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.8.3-2.2">Logs on the processing of components of crypto assets custodians system
+              <li class="normal" id="section-7.3.8.3-2.2">Logs on the processing of components of crypto assets custodians system
 Collecting and monitoring of the processing logs from each component detects an abnormal state of crypto assets custodians system. Collecting proper logs are used as a proof of proper processing inside the crypto assets custodians system, and also used to investigate a cause in a case of the incident.<a href="#section-7.3.8.3-2.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.8.3-2.3">Access log of signature key
+              <li class="normal" id="section-7.3.8.3-2.3">Access log of signature key
 Information such as date, a source terminal, an operator(not a role but information to identify an operator) MUST be obtained and recorded in a case of operations such as activation and deactivation of the signature key, access to the activated signature key and backup/restore. Those records MUST be validated against the records such as operational procedures, operating hours, on a periodical inspection such as weekly inspection. Moreover, in a case where the signature key is managed online,  operational log such as the creation of a transaction signature by operator MUST be recorded and validated as well.<a href="#section-7.3.8.3-2.3" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.8.3-2.4">Operational Log of a wallet managed by custodians
+              <li class="normal" id="section-7.3.8.3-2.4">Operational Log of a wallet managed by custodians
 Logs on remittance MUST be monitored real-time against the attempt of outgoing coin transfer in a case where the signature key and backup are unexpectedly leaked. In a case where an unexpected remittance has occurred in one of the wallets, monitoring logs help timely detecting the incidents, suspending all signing operations, rechecking on other existing wallets, and migrating to other wallets using a different signature key.<a href="#section-7.3.8.3-2.4" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.8.3-2.5">Access log of administration remote terminal
+              <li class="normal" id="section-7.3.8.3-2.5">Access log of administration remote terminal
 If a remote access to cryptoassets custodian system is permitted, audit information such as date, source IP address, terminal information(e.g. terminal ID, latest result of security evaluation if it's possible) and destination IP address (or hostname) MUST be obtained and recorded for auditing which checks the accesses are from/in authorized range.<a href="#section-7.3.8.3-2.5" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.8.3-2.6">Traffic log between the inside and the outside (e.g., the Internet)
+              <li class="normal" id="section-7.3.8.3-2.6">Traffic log between the inside and the outside (e.g., the Internet)
 As mentioned in <a href="#network-security-management" class="xref">Section 7.3.9.1</a>, Inbound traffic to cryotoassets custodian systems such as traffic from the Internet MUST be restricted to a permitted external network or permitted protocol. Inbound traffic from disallowed network and traffic using disallowed protocol are denied at the firewall and other middleboxes. Logs from that equipment are effective to protect customers from malicious access in terms of not only cryptoassets custodian system but also the information security.
 Usually, outbound traffic from protected assets such as cryptoassets custodian systems to the Internet and other systems is not a subject to logging. However, those logs are useful in cases such as investigations on incidents (e.g., malicious usage of the signature key, theft of signature key)  and detection of the incident, so entire traffic or network flow are RECOMMENDED to be acquired according to protocols/destinations.<a href="#section-7.3.8.3-2.6" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.8.3-2.7">
+              <li class="normal" id="section-7.3.8.3-2.7">
                 <p id="section-7.3.8.3-2.7.1">Customers access log
 Customers access log MUST be obtained since those logs are used to detect malicious login or request. Also, those logs are used as evidence in a case of incidents. In a case of malicious login, custodians MUST notify its customer.<a href="#section-7.3.8.3-2.7.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7.3.8.3-2.7.2.1">Provide information about the malicious activity to customers
 Providing a feature to allow a customer to confirm login history, source IP address, region, and terminal information, and login notification by a push-notification or an e-mail are effective to detect malicious access after the incident. Feature protecting an account and alerting to a user in cases when detecting login from unknown source address or terminal, or detecting consecutive login to multiple accounts from the same source IP address, are effective to protect a user from malicious access.<a href="#section-7.3.8.3-2.7.2.1" class="pilcrow">¶</a>
 </li>
-</ul>
+                </ul>
 </li>
-<li class="normal" id="section-7.3.8.3-2.8">Images/videos recorded by a surveillance camera and entry/exit records
+              <li class="normal" id="section-7.3.8.3-2.8">Images/videos recorded by a surveillance camera and entry/exit records
 Storing images/videos recorded by the surveillance camera and entry/exit records for proper period enables validating if physical safety control measures work properly after the incident.<a href="#section-7.3.8.3-2.8" class="pilcrow">¶</a>
 </li>
-</ul>
+            </ul>
 <p id="section-7.3.8.3-3">Detecting a malicious process execution (e.g., malware), malicious access, an abnormal state of cryptoassets custodians system by monitoring logs mentioned above comprehensively is important. Moreover, storing this evidence is important to prevent internal fraud and exonerate person involved from the charge. Security Operation Center (SOC) may help to monitor the system. Outsourcing to trusted operators about detection and notification of threats in the operation of SOC may be helpful.<a href="#section-7.3.8.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2653,34 +3182,34 @@ Storing images/videos recorded by the surveillance camera and entry/exit records
 <li class="normal" id="section-7.3.9.2-2.1.2.1">Objectives:
 Preventing a connection to custodians systems through information systems used in daily operations, which has been compromised due to malware infections caused by external attacks such as targeted attack.<a href="#section-7.3.9.2-2.1.2.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.9.2-2.1.2.2">Countermeasures:
+                  <li class="normal" id="section-7.3.9.2-2.1.2.2">Countermeasures:
 Isolate a network between information systems used in daily operations and custodians system by segmentation of network or limiting access.<a href="#section-7.3.9.2-2.1.2.2" class="pilcrow">¶</a>
 </li>
-</ul>
+                </ul>
 </li>
-<li class="normal" id="section-7.3.9.2-2.2">
+              <li class="normal" id="section-7.3.9.2-2.2">
                 <p id="section-7.3.9.2-2.2.1">Network isolation at the boundary to the Internet<a href="#section-7.3.9.2-2.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7.3.9.2-2.2.2.1">Objective:
 Preventing access to critical information such as a signature key from attack through the Internet by minimizing and isolating modules which connect to the Internet.<a href="#section-7.3.9.2-2.2.2.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.9.2-2.2.2.2">Countermeasures:
+                  <li class="normal" id="section-7.3.9.2-2.2.2.2">Countermeasures:
 Features which connects external services on the Internet to achieve the functionality of custodians system, transmit transactions or obtain blockchain data MUST be packaged as a module as minimum as possible or be isolated from other systems such as locating on DMZ. Moreover, if modules are connecting to external services, access controls to those services MUST be adequately performed.<a href="#section-7.3.9.2-2.2.2.2" class="pilcrow">¶</a>
 </li>
-</ul>
+                </ul>
 </li>
-<li class="normal" id="section-7.3.9.2-2.3">
+              <li class="normal" id="section-7.3.9.2-2.3">
                 <p id="section-7.3.9.2-2.3.1">Limitation on a terminal used in custodians system administration<a href="#section-7.3.9.2-2.3.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7.3.9.2-2.3.2.1">Objective:
 Preventing a malicious operation due to a hijacking of terminal used in custodians system administration.<a href="#section-7.3.9.2-2.3.2.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.9.2-2.3.2.2">Countermeasures:
+                  <li class="normal" id="section-7.3.9.2-2.3.2.2">Countermeasures:
 Limiting a terminal which can connect to custodians system, such as a terminal to manage a custodians system administration function and a terminal running an administrative tool to order operation to custodians system.<a href="#section-7.3.9.2-2.3.2.2" class="pilcrow">¶</a>
 </li>
-</ul>
+                </ul>
 </li>
-</ul>
+            </ul>
 </section>
 </div>
 <div id="system-acquisition-development-and-maintenance">
@@ -2694,19 +3223,19 @@ Limiting a terminal which can connect to custodians system, such as a terminal t
 <li class="normal" id="section-7.3.9.3-3.1">Software development method
 Secure software development method such as secure coding and code review MUST be used in the software development of the custodian system. Code review not only with the development team but also with an operational team is effective to detect a vulnerability from the viewpoint of operation.<a href="#section-7.3.9.3-3.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.9.3-3.2">Penetration test
+              <li class="normal" id="section-7.3.9.3-3.2">Penetration test
 Conducting a penetration test helps to detect a known vulnerability at systems and results in obviating the attacking risk by the attacker in advance.<a href="#section-7.3.9.3-3.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.9.3-3.3">Integration test with blockchain network
+              <li class="normal" id="section-7.3.9.3-3.3">Integration test with blockchain network
 Test MUST be performed not only with the test network of blockchain but also with the production network of the blockchain. Risk assessment MUST be taken with an understanding of the limitation of test on the production network such as high-load test.<a href="#section-7.3.9.3-3.3" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.9.3-3.4">Privilege separation on the operation
+              <li class="normal" id="section-7.3.9.3-3.4">Privilege separation on the operation
 Privilege separation such as limiting code reviewed software deployment to the production environment to the system operating team is effective to prevent tampering attacks from internal.<a href="#section-7.3.9.3-3.4" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.9.3-3.5">Prohibiting using default (factory-configured) values
+              <li class="normal" id="section-7.3.9.3-3.5">Prohibiting using default (factory-configured) values
 Any factory-configured authentication information such as password MUST NOT be used regardless of hardware/software, development environment or production environment.<a href="#section-7.3.9.3-3.5" class="pilcrow">¶</a>
 </li>
-</ul>
+            </ul>
 </section>
 </div>
 </section>
@@ -2743,43 +3272,43 @@ Any factory-configured authentication information such as password MUST NOT be u
 <ul class="normal">
 <li class="normal" id="section-7.3.12-3.1.2.1">Power outage<a href="#section-7.3.12-3.1.2.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.12-3.1.2.2">Damages of building<a href="#section-7.3.12-3.1.2.2" class="pilcrow">¶</a>
+                <li class="normal" id="section-7.3.12-3.1.2.2">Damages of building<a href="#section-7.3.12-3.1.2.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.12-3.1.2.3">An act of nature (e.g., earthquakes, fires (including sprayed water for neighborhoods fire), water outage, flood)<a href="#section-7.3.12-3.1.2.3" class="pilcrow">¶</a>
+                <li class="normal" id="section-7.3.12-3.1.2.3">An act of nature (e.g., earthquakes, fires (including sprayed water for neighborhoods fire), water outage, flood)<a href="#section-7.3.12-3.1.2.3" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.12-3.1.2.4">Other reasons (e.g., facilities are unavailable, or access to the facilities are prohibited by law/regulations/authorities.)<a href="#section-7.3.12-3.1.2.4" class="pilcrow">¶</a>
+                <li class="normal" id="section-7.3.12-3.1.2.4">Other reasons (e.g., facilities are unavailable, or access to the facilities are prohibited by law/regulations/authorities.)<a href="#section-7.3.12-3.1.2.4" class="pilcrow">¶</a>
 </li>
-</ul>
+              </ul>
 </li>
-<li class="normal" id="section-7.3.12-3.2">
+            <li class="normal" id="section-7.3.12-3.2">
               <p id="section-7.3.12-3.2.1">In a case where it's difficult to continue the system<a href="#section-7.3.12-3.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7.3.12-3.2.2.1">In a case of becoming difficult to continue running an emergency electric generator.<a href="#section-7.3.12-3.2.2.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.12-3.2.2.2">Long suspension of public transportation services, a pandemic of disease, lack of human resources by an act of nature.<a href="#section-7.3.12-3.2.2.2" class="pilcrow">¶</a>
+                <li class="normal" id="section-7.3.12-3.2.2.2">Long suspension of public transportation services, a pandemic of disease, lack of human resources by an act of nature.<a href="#section-7.3.12-3.2.2.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.12-3.2.2.3">Failure of a communication network<a href="#section-7.3.12-3.2.2.3" class="pilcrow">¶</a>
+                <li class="normal" id="section-7.3.12-3.2.2.3">Failure of a communication network<a href="#section-7.3.12-3.2.2.3" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.12-3.2.2.4">Failure of equipment<a href="#section-7.3.12-3.2.2.4" class="pilcrow">¶</a>
+                <li class="normal" id="section-7.3.12-3.2.2.4">Failure of equipment<a href="#section-7.3.12-3.2.2.4" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.12-3.2.2.5">Failure of the system (regardless of reasons such as failure of a program or cyber attacks)<a href="#section-7.3.12-3.2.2.5" class="pilcrow">¶</a>
+                <li class="normal" id="section-7.3.12-3.2.2.5">Failure of the system (regardless of reasons such as failure of a program or cyber attacks)<a href="#section-7.3.12-3.2.2.5" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.12-3.2.2.6">Loss of paper wallet or hardware wallet.<a href="#section-7.3.12-3.2.2.6" class="pilcrow">¶</a>
+                <li class="normal" id="section-7.3.12-3.2.2.6">Loss of paper wallet or hardware wallet.<a href="#section-7.3.12-3.2.2.6" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.12-3.2.2.7">Suspension of outsourcing contractor's business<a href="#section-7.3.12-3.2.2.7" class="pilcrow">¶</a>
+                <li class="normal" id="section-7.3.12-3.2.2.7">Suspension of outsourcing contractor's business<a href="#section-7.3.12-3.2.2.7" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-7.3.12-3.2.2.8">Leakage or loss of signature key<a href="#section-7.3.12-3.2.2.8" class="pilcrow">¶</a>
+                <li class="normal" id="section-7.3.12-3.2.2.8">Leakage or loss of signature key<a href="#section-7.3.12-3.2.2.8" class="pilcrow">¶</a>
 </li>
-</ul>
+              </ul>
 </li>
-<li class="normal" id="section-7.3.12-3.3">
+            <li class="normal" id="section-7.3.12-3.3">
               <p id="section-7.3.12-3.3.1">In the case of becoming difficult to continue business<a href="#section-7.3.12-3.3.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7.3.12-3.3.2.1">Business-suspension order by law/regulations.<a href="#section-7.3.12-3.3.2.1" class="pilcrow">¶</a>
 </li>
-</ul>
+              </ul>
 </li>
-</ul>
+          </ul>
 <div id="maintaining-availability-of-the-system">
 <section id="section-7.3.12.1">
             <h5 id="name-maintaining-availability-of">
@@ -2852,20 +3381,20 @@ Any factory-configured authentication information such as password MUST NOT be u
         </h3>
 <dl class="references">
 <dt id="ISO.27001_2013">[ISO.27001_2013]</dt>
-<dd>
-<span class="refAuthor">International Organization for Standardization</span>, <span class="refTitle">"Information technology -- Security techniques -- Information security management systems -- Requirements"</span>, <span class="seriesInfo">ISO/IEC 27001:2013</span>, <time datetime="2013-10">October 2013</time>, <span>&lt;<a href="https://www.iso.org/standard/54534.html">https://www.iso.org/standard/54534.html</a>&gt;</span>. </dd>
+        <dd>
+<span class="refAuthor">International Organization for Standardization</span>, <span class="refTitle">"Information technology -- Security techniques -- Information security management systems -- Requirements"</span>, <span class="seriesInfo">ISO/IEC 27001:2013</span>, <time datetime="2013-10" class="refDate">October 2013</time>, <span>&lt;<a href="https://www.iso.org/standard/54534.html">https://www.iso.org/standard/54534.html</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="ISO.27002_2013">[ISO.27002_2013]</dt>
-<dd>
-<span class="refAuthor">International Organization for Standardization</span>, <span class="refTitle">"Information technology -- Security techniques -- Code of practice for information security controls"</span>, <span class="seriesInfo">ISO/IEC 27002:2013</span>, <time datetime="2013-10">October 2013</time>, <span>&lt;<a href="https://www.iso.org/standard/54533.html">https://www.iso.org/standard/54533.html</a>&gt;</span>. </dd>
+        <dd>
+<span class="refAuthor">International Organization for Standardization</span>, <span class="refTitle">"Information technology -- Security techniques -- Code of practice for information security controls"</span>, <span class="seriesInfo">ISO/IEC 27002:2013</span>, <time datetime="2013-10" class="refDate">October 2013</time>, <span>&lt;<a href="https://www.iso.org/standard/54533.html">https://www.iso.org/standard/54533.html</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
-<dd>
-<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-<dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+      <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2875,24 +3404,24 @@ Any factory-configured authentication information such as password MUST NOT be u
         </h3>
 <dl class="references">
 <dt id="BIP-0010">[BIP-0010]</dt>
-<dd>
-<span class="refAuthor">Reiner, A.</span>, <span class="refTitle">"Multi-Sig Transaction Distribution"</span>, <span class="seriesInfo">BIP 10</span>, <time datetime="2011-10-28">28 October 2011</time>, <span>&lt;<a href="https://github.com/bitcoin/bips/blob/master/bip-0010.mediawiki">https://github.com/bitcoin/bips/blob/master/bip-0010.mediawiki</a>&gt;</span>. </dd>
+        <dd>
+<span class="refAuthor">Reiner, A.</span>, <span class="refTitle">"Multi-Sig Transaction Distribution"</span>, <span class="seriesInfo">BIP 10</span>, <time datetime="2011-10-28" class="refDate">28 October 2011</time>, <span>&lt;<a href="https://github.com/bitcoin/bips/blob/master/bip-0010.mediawiki">https://github.com/bitcoin/bips/blob/master/bip-0010.mediawiki</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="BIP-0011">[BIP-0011]</dt>
-<dd>
-<span class="refAuthor">Andresen, G.</span>, <span class="refTitle">"M-of-N Standard Transactions"</span>, <span class="seriesInfo">BIP 10</span>, <time datetime="2011-10-18">18 October 2011</time>, <span>&lt;<a href="https://github.com/bitcoin/bips/blob/master/bip-0011.mediawiki">https://github.com/bitcoin/bips/blob/master/bip-0011.mediawiki</a>&gt;</span>. </dd>
+        <dd>
+<span class="refAuthor">Andresen, G.</span>, <span class="refTitle">"M-of-N Standard Transactions"</span>, <span class="seriesInfo">BIP 10</span>, <time datetime="2011-10-18" class="refDate">18 October 2011</time>, <span>&lt;<a href="https://github.com/bitcoin/bips/blob/master/bip-0011.mediawiki">https://github.com/bitcoin/bips/blob/master/bip-0011.mediawiki</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="CVE-2018-10299">[CVE-2018-10299]</dt>
-<dd>
-<span class="refAuthor">MITRE Corporation</span>, <span class="refTitle">"CVE-2018-10299"</span>, <span class="seriesInfo">CVE 2018-10299</span>, <time datetime="2018-04-22">22 April 2018</time>, <span>&lt;<a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10299">http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10299</a>&gt;</span>. </dd>
+        <dd>
+<span class="refAuthor">MITRE Corporation</span>, <span class="refTitle">"CVE-2018-10299"</span>, <span class="seriesInfo">CVE 2018-10299</span>, <time datetime="2018-04-22" class="refDate">22 April 2018</time>, <span>&lt;<a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10299">http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10299</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.nakajima-crypto-asset-terminology">[I-D.nakajima-crypto-asset-terminology]</dt>
-<dd>
-<span class="refAuthor">Nakajima, H.</span><span class="refAuthor">, Kusunoki, M.</span><span class="refAuthor">, Hida, K.</span><span class="refAuthor">, Suga, Y.</span><span class="refAuthor">, and T. Hayashi</span>, <span class="refTitle">"Terminology for Cryptoassets"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-nakajima-crypto-asset-terminology-03</span>, <time datetime="2019-12-31">31 December 2019</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-nakajima-crypto-asset-terminology-03.txt">http://www.ietf.org/internet-drafts/draft-nakajima-crypto-asset-terminology-03.txt</a>&gt;</span>. </dd>
+        <dd>
+<span class="refAuthor">Nakajima, H.</span><span class="refAuthor">, Kusunoki, M.</span><span class="refAuthor">, Hida, K.</span><span class="refAuthor">, Suga, Y.</span><span class="refAuthor">, and T. Hayashi</span>, <span class="refTitle">"Terminology for Cryptoassets"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-nakajima-crypto-asset-terminology-04</span>, <time datetime="2020-07-02" class="refDate">2 July 2020</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-nakajima-crypto-asset-terminology-04.txt">http://www.ietf.org/internet-drafts/draft-nakajima-crypto-asset-terminology-04.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="LISK-ISSUE_2088">[LISK-ISSUE_2088]</dt>
-<dd>
-<span class="refAuthor">MaciejBaj, .</span>, <span class="refTitle">"Check INT_32 range for transaction timestamps"</span>, <time datetime="2018-06">June 2018</time>, <span>&lt;<a href="https://github.com/LiskHQ/lisk/issues/2088">https://github.com/LiskHQ/lisk/issues/2088</a>&gt;</span>. </dd>
+      <dd>
+<span class="refAuthor">MaciejBaj, .</span>, <span class="refTitle">"Check INT_32 range for transaction timestamps"</span>, <time datetime="2018-06" class="refDate">June 2018</time>, <span>&lt;<a href="https://github.com/LiskHQ/lisk/issues/2088">https://github.com/LiskHQ/lisk/issues/2088</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2942,7 +3471,7 @@ Any factory-configured authentication information such as password MUST NOT be u
 <div dir="auto" class="left">
 <span class="street-address">Roppongi 6-10-1<br>Roppongi Hills Mori Tower 18F</span>, <span class="region">Tokyo, Minato</span>
 </div>
-<div dir="auto" class="left"><span class="postal-code">106-6143</span></div>
+<div dir="auto" class="left"><span class="postal-code">106-6118</span></div>
 <div dir="auto" class="left"><span class="country-name">Japan</span></div>
 <div class="email">
 <span>Email:</span>
